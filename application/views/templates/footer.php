@@ -31,6 +31,10 @@
 <script src="<?= base_url() ?>/assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
 <script src="<?= base_url() ?>/assets/pages/jquery.datatable.init.js"></script>
 
+<!-- sweetalert -->
+<script src="<?= base_url('assets/sweetalert/') ?>sweetalert2.all.min.js"></script>
+<script src="<?= base_url('assets/js/myscript.js') ?>"></script>
+
 
 <!-- App js -->
 <script src="<?= base_url() ?>/assets/js/app.js"></script>
