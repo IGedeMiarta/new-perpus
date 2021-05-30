@@ -16,4 +16,12 @@ class admin extends CI_Controller
         $this->load->view('templates/starter');
         $this->load->view('templates/footer');
     }
+    public function buku()
+    {
+        $this->load->view('templates/header');
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('book/default');
+        $this->load->view('templates/footer');
+    }
 }

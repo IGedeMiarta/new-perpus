@@ -1,11 +1,32 @@
-<!-- partial -->
+<!-- Page Content-->
+<div class="page-content">
 
-<div class="content-wrapper">
-    <div class="card">
-        <div class="card-body">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id iure molestias nostrum perspiciatis vero eaque nulla. Vel ipsa quibusdam, veritatis natus tempora assumenda dignissimos perspiciatis facilis doloribus. Accusantium, quasi dicta.</p>
+    <div class="container-fluid">
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="float-right">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Metrica</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Pages</a></li>
+                            <li class="breadcrumb-item active">Starter</li>
+                        </ol>
+                    </div>
+                    <h4 class="page-title">Starter</h4>
+                </div>
+                <!--end page-title-box-->
+            </div>
+            <!--end col-->
+        </div>
+        <!-- end page title end breadcrumb -->
+
+        <div class="card">
+            <div class="card-body">
+
+
+            </div>
         </div>
 
-    </div>
-</div>
-<!-- content-wrapper ends -->
+
+    </div><!-- container -->

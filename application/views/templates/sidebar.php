@@ -1,69 +1,29 @@
-<!-- partial -->
-<div class="container-fluid page-body-wrapper">
-    <!-- partial:<?= base_url('assets/templates/') ?>partials/_sidebar.html -->
-    <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
+<div class="page-wrapper">
+    <!-- Left Sidenav -->
+    <div class="left-sidenav">
+        <ul class="metismenu left-sidenav-menu">
 
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('assets/templates/') ?>index.html">
-                    <span class="menu-title">Dashboard</span>
-                    <i class="mdi mdi-home menu-icon"></i>
-                </a>
+            <li>
+                <a href="javascript: void(0);"><i class="ti-server"></i><span>Buku</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/buku') ?>"><i class="ti-control-record"></i>Data Buku</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Kategori Buku</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Pengarang</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Penerbit</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Rak</a></li>
+                </ul>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                    <span class="menu-title">Basic UI Elements</span>
-                    <i class="menu-arrow"></i>
-                    <i class="mdi mdi-crosshairs-gps menu-icon"></i>
-                </a>
-                <div class="collapse" id="ui-basic">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="<?= base_url('assets/templates/') ?>pages/ui-features/buttons.html">Buttons</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="<?= base_url('assets/templates/') ?>pages/ui-features/typography.html">Typography</a></li>
-                    </ul>
-                </div>
+            <li>
+                <a href="javascript: void(0);"><i class="ti-server"></i><span>Crypto</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/buku') ?>"><i class="ti-control-record"></i>Anggota Baru</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Data Anggota</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Cetak Kartu</a></li>
+                </ul>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('assets/templates/') ?>pages/icons/mdi.html">
-                    <span class="menu-title">Icons</span>
-                    <i class="mdi mdi-contacts menu-icon"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('assets/templates/') ?>pages/forms/basic_elements.html">
-                    <span class="menu-title">Forms</span>
-                    <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('assets/templates/') ?>pages/charts/chartjs.html">
-                    <span class="menu-title">Charts</span>
-                    <i class="mdi mdi-chart-bar menu-icon"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('assets/templates/') ?>pages/tables/basic-table.html">
-                    <span class="menu-title">Tables</span>
-                    <i class="mdi mdi-table-large menu-icon"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-                    <span class="menu-title">Sample Pages</span>
-                    <i class="menu-arrow"></i>
-                    <i class="mdi mdi-medical-bag menu-icon"></i>
-                </a>
-                <div class="collapse" id="general-pages">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="<?= base_url('assets/templates/') ?>pages/samples/blank-page.html"> Blank Page </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="<?= base_url('assets/templates/') ?>pages/samples/login.html"> Login </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="<?= base_url('assets/templates/') ?>pages/samples/register.html"> Register </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="<?= base_url('assets/templates/') ?>pages/samples/error-404.html"> 404 </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="<?= base_url('assets/templates/') ?>pages/samples/error-500.html"> 500 </a></li>
-                    </ul>
-                </div>
-            </li>
+
+
 
         </ul>
-    </nav>
-    <div class="main-panel">
+    </div>
+    <!-- end left-sidenav-->
