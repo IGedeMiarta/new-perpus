@@ -124,15 +124,15 @@
                     <div class="general-label">
                         <form action="<?= base_url('admin/AddPengarang') ?>" method="POST">
                             <div class="form-group row">
-                                <label for="horizontalInput1" class="col-sm-2 col-form-label">Kode Pengarang</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="kd_pengarang" value="PG<?php echo sprintf("%04s", $kd_pengarang) ?>" readonly>
+                                <label for="horizontalInput1" class="col-sm-3 col-form-label">Kode Pengarang</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="kd_pengarang" value="<?php echo $kd_pengarang ?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="horizontalInput2" class="col-sm-2 col-form-label">Nama Pengarang</label>
-                                <div class="col-sm-10">
+                                <label for="horizontalInput2" class="col-sm-3 col-form-label">Nama Pengarang</label>
+                                <div class="col-sm-9">
                                     <input type="text" class="form-control" name="nama_pengarang" id="horizontalInput2" placeholder="Nama Pengarang">
                                 </div>
                             </div>
@@ -162,7 +162,7 @@
                             <div class="form-group row">
                                 <label for="horizontalInput1" class="col-sm-2 col-form-label">Kode Penerbit</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="kd_penerbit" value="PN<?php echo sprintf("%04s", $kd_penerbit) ?>" readonly>
+                                    <input type="text" class="form-control" name="kd_penerbit" value="<?php echo $kd_penerbit ?>" readonly>
                                 </div>
                             </div>
 
@@ -199,7 +199,7 @@
                             <div class="form-group row">
                                 <label for="horizontalInput1" class="col-sm-2 col-form-label">Kode kategori</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="kd_kategori" value="KT<?php echo sprintf("%04s", $kd_kategori) ?>" readonly>
+                                    <input type="text" class="form-control" name="kd_kategori" value="<?php echo $kd_kategori ?>" readonly>
                                 </div>
                             </div>
 

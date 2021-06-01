@@ -13,7 +13,7 @@
                             <li class="breadcrumb-item active">Starter</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Starter</h4>
+                    <h4 class="page-title">Detail Buku</h4>
                 </div>
                 <!--end page-title-box-->
             </div>

@@ -18,7 +18,8 @@ class MakeCode extends CI_Model
         $id = $data->id;
         $no = substr($id, 2, 4);
         $pengarang = $no + 1;
-        return $pengarang;
+        $kd = 'PG' . sprintf("%04s", $pengarang);
+        return $kd;
     }
     function kd_penerbit()
     {
@@ -27,7 +28,8 @@ class MakeCode extends CI_Model
         $id = $data->id;
         $no = substr($id, 2, 4);
         $penerbit = $no + 1;
-        return $penerbit;
+        $kd = 'PN' . sprintf("%04s", $penerbit);
+        return $kd;
     }
     function kd_kategori()
     {
@@ -36,7 +38,8 @@ class MakeCode extends CI_Model
         $id = $data->id;
         $no = substr($id, 2, 4);
         $kategori = $no + 1;
-        return $kategori;
+        $kd = 'KT' . sprintf("%04s", $kategori);
+        return $kd;
     }
     function kd_detail($id)
     {

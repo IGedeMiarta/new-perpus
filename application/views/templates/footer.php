@@ -1,6 +1,10 @@
 <footer class="footer text-center text-sm-left">
-    &copy; 2021 <span class="text-muted d-none d-sm-inline-block float-right">Crafted with <i class="mdi mdi-heart text-danger"></i></span>
+    <div class="container">
+        &copy; 2021 Perpustakaan<span class="text-muted d-none d-sm-inline-block float-right">Crafted with <i class="mdi mdi-heart text-danger"></i></span>
+    </div>
 </footer>
+
+
 <!--end footer-->
 </div>
 <!-- end page content -->
@@ -31,13 +35,19 @@
 <script src="<?= base_url() ?>/assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
 <script src="<?= base_url() ?>/assets/pages/jquery.datatable.init.js"></script>
 
+<!-- base_url on .js -->
+<script text="javascipt">
+    var base_url = '<?= base_url() ?>'
+</script>
+
+
+
 <!-- sweetalert -->
 <script src="<?= base_url('assets/sweetalert/') ?>sweetalert2.all.min.js"></script>
 <script src="<?= base_url('assets/js/myscript.js') ?>"></script>
-
-
 <!-- App js -->
 <script src="<?= base_url() ?>/assets/js/app.js"></script>
+
 
 </body>
 
