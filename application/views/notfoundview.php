@@ -30,7 +30,7 @@
                         <div class="px-3">
                             <div class="auth-logo-box">
                                 <a href="#" class="logo logo-admin">
-                                    <img src="<?= base_url() ?>/assets/images/logo-sm.png" height="55" alt="logo" class="auth-logo">
+                                    <img src="<?= base_url() ?>/assets/images/logo.png" height="55" alt="logo" class="auth-logo">
                                 </a>
                             </div>
                             <!--end auth-logo-box-->

@@ -25,7 +25,7 @@
 
         <div class="card">
             <div class="card-header bg-primary text-center">
-                <h4 class="text-light mb-2">Tabel Buku</h4>
+                <h4 class="text-light mb-2">Tambah Buku</h4>
             </div>
             <div class="card-body bg-light">
                 <div class="general-label">
@@ -122,7 +122,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="general-label">
-                        <form action="<?= base_url('admin/AddPengarang') ?>" method="POST">
+                        <form action="<?= base_url('buku/AddPengarang') ?>" method="POST">
                             <div class="form-group row">
                                 <label for="horizontalInput1" class="col-sm-3 col-form-label">Kode Pengarang</label>
                                 <div class="col-sm-9">
@@ -158,7 +158,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="general-label">
-                        <form action="<?= base_url('admin/AddPenerbit') ?>" method="POST">
+                        <form action="<?= base_url('buku/AddPenerbit') ?>" method="POST">
                             <div class="form-group row">
                                 <label for="horizontalInput1" class="col-sm-2 col-form-label">Kode Penerbit</label>
                                 <div class="col-sm-10">
@@ -195,7 +195,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="general-label">
-                        <form action="<?= base_url('admin/AddKategori') ?>" method="POST">
+                        <form action="<?= base_url('buku/AddKategori') ?>" method="POST">
                             <div class="form-group row">
                                 <label for="horizontalInput1" class="col-sm-2 col-form-label">Kode kategori</label>
                                 <div class="col-sm-10">

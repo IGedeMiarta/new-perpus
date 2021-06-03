@@ -8,146 +8,116 @@ class Users extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->model('Users_Models', 'Mduser');
+        $this->load->model('UserModel', 'user');
     }
-    public function index()
+    public function petugas()
     {
-        $data['title'] = "Users";
-        $data['user'] = $this->Mduser->edit(['id' => $this->session->userdata('id')], 'users');
-        $this->load->view('default/header', $data);
-        $this->load->view('default/nav');
-        $this->load->view('users/home', $data);
-        $this->load->view('default/footer');
-    }
-    public function user_update()
-    {
-        $data = [
-            'email' => htmlspecialchars($this->input->post('email', true)),
-            'name' => $this->input->post('nama'),
-            'address' => $this->input->post('alamat'),
-            'phone' => $this->input->post('hp'),
-        ];
+        $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
 
-        $this->Mduser->update(['id' => $this->input->post('id')], $data, 'users');
-
-        $this->session->set_flashdata('messege', '<script>alert("Update Entry Success!");</script>');
-        redirect('users');
-    }
-    public function edu()
-    {
-        $data['title'] = "Education";
-        $id = $this->session->userdata('id');
-        $user = $this->db->get_where('educations', ['id_user' => $id])->row_array();
-
-        if ($user) {
-            $data['edu'] = $this->Mduser->edit(['id_user' => $id], 'educations');
-            $this->load->view('default/header', $data);
-            $this->load->view('default/nav');
-            $this->load->view('users/edu', $data);
-            $this->load->view('default/footer');
+        if ($this->form_validation->run() == false) {
+            $data['judul'] = 'Petugas';
+            $data['petugas'] = $this->user->read('petugas');
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('users/petugas', $data);
+            $this->load->view('templates/footer');
         } else {
-            $this->form_validation->set_rules('nama', 'Name', 'required|trim');
-            $this->form_validation->set_rules('start', 'Date', 'required|trim');
-            $this->form_validation->set_rules('end', 'Date', 'required|trim');
-            if ($this->form_validation->run() == false) {
-                $this->load->view('default/header', $data);
-                $this->load->view('default/nav');
-                $this->load->view('users/edu_inp', $data);
-                $this->load->view('default/footer');
-            } else {
-                $data = [
-                    'id_user' => $this->session->userdata('id'),
-                    'name' => $this->input->post('nama'),
-                    'level' => $this->input->post('level'),
-                    'start_date' => $this->input->post('start'),
-                    'end_date' => $this->input->post('end')
-                ];
-
-                $this->Mduser->insert($data, 'educations');
-                $this->session->set_flashdata('messege', '<script>alert("New Entry Success!");</script>');
-                redirect('users/edu');
-            }
+            $data = [
+                'nip' => $this->input->post('nip'),
+                'nama' => $this->input->post('nama'),
+                'jenkel' => $this->input->post('jenkel'),
+                'no_hp' => $this->input->post('hp'),
+                'alamat' => $this->input->post('alamat')
+            ];
+            $this->user->insert($data, 'petugas');
+            $this->session->set_flashdata('messege', $this->input->post('nama'));
+            redirect('users/petugas');
         }
     }
-
-    public function edu_update()
+    public function updatePetugas()
     {
+        $id = $_POST['id'];
         $data = [
-            'name' => $this->input->post('nama'),
-            'level' => $this->input->post('level'),
-            'start_date' => $this->input->post('start'),
-            'end_date' => $this->input->post('end')
+            'nip' => $_POST['nip'],
+            'nama' => $_POST['nama'],
+            'jenkel' => $_POST['jenkel'],
+            'no_hp' => $_POST['hp'],
+            'alamat' => $_POST['alamat']
         ];
-        $this->Mduser->update(['id_edu' => $this->input->post('id')], $data, 'educations');
-        $this->session->set_flashdata('messege', '<script>alert("New Entry Success!");</script>');
-        redirect('users/edu');
+
+        $this->user->update(['id_petugas' => $id], $data, 'petugas');
+        $this->session->set_flashdata('update', $this->input->post('nama'));
+        redirect('users/petugas');
+    }
+    public function deletePetugas($id)
+    {
+        $this->user->delete(['id_petugas' => $id], 'petugas');
+        $this->session->set_flashdata('delete', 'Petugas');
+        redirect('users/petugas');
     }
 
-    public function empl()
+    public function anggota()
     {
-        $data['title'] = "Employments";
-        $name = $this->session->userdata('id');
-        $user = $this->db->get_where('employments', ['id_user' => $name])->row_array();
+        $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
 
-        if ($user) {
-            $data['empl'] = $this->Mduser->edit(['id_user' => $name], 'employments');
-            $this->load->view('default/header', $data);
-            $this->load->view('default/nav');
-            $this->load->view('users/empl', $data);
-            $this->load->view('default/footer');
+        if ($this->form_validation->run() == false) {
+            $data['judul'] = 'Anggota';
+            $data['anggota'] = $this->user->gelAllAnggota();
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('users/anggota', $data);
+            $this->load->view('templates/footer');
         } else {
-            $this->form_validation->set_rules('nama', 'Name', 'required|trim');
-            $this->form_validation->set_rules('start', 'Date', 'required|trim');
-            $this->form_validation->set_rules('end', 'Date', 'required|trim');
-            if ($this->form_validation->run() == false) {
-                $data['user'] = $this->Mduser->edit(['id' => $this->session->userdata('id')], 'users');
-
-                $this->load->view('default/header', $data);
-                $this->load->view('default/nav');
-                $this->load->view('users/empl_inp', $data);
-                $this->load->view('default/footer');
-            } else {
-                $data = [
-                    'id_user' => $this->session->userdata('id'),
-                    'employment_name' => $this->input->post('nama'),
-                    'level' => $this->input->post('level'),
-                    'company' => $this->input->post('company'),
-                    'start_date' => $this->input->post('start'),
-                    'end_date' => $this->input->post('end')
-                ];
-
-                $this->Mduser->insert($data, 'employments');
-                $this->session->set_flashdata('messege', '<script>alert("New Entry Success!");</script>');
-                redirect('users/empl');
-            }
+            $data = [
+                'nis' => $this->input->post('nis'),
+                'nama' => $this->input->post('nama'),
+                'jenis_kel' => $this->input->post('jenkel'),
+                'no_hp' => $this->input->post('hp'),
+                'alamat' => $this->input->post('alamat'),
+                'status' => 1
+            ];
+            $this->user->insert($data, 'anggota');
+            $this->session->set_flashdata('messege', $this->input->post('nama'));
+            redirect('users/anggota');
         }
     }
-
-    public function empl_update()
+    public function updateAnggota()
     {
+        $id = $_POST['id'];
         $data = [
-            'employment_name' => $this->input->post('nama'),
-            'level' => $this->input->post('level'),
-            'company' => $this->input->post('company'),
-            'start_date' => $this->input->post('start'),
-            'end_date' => $this->input->post('end')
+            'nis' => $_POST['nis'],
+            'nama' => $_POST['nama'],
+            'jenis_kel' => $_POST['jenkel'],
+            'no_hp' => $_POST['hp'],
+            'alamat' => $_POST['alamat'],
+            'status' => $_POST['status']
         ];
-        $this->Mduser->update(['id_emp' => $this->input->post('id')], $data, 'employments');
-        $this->session->set_flashdata('messege', '<script>alert("Update Entry Success!");</script>');
-        redirect('users/empl');
+
+        $this->user->update(['id_anggota' => $id], $data, 'anggota');
+        $this->session->set_flashdata('update', $this->input->post('nama'));
+        redirect('users/anggota');
     }
-
-    public function cv()
+    public function deleteAnggota($id)
     {
-        $data['title'] = "CV";
-        $id = $this->session->userdata('id');
-        $data['user'] = $this->Mduser->edit(['id' => $this->session->userdata('id')], 'users');
-        $data['edu'] = $this->Mduser->edit(['id_user' => $this->session->userdata('id')], 'educations');
-        $data['emp'] = $this->Mduser->edit(['id_user' => $this->session->userdata('id')], 'employments');
-
-        $this->load->view('default/header', $data);
-        $this->load->view('default/nav');
-        $this->load->view('users/cv', $data);
-        $this->load->view('default/footer');
+        $this->user->delete(['id_anggota' => $id], 'anggota');
+        $this->session->set_flashdata('delete', 'Anggota');
+        redirect('users/anggota');
+    }
+    public function kartuAnggota()
+    {
+        $data['judul'] = 'Petugas';
+        $data['anggota'] = $this->user->gelAllAnggota();
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('users/kartuanggota', $data);
+        $this->load->view('templates/footer');
+    }
+    public function cardPrint($id)
+    {
+        $data['anggota'] = $this->user->edit(['id_anggota' => $id], 'anggota');
+        $this->load->view('users/cardprint', $data);
     }
 }

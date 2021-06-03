@@ -21,17 +21,22 @@
                 <!--end col-->
             </div>
             <!-- end page title end breadcrumb -->
+
+            <!-- sweet alert -->
             <div class="flash-data" data-flashdata="<?= $this->session->flashdata('messege') ?>"></div>
+            <div class="flash-delete" data-delete="<?= $this->session->flashdata('delete') ?>"></div>
+            <!-- end sweet alert -->
+
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header bg-primary text-center">
                             <h4 class="text-light mb-2">Tabel Buku</h4>
                         </div>
-                        <div class="card-body bg-light">
-                            <a href="<?= base_url('admin/BookAdd') ?>" class="btn btn-success float-right"><i class="ti ti-plus"></i> Add</a>
-                            <table id="datatable2" class="table dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                <thead>
+                        <div class="card-body bg-white">
+                            <a href="<?= base_url('buku/BookAdd') ?>" class="btn btn-success float-right"><i class="ti ti-plus"></i> Add</a>
+                            <table id="datatable2" class="table table-bordered table-striped table-hover table-datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead class="thead-dark">
                                     <tr>
                                         <th width="1px">No</th>
                                         <th>Kode</th>
@@ -60,8 +65,8 @@
                                             <td>
 
                                                 <?php if ($b->status == 1) { ?>
-                                                    <a class="badge badge-success" href=""><i class="far fa-fw fa-eye"></i></a>
-                                                    <a class="badge badge-primary" href=""><i class="fas fa-fw fa-plus"></i></a>
+                                                    <a class="badge badge-success" href="<?= base_url('buku/bookdetail/') . $b->id ?>"><i class="far fa-fw fa-eye"></i></a>
+                                                    <a class="badge badge-primary detail-buku" href="#" data-toggle="modal" data-target="#exampleModal" data-id="<?= $b->id ?>"><i class="fas fa-fw fa-plus"></i></a>
                                                 <?php } else {
                                                 ?>
                                                     <a class="badge badge-primary detail-buku" href="#" data-toggle="modal" data-target="#exampleModal" data-id="<?= $b->id ?>"><i class="fas fa-fw fa-plus"></i></a>
@@ -90,7 +95,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Detail</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

@@ -21,6 +21,15 @@ class BookModels extends CI_Model
                 AND buku.kategori=kategori.kd_kategori"
         )->result();
     }
+    function getBukuId($id)
+    {
+        return $this->db->query("SELECT * FROM buku,pengarang,penerbit,kategori WHERE buku.pengarang=pengarang.kd_pengarang AND buku.penerbit=penerbit.kd_penerbit AND buku.kategori=kategori.kd_kategori AND buku.id=$id")->row_array();
+    }
+    function getAllDetailBuku($kd)
+    {
+        return $this->db->query("SELECT *,detail_buku.status as status_buku FROM buku JOIN detail_buku JOIN rak ON buku.kd_buku=detail_buku.kd_buku AND detail_buku.rak=rak.id_rak WHERE detail_buku.kd_buku='$kd' ORDER BY detail_buku.kd_detail")->result();
+    }
+    
     function getAllRak()
     {
         return $this->db->query("SELECT * FROM `rak` ORDER BY nama_rak")->result();

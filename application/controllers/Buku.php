@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class admin extends CI_Controller
+class buku extends CI_Controller
 {
     public function __construct()
     {
@@ -47,7 +47,7 @@ class admin extends CI_Controller
             $this->BookModels->insert($data, 'detail_buku');
             $this->BookModels->update(['kd_buku' => $kd_buku], ['status' => 1], 'buku');
             $this->session->set_flashdata('messege', $buku['judul']);
-            redirect('admin/book');
+            redirect('buku/book');
         }
     }
     public function BookAdd()
@@ -83,24 +83,84 @@ class admin extends CI_Controller
             ];
             $this->BookModels->insert($data, 'buku');
             $this->session->set_flashdata('messege', 'Buku');
-            redirect('admin/book');
+            redirect('buku/book');
         }
     }
-
-    public function addDetailBuku($id)
+    public function AddPenerbit()
     {
-
-        $data['judul'] = 'Detail Buku';
-        $data['buku'] = $this->BookModels->edit(['id' => $id], 'buku');
-        $data['id_detail'] = $this->databuku->kd_detail($id);
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('book/bookDetail', $data);
-        $this->load->view('templates/footer');
+        $nama = $this->input->post('nama_penerbit');
+        $data = [
+            'kd_penerbit' => $this->input->post('kd_penerbit'),
+            'nama_penerbit' => $nama
+        ];
+        $this->BookModels->insert($data, 'penerbit');
+        $this->session->set_flashdata('messege', $nama);
+        redirect('buku/BookAdd');
     }
+    public function AddKategori()
+    {
+        $nama = $this->input->post('nama_kategori');
+        $data = [
+            'kd_kategori' => $this->input->post('kd_kategori'),
+            'nama_kategori' => $nama
+        ];
+        $this->BookModels->insert($data, 'kategori');
+        $this->session->set_flashdata('messege', $nama);
 
+        redirect('buku/BookAdd');
+    }
+    public function AddPengarang()
+    {
+        $nama = $this->input->post('nama_pengarang');
+        $data = [
+            'kd_pengarang' => $this->input->post('kd_pengarang'),
+            'nama_pengarang' => $nama
+        ];
+        $this->BookModels->insert($data, 'pengarang');
+        $this->session->set_flashdata('messege', $nama);
 
+        redirect('buku/BookAdd');
+    }
+    public function bookDetail($id)
+    {
+        $this->form_validation->set_rules('id_buku', 'ID Buku', 'trim|required');
+
+        if ($this->form_validation->run() == false) {
+            $data['judul'] = 'Detail Buku';
+            $data['buku'] = $this->BookModels->getBukuId($id);
+            $buku = $this->BookModels->getBukuId($id);
+            $kode = $buku['kd_buku'];
+            $data['id'] = $buku['id'];
+            $data['detail'] = $this->BookModels->getAllDetailBuku($kode);
+            $data['rak'] = $this->BookModels->getAllRak();
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('book/bookDetail', $data);
+            $this->load->view('templates/footer');
+        } else {
+
+            $kd_buku = $this->input->post('id_buku');
+            $buku = $this->BookModels->edit(['kd_buku' => $kd_buku], 'buku');
+            $data = [
+                'kd_detail' => $this->input->post('kd_detail'),
+                'kd_buku' => $kd_buku,
+                'tgl_masuk' => date('Y-m-d'),
+                'rak' => $this->input->post('rak'),
+                'status' => 1
+            ];
+
+            $this->BookModels->insert($data, 'detail_buku');
+
+            //    cek apakah status buku 0 tau 1
+            if ($buku['status'] != 1) {
+                $this->BookModels->update(['kd_buku' => $kd_buku], ['status' => 1], 'buku');
+            }
+
+            $this->session->set_flashdata('messege', $buku['judul']);
+            redirect('buku/bookDetail/' . $id);
+        }
+    }
 
     public function kategori()
     {
@@ -122,28 +182,18 @@ class admin extends CI_Controller
             ];
             $this->BookModels->insert($data, 'kategori');
             $this->session->set_flashdata('messege', 'Kategori');
-            redirect('admin/kategori');
+            redirect('buku/kategori');
         }
     }
 
 
-    public function AddKategori()
-    {
-        $data = [
-            'kd_kategori' => $this->input->post('kd_kategori'),
-            'nama_kategori' => $this->input->post('nama_kategori')
-        ];
-        $this->BookModels->insert($data, 'kategori');
-        $this->session->set_flashdata('messege', 'Kategori');
 
-        redirect('admin/BookAdd');
-    }
 
     public function deleteKategori($id)
     {
         $this->BookModels->delete(['id_kategori' => $id], 'kategori');
         $this->session->set_flashdata('delete', 'Kategori');
-        redirect('admin/kategori');
+        redirect('buku/kategori');
     }
 
     public function pengarang()
@@ -167,25 +217,15 @@ class admin extends CI_Controller
             ];
             $this->BookModels->insert($data, 'pengarang');
             $this->session->set_flashdata('messege', 'Pengarang');
-            redirect('admin/pengarang');
+            redirect('buku/pengarang');
         }
     }
-    public function AddPengarang()
-    {
-        $data = [
-            'kd_pengarang' => $this->input->post('kd_pengarang'),
-            'nama_pengarang' => $this->input->post('nama_pengarang')
-        ];
-        $this->BookModels->insert($data, 'pengarang');
-        $this->session->set_flashdata('messege', 'Pengarang');
 
-        redirect('admin/BookAdd');
-    }
     public function deletePengarang($id)
     {
         $this->BookModels->delete(['id_pengarang' => $id], 'pengarang');
         $this->session->set_flashdata('delete', 'Pengarang');
-        redirect('admin/pengarang');
+        redirect('buku/pengarang');
     }
 
 
@@ -210,26 +250,18 @@ class admin extends CI_Controller
             ];
             $this->BookModels->insert($data, 'penerbit');
             $this->session->set_flashdata('messege', 'Penerbit');
-            redirect('admin/penerbit');
+            redirect('buku/penerbit');
         }
     }
-    public function AddPenerbit()
-    {
 
-        $data = [
-            'kd_penerbit' => $this->input->post('kd_penerbit'),
-            'nama_penerbit' => $this->input->post('nama_penerbit')
-        ];
-        $this->BookModels->insert($data, 'penerbit');
-        $this->session->set_flashdata('messege', 'Penerbit');
-        redirect('admin/BookAdd');
-    }
+
+
     public function rak()
     {
-        $this->form_validation->set_rules('nama', 'Nama', 'trim|required|is_unique[]');
+        $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
 
         if ($this->form_validation->run() == false) {
-            $data['judul'] = 'Rak';
+            $data['judul'] = 'Rak Buku';
             $data['rak'] = $this->BookModels->getAllRak();
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
@@ -243,7 +275,13 @@ class admin extends CI_Controller
             ];
             $this->BookModels->insert($data, 'rak');
             $this->session->set_flashdata('messege', 'Rak Buku');
-            redirect('admin/rak');
+            redirect('buku/rak');
         }
+    }
+    public function deleteRak($id)
+    {
+        $this->BookModels->delete(['id_rak' => $id], 'rak');
+        $this->session->set_flashdata('delete', 'Rak Buku');
+        redirect('buku/rak');
     }
 }

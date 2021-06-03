@@ -9,7 +9,7 @@
     <meta content="Mannatthemes" name="author" />
 
     <!-- App favicon -->
-    <!-- <link rel="shortcut icon" href="<?= base_url('') ?>/assets/images/favicon.ico"> -->
+    <link rel="shortcut icon" href="<?= base_url('') ?>/assets/images/logo.ico">
 
     <!-- datatables -->
     <!-- DataTables -->

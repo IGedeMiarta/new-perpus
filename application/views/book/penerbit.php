@@ -31,10 +31,10 @@
             <div class="card-header bg-primary text-center">
                 <h4 class="text-light">Tabel Penerbit</h4>
             </div>
-            <div class="card-body bg-light">
+            <div class="card-body bg-white">
                 <a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add</a>
-                <table id="datatable2" class="table dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                    <thead>
+                <table id="datatable2" class="table table-bordered table-striped table-hover table-datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead class="thead-dark">
                         <tr>
                             <th>No</th>
                             <th>Kode</th>
@@ -53,7 +53,7 @@
                                 <td><?= $b->nama_penerbit ?></td>
                                 <td>
                                     <a href="" class="btn btn-warning"> <i class="fas fa-edit"></i></a>
-                                    <a href="<?= base_url('admin/deletePengarang/') . $b->id_penerbit ?>" class="btn btn-danger"> <i class="fas fa-trash"></i></a>
+                                    <a href="<?= base_url('buku/deletePengarang/') . $b->id_penerbit ?>" class="btn btn-danger"> <i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                             </tr>

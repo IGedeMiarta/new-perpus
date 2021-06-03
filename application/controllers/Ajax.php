@@ -9,6 +9,7 @@ class Ajax extends CI_Controller
         $this->load->model('BookModels');
         $this->load->model('MakeCode');
         $this->load->library('form_validation');
+        $this->load->model('UserModel', 'user');
     }
     public function addKategori()
     {
@@ -37,37 +38,21 @@ class Ajax extends CI_Controller
         ];
         echo json_encode($data);
     }
-
-
-
-    public function edit_user()
+    public function editPetugas()
     {
-        if ($this->input->is_ajax_request()) {
-            $id = $this->input->post('id');
-            $user = $this->db->get_where('users', ['id' => $id])->row();
-            echo json_encode($user);
-        } else {
-            redirect('eror');
-        }
+        $id = $this->input->post('id');
+        $petugas = $this->BookModels->edit(['id_petugas' => $id], 'petugas');
+        echo json_encode($petugas);
     }
-    public function edit_edu()
+    public function updatePetugas()
     {
-        if ($this->input->is_ajax_request()) {
-            $id = $this->input->post('id');
-            $user = $this->db->get_where('educations', ['id_user' => $id])->row();
-            echo json_encode($user);
-        } else {
-            redirect('eror');
-        }
+        $data = $_POST;
+        $rs =   $this->user->updatePetugas($data);
     }
-    public function edit_empl()
+    public function editAnggota()
     {
-        if ($this->input->is_ajax_request()) {
-            $id = $this->input->post('id');
-            $user = $this->db->get_where('employments', ['id_user' => $id])->row();
-            echo json_encode($user);
-        } else {
-            redirect('eror');
-        }
+        $id = $this->input->post('id');
+        $anggota = $this->BookModels->edit(['id_anggota' => $id], 'anggota');
+        echo json_encode($anggota);
     }
 }

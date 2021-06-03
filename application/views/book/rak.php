@@ -23,7 +23,7 @@
 
         <!-- sweet alert -->
         <div class="flash-data" data-flashdata="<?= $this->session->flashdata('messege') ?>"></div>
-        <div class="flash-delete" data-delete="<?= $this->session->flashdata('delete') ?>"></div>
+        <div class="flash-delete" data-flashdelete="<?= $this->session->flashdata('delete') ?>"></div>
         <!-- end sweet alert -->
 
 
@@ -31,10 +31,10 @@
             <div class="card-header bg-primary text-center">
                 <h4 class="text-light">Tabel Rak</h4>
             </div>
-            <div class="card-body bg-light">
-                <a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add</a>
-                <table id="datatable2" class="table dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                    <thead>
+            <div class="card-body bg-white">
+                <a href="#" class="btn btn-success float-right" data-toggle="modal" data-target="#modalRak"><i class="fas fa-plus"></i> Add</a>
+                <table id="datatable2" class="table table-bordered table-striped table-hover table-datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead class="thead-dark">
                         <tr>
                             <th>No</th>
                             <th>Kode</th>
@@ -53,7 +53,7 @@
                                 <td><?= $b->detail ?></td>
                                 <td>
                                     <a href="" class="btn btn-warning"> <i class="fas fa-edit"></i></a>
-                                    <a href="<?= base_url('admin/deletePengarang/') . $b->id_rak ?>" class="btn btn-danger"> <i class="fas fa-trash"></i></a>
+                                    <a href="<?= base_url('buku/deleteRak/') . $b->id_rak ?>" class="btn btn-danger"> <i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -66,17 +66,17 @@
     </div><!-- container -->
 
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalRak" tabindex="-1" aria-labelledby="modalRakLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Rak</h5>
+                    <h5 class="modal-title" id="modalRakLabel">Tambah Rak</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="form_kategori" method="POST" action="">
+                    <form method="POST" action="">
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Kode Rak</label>
                             <div class="col-sm-8">
@@ -93,7 +93,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Save </button>
                 </div>
                 </form>
             </div>
