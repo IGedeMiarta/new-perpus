@@ -1,6 +1,6 @@
 <?php
 
-class Ajax extends CI_Model
+class AjaxModel extends CI_Model
 {
     function getWhere($where, $table)
     {
@@ -21,5 +21,17 @@ class Ajax extends CI_Model
         $qry = $this->db->insert('kategori', ['nama' => $data['nama']]);
         $out = $qry->affected_rows;
         return $out;
+    }
+    function getPeminjamanId($id)
+    {
+        $qry = $this->db->query(
+            "SELECT 
+              *
+            FROM 
+                peminjaman
+            WHERE
+             	peminjaman.id_peminjaman=\"$id\""
+        )->row_array();
+        return $qry;
     }
 }

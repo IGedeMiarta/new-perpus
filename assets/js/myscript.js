@@ -29,7 +29,7 @@ if (flashUpdate) {
 };
 
 
-$('.detail-buku').click(function() {
+$('.detail-buku').click(function () {
     const id = $(this).data('id');
     $.ajax({
         url: base_url + "ajax/bookDetail",
@@ -39,8 +39,8 @@ $('.detail-buku').click(function() {
         type: 'POST',
         dataType: 'json',
         async: true,
-        success: function(data) {
-            $.each(data, function(id, kd) {
+        success: function (data) {
+            $.each(data, function (id, kd) {
                 $('#id_buku').val(data.id);
                 $('#kd_detail').val(data.kd);
             });
@@ -48,7 +48,7 @@ $('.detail-buku').click(function() {
     });
 });
 
-$('.edit-petugas').click(function() {
+$('.edit-petugas').click(function () {
     const id = $(this).data('id');
     $.ajax({
         type: 'POST',
@@ -58,8 +58,8 @@ $('.edit-petugas').click(function() {
         dataType: 'JSON',
         url: base_url + "ajax/editPetugas",
         async: true,
-        success: function(data) {
-            $.each(data, function() {
+        success: function (data) {
+            $.each(data, function () {
                 $('#e_id').val(data.id_petugas);
                 $('#e_nip').val(data.nip);
                 $('#e_nama').val(data.nama);
@@ -71,7 +71,7 @@ $('.edit-petugas').click(function() {
     });
 });
 
-$('.edit-anggota').click(function() {
+$('.edit-anggota').click(function () {
     const id = $(this).data('id');
     $.ajax({
         type: 'POST',
@@ -81,8 +81,8 @@ $('.edit-anggota').click(function() {
         dataType: 'JSON',
         url: base_url + "ajax/editAnggota",
         async: true,
-        success: function(data) {
-            $.each(data, function() {
+        success: function (data) {
+            $.each(data, function () {
                 $('#e_id').val(data.id_anggota);
                 $('#e_nip').val(data.nis);
                 $('#e_nama').val(data.nama);
@@ -95,7 +95,7 @@ $('.edit-anggota').click(function() {
     });
 });
 
-$('.edit-donatur').on('click', function() {
+$('.edit-donatur').on('click', function () {
     const id = $(this).data('id');
     $.ajax({
         type: 'POST',
@@ -105,14 +105,38 @@ $('.edit-donatur').on('click', function() {
         dataType: 'JSON',
         url: base_url + "ajax/editDonatur",
         async: true,
-        success: function(data) {
-            $.each(data, function() {
+        success: function (data) {
+            $.each(data, function () {
                 $('#e_id').val(data.id_donatur);
                 $('#e_nama').val(data.nama_donatur);
                 $('#e_jenkel').val(data.jenkel);
                 $('#e_hp').val(data.no_hp);
                 $('#e_alamat').val(data.alamat);
             })
+        }
+    })
+});
+$('.edit-peminjaman').on('click', function () {
+    const id = $(this).data('id');
+    $.ajax({
+        type: 'POST',
+        data: {
+            id: id
+        },
+        dataType: 'JSON',
+        url: base_url + "ajax/editPeminjaman",
+        async: true,
+        success: function (data) {
+            console.log(data);
+            $.each(data, function () {
+                $('#e_id').val(data.id_peminjaman);
+                $('#e_bk2').val(data.id_buku);
+                $('#e_tgl').val(data.tgl_pinjam);
+                $('#e_anggota').val(data.id_anggota);
+                $('#e_buku').val(data.id_buku);
+                $('#e_status').val(1);
+
+            });
         }
     })
 });

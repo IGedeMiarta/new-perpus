@@ -13,7 +13,7 @@
                             <li class="breadcrumb-item active">Starter</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Donasi</h4>
+                    <h4 class="page-title">Peminjaman</h4>
                 </div>
                 <!--end page-title-box-->
             </div>
@@ -30,7 +30,7 @@
 
         <div class="card">
             <div class="card-header bg-primary text-center">
-                <h4 class="text-light">Tabel Donatur</h4>
+                <h4 class="text-light">Tabel Peminjaman</h4>
             </div>
             <div class="card-body bg-white">
                 <a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add</a>
@@ -38,32 +38,28 @@
                     <thead class="thead-dark">
                         <tr>
                             <th>No</th>
-                            <th>Tanggal </th>
-                            <th>Donatur</th>
-                            <th>No Hp</th>
-                            <th>Jumlah</th>
-                            <th>Detail</th>
+                            <th>Tanggal Pinjam </th>
+                            <th>Nama Peminjam </th>
+                            <th>Judul Buku</th>
+                            <th>Batas Pinjam</th>
                             <th>Status</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         <?php $no = 1;
-
-                        foreach ($donasi as $b) { ?>
+                        foreach ($peminjaman as $b) { ?>
 
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td><?= $b->tgl_donasi ?></td>
-                                <td><?= $b->nama_donatur ?></td>
-                                <td><?= $b->no_hp ?></td>
-                                <td><?= $b->jml_donasi ?></td>
-                                <td><?= $b->keterangan ?></td>
-                                <td><?= $b->status ?></td>
+                                <td><?= $b->tgl_pinjam ?></td>
+                                <td><?= $b->nama ?></td>
+                                <td><?= $b->judul ?></td>
+                                <td><?= $b->batas_pinjam ?></td>
+                                <td><?= $b->status_pinjam ?></td>
                                 <td>
-                                    <a href="" class="btn btn-warning edit-donasi" data-toggle="modal" data-id="<?= $b->id_donasi ?>" data-target="#modelEdit"> <i class="fas fa-edit"></i></a>
-                                    <a href="<?= base_url('donasi/deleteDonasi/') . $b->id_donasi ?>" class="btn btn-danger"> <i class="fas fa-trash"></i></a>
+                                    <a href="" class="btn btn-warning edit-peminjaman" data-toggle="modal" data-id="<?= $b->id_peminjaman ?>" data-target="#modelEdit"> <i class="fas fa-edit"></i></a>
+                                    <!-- <a href="<?= base_url('peminjaman/deletePeminjaman/') . $b->id_peminjaman ?>" class="btn btn-danger"> <i class="fas fa-trash"></i></a> -->
                                 </td>
                             </tr>
                             </tr>
@@ -80,7 +76,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Donasi</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Peminjaman</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -94,38 +90,28 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Donatur</label>
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Peminjam</label>
                             <div class="col-sm-10">
-                                <select name="donatur" id="donatur" class="form-control">
-                                    <option>-Select Donatur</option>
-                                    <?php foreach ($donatur as $d) : ?>
-                                        <option value="<?= $d->id_donatur ?>"><?= $d->nama_donatur ?></option>
+                                <select name="anggota" id="anggota" class="form-control">
+                                    <option>-Select Anggota</option>
+                                    <?php foreach ($anggota as $d) : ?>
+                                        <option value="<?= $d->id_anggota ?>"><strong><?= $d->nis != '' ? $d->nis . ' - ' : '';  ?></strong><?= $d->nama ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Jumlah Donasi</label>
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Buku</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" id="jml" name="jml">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Keterengan</label>
-                            <div class="col-sm-10">
-                                <textarea name="ket" id="ket" class="form-control" cols="30" rows="5"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Status</label>
-                            <div class="col-sm-10">
-                                <select name="status" class="form-control" id="status">
-                                    <option value="">--Pilih</option>
-                                    <option value="sumbangan">Sumbangan</option>
-                                    <option value="denda">Denda</option>
+                                <select name="buku" id="buku" class="form-control">
+                                    <option>-Select Buku</option>
+                                    <?php foreach ($buku as $d) : ?>
+                                        <option value="<?= $d->id_detail ?>"><?= '[' . $d->kd_buku . '] ' . $d->judul ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -140,42 +126,56 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Donatur</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Peminjaman</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="edit_petugas" method="POST" action="<?= base_url('donasi/updateDonatur') ?>">
+                    <form id="updatePeminjaman" method="POST" action="<?= base_url('transaksi/updatePeminjaman') ?>">
                         <input type="text" class="form-control" id="e_id" name="id" hidden>
+                        <input type="text" class="form-control" id="e_bk2" name="bk" hidden>
 
                         <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Tanggal</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="e_nama" name="nama">
+                                <input type="date" class="form-control" id="e_tgl" name="tanggal">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Peminjam</label>
                             <div class="col-sm-10">
-                                <select name="jenkel" id="e_jenkel" class="form-control">
-                                    <option value="L">Laki-Laki</option>
-                                    <option value="P">Perempuan</option>
+                                <select name="anggota" id="e_anggota" class="form-control">
+                                    <option>-Select Anggota</option>
+                                    <?php foreach ($anggota as $d) : ?>
+                                        <option value="<?= $d->id_anggota ?>"><strong><?= $d->nis != '' ? $d->nis . ' - ' : '';  ?></strong><?= $d->nama ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">No Hp</label>
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Buku</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" id="e_hp" name="hp">
+                                <select name="buku" id="e_buku" class="form-control">
+                                    <option>-Select Buku</option>
+                                    <?php foreach ($bukuedt as $d) : ?>
+                                        <option value="<?= $d->id_detail ?>"><?= '[' . $d->kd_buku . '] ' . $d->judul ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Alamat</label>
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Status</label>
                             <div class="col-sm-10">
-                                <textarea name="alamat" id="e_alamat" class="form-control" cols="30" rows="5"></textarea>
+                                <select name="status" id="e_status" class="form-control">
+                                    <option>-Select Status</option>
+                                    <?php foreach ($detail as $d) : ?>
+                                        <option class="form-control" value="<?= $d->id_detail_peminjaman ?>"><?= $d->status_pinjam ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                         </div>
+
 
                 </div>
                 <div class="modal-footer">

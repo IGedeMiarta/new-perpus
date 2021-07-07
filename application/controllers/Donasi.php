@@ -13,13 +13,49 @@ class Donasi extends CI_Controller
     }
     public function index()
     {
-        $data['judul'] = 'Donasi';
-        $data['donasi'] = $this->user->read('donasi');
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('donate/donasi');
-        $this->load->view('templates/footer');
+        $this->form_validation->set_rules('tanggal', 'tanggal', 'trim|required');
+
+        if ($this->form_validation->run() == false) {
+            $data['judul'] = 'Donasi';
+            $data['donasi'] = $this->user->getAllDonasi();
+            $data['donatur'] = $this->user->read('donatur');
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('donate/donasi');
+            $this->load->view('templates/footer');
+        } else {
+            // insert ke detail donasi
+            $tanggal = $this->input->post('tanggal');
+            $donatur = $this->input->post('donatur');
+            $jml_donasi = $this->input->post('jml');
+            $keterangan = $this->input->post('ket');
+            $status = $this->input->post('status');
+            $data_dtl = [
+                'keterangan' => $keterangan,
+                'status' => $status
+            ];
+            $this->user->insert($data_dtl, 'detail_donasi');
+            // cari id detail donasi terkahir input;
+            $detail_donasi = $this->db->query("SELECT * FROM detail_donasi WHERE detail_donasi.keterangan = '" . $keterangan . "' AND detail_donasi.status='" . $status . "' ORDER BY id_detail_donasi DESC LIMIT 1")->row_array();
+            $id = $detail_donasi['id_detail_donasi'];
+            $data_donasi = [
+                'tgl_donasi' => $tanggal,
+                'donatur' => $donatur,
+                'jml_donasi' => $jml_donasi,
+                'detail' => $id
+            ];
+            $this->user->insert($data_donasi, 'donasi');
+            $this->session->set_flashdata('messege', 'donasi');
+            redirect('donasi');
+        }
+    }
+    public function deleteDonasi($id_donasi)
+    {
+        var_dump($id_donasi);
+        // $this->user->delete(['id_donasi' => $id_donasi], 'donasi');
+        $this->session->set_flashdata('delete', 'donasi');
+        redirect('donasi');
     }
     public function donatur()
     {

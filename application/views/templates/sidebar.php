@@ -33,6 +33,13 @@
                     <li class="nav-item"><a href="<?= base_url('donasi/donatur') ?>"><i class="ti-control-record"></i>Data Donatur</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="javascript: void(0);"><i class="ti-wallet"></i><span>Transaksi</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li class="nav-item"><a href="<?= base_url('transaksi/peminjaman') ?>"><i class="ti-control-record"></i>Peminjaman</a></li>
+                    <li class="nav-item"><a href="<?= base_url('transaksi/pengembalian') ?>"><i class="ti-control-record"></i>Pengembalian</a></li>
+                </ul>
+            </li>
 
 
 
