@@ -29,7 +29,7 @@ class BookModels extends CI_Model
     {
         return $this->db->query("SELECT *,detail_buku.status as status_buku FROM buku JOIN detail_buku JOIN rak ON buku.kd_buku=detail_buku.kd_buku AND detail_buku.rak=rak.id_rak WHERE detail_buku.kd_buku='$kd' ORDER BY detail_buku.kd_detail")->result();
     }
-    
+
     function getAllRak()
     {
         return $this->db->query("SELECT * FROM `rak` ORDER BY nama_rak")->result();

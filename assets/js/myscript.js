@@ -1,7 +1,7 @@
 const flashData = $('.flash-data').data('flashdata');
-if(flashData){
+if (flashData) {
     Swal.fire({
-        title: 'Data '+ flashData,
+        title: 'Data ' + flashData,
         text: 'berhasil ditambahkan',
         icon: 'success',
         confirmButtonText: 'Ok'
@@ -9,9 +9,9 @@ if(flashData){
 };
 
 const flashDalete = $('.flash-delete').data('delete');
-if(flashDalete){
-     Swal.fire({
-        title: 'Data '+ flashDalete,
+if (flashDalete) {
+    Swal.fire({
+        title: 'Data ' + flashDalete,
         text: 'berhasil dihapus',
         icon: 'success',
         confirmButtonText: 'Ok'
@@ -19,9 +19,9 @@ if(flashDalete){
 };
 
 const flashUpdate = $('.flash-update').data('update');
-if(flashUpdate){
-     Swal.fire({
-        title: 'Data '+ flashUpdate,
+if (flashUpdate) {
+    Swal.fire({
+        title: 'Data ' + flashUpdate,
         text: 'berhasil diupdate',
         icon: 'success',
         confirmButtonText: 'Ok'
@@ -32,34 +32,34 @@ if(flashUpdate){
 $('.detail-buku').click(function() {
     const id = $(this).data('id');
     $.ajax({
-        url: base_url+"ajax/bookDetail",
+        url: base_url + "ajax/bookDetail",
         data: {
-            id:id
+            id: id
         },
         type: 'POST',
         dataType: 'json',
         async: true,
-        success:function(data){
-            $.each(data,function(id,kd){
+        success: function(data) {
+            $.each(data, function(id, kd) {
                 $('#id_buku').val(data.id);
                 $('#kd_detail').val(data.kd);
             });
         }
     });
- });
+});
 
- $('.edit-petugas').click(function(){
-     const id = $(this).data('id');
-     $.ajax({
-        type : 'POST',
-        data : {
-            id:id
+$('.edit-petugas').click(function() {
+    const id = $(this).data('id');
+    $.ajax({
+        type: 'POST',
+        data: {
+            id: id
         },
-        dataType:'JSON',
-        url: base_url+"ajax/editPetugas",
+        dataType: 'JSON',
+        url: base_url + "ajax/editPetugas",
         async: true,
-        success:function(data){
-            $.each(data,function(){
+        success: function(data) {
+            $.each(data, function() {
                 $('#e_id').val(data.id_petugas);
                 $('#e_nip').val(data.nip);
                 $('#e_nama').val(data.nama);
@@ -68,21 +68,21 @@ $('.detail-buku').click(function() {
                 $('#e_alamat').val(data.alamat);
             })
         }
-     });
- });
- 
- $('.edit-anggota').click(function(){
-     const id = $(this).data('id');
-     $.ajax({
-        type : 'POST',
-        data : {
-            id:id
+    });
+});
+
+$('.edit-anggota').click(function() {
+    const id = $(this).data('id');
+    $.ajax({
+        type: 'POST',
+        data: {
+            id: id
         },
-        dataType:'JSON',
-        url: base_url+"ajax/editAnggota",
+        dataType: 'JSON',
+        url: base_url + "ajax/editAnggota",
         async: true,
-        success:function(data){
-            $.each(data,function(){
+        success: function(data) {
+            $.each(data, function() {
                 $('#e_id').val(data.id_anggota);
                 $('#e_nip').val(data.nis);
                 $('#e_nama').val(data.nama);
@@ -92,14 +92,35 @@ $('.detail-buku').click(function() {
                 $('#status').val(data.status);
             })
         }
-     });
- });
+    });
+});
+
+$('.edit-donatur').on('click', function() {
+    const id = $(this).data('id');
+    $.ajax({
+        type: 'POST',
+        data: {
+            id: id
+        },
+        dataType: 'JSON',
+        url: base_url + "ajax/editDonatur",
+        async: true,
+        success: function(data) {
+            $.each(data, function() {
+                $('#e_id').val(data.id_donatur);
+                $('#e_nama').val(data.nama_donatur);
+                $('#e_jenkel').val(data.jenkel);
+                $('#e_hp').val(data.no_hp);
+                $('#e_alamat').val(data.alamat);
+            })
+        }
+    })
+});
 
 
-
- // contoh insert dengan ajax
+// contoh insert dengan ajax
 //  $('#edit_petugas').on('submit',function(){
-    
+
 //      $.ajax({
 //         type : 'POST',
 //         data : $(this).serialize(),
@@ -116,6 +137,3 @@ $('.detail-buku').click(function() {
 //         }
 //      });
 //  });
-
-
-

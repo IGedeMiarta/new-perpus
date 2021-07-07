@@ -54,7 +54,7 @@
                                 <td><?= $b->nama ?></td>
 
                                 <td>
-                                    <a href="<?= base_url('users/cardprint/') . $b->id_anggota ?>" class="btn btn-warning"> <i class="fas fa-print"></i></a>
+                                    <a href="<?= base_url('users/cardprint/') . $b->id_anggota ?>" target="_blank" class="btn btn-warning"> <i class="fas fa-print"></i></a>
                                 </td>
                             </tr>
                             </tr>

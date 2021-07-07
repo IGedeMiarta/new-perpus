@@ -30,7 +30,7 @@
                 <a href="javascript: void(0);"><i class="ti-wallet"></i><span>Donasi</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                 <ul class="nav-second-level" aria-expanded="false">
                     <li class="nav-item"><a href="<?= base_url('donasi') ?>"><i class="ti-control-record"></i>Data Donasi</a></li>
-                    <li class="nav-item"><a href="#"><i class="ti-control-record"></i>Data Donatur</a></li>
+                    <li class="nav-item"><a href="<?= base_url('donasi/donatur') ?>"><i class="ti-control-record"></i>Data Donatur</a></li>
                 </ul>
             </li>
 
