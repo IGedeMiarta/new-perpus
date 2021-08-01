@@ -8,9 +8,9 @@
                 <div class="page-title-box">
                     <div class="float-right">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Metrica</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Pages</a></li>
-                            <li class="breadcrumb-item active">Starter</li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Admin</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Buku</a></li>
+                            <li class="breadcrumb-item active">Kategori</li>
                         </ol>
                     </div>
                     <h4 class="page-title">Kategori</h4>

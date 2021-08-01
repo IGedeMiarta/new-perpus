@@ -8,12 +8,12 @@
                 <div class="page-title-box">
                     <div class="float-right">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Metrica</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Pages</a></li>
-                            <li class="breadcrumb-item active">Starter</li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Admin</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Donation</a></li>
+                            <li class="breadcrumb-item active">Donation</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Donasi</h4>
+                    <h4 class="page-title">Donation</h4>
                 </div>
                 <!--end page-title-box-->
             </div>
@@ -30,7 +30,7 @@
 
         <div class="card">
             <div class="card-header bg-primary text-center">
-                <h4 class="text-light">Tabel Donatur</h4>
+                <h4 class="text-light">Tabel Donation</h4>
             </div>
             <div class="card-body bg-white">
                 <a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add</a>
@@ -55,10 +55,10 @@
 
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td><?= $b->tgl_donasi ?></td>
+                                <td><?= date('d M Y', strtotime($b->tgl_donasi)) ?></td>
                                 <td><?= $b->nama_donatur ?></td>
                                 <td><?= $b->no_hp ?></td>
-                                <td><?= $b->jml_donasi ?></td>
+                                <td><?= "Rp " . number_format($b->jml_donasi) ?></td>
                                 <td><?= $b->keterangan ?></td>
                                 <td><?= $b->status ?></td>
                                 <td>

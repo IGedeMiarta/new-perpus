@@ -27,7 +27,7 @@
             <div class="card-header bg-primary text-center">
                 <h4 class="text-light mb-2">Tambah Buku</h4>
             </div>
-            <div class="card-body bg-light">
+            <div class="card-body bg-white">
                 <div class="general-label">
                     <form action="" method="POST">
                         <div class="form-group row">

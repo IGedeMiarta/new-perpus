@@ -3,7 +3,7 @@
     <div class="left-sidenav">
         <ul class="metismenu left-sidenav-menu">
             <li>
-                <a href="<?= base_url('buku/index') ?>"><i class="ti-dashboard"></i><span>Dashboard</span></a>
+                <a href="<?= base_url('dashboard') ?>"><i class="ti-dashboard"></i><span>Dashboard</span></a>
             </li>
             <li>
                 <a href="<?= base_url('users/petugas') ?>"><i class="ti-user"></i><span>Petugas</span></a>
@@ -37,6 +37,7 @@
                 <a href="javascript: void(0);"><i class="ti-wallet"></i><span>Transaksi</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                 <ul class="nav-second-level" aria-expanded="false">
                     <li class="nav-item"><a href="<?= base_url('transaksi/peminjaman') ?>"><i class="ti-control-record"></i>Peminjaman</a></li>
+                    <li class="nav-item"><a href="<?= base_url('transaksi/perpanjangan') ?>"><i class="ti-control-record"></i>Perpanjangan</a></li>
                     <li class="nav-item"><a href="<?= base_url('transaksi/pengembalian') ?>"><i class="ti-control-record"></i>Pengembalian</a></li>
                 </ul>
             </li>

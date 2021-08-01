@@ -40,7 +40,20 @@ class UserModel extends CI_Model
     }
     function gelAllAnggota()
     {
-        return $this->db->query("SELECT *,anggota.status as sts,status_anggota.status AS status_anggota FROM anggota JOIN status_anggota ON anggota.status=status_anggota.id_status_anggota")->result();
+        $db =  $this->db->query("SELECT
+                                    anggota.id_anggota,
+                                    anggota.nis,
+                                    anggota.nama,
+                                    anggota.jenis_kel,
+                                    anggota.alamat,
+                                    anggota.no_hp,
+                                    status_anggota.status
+                                FROM 
+                                    anggota 
+                                LEFT JOIN 
+                                    status_anggota 
+                                ON anggota.status=status_anggota.id_status_anggota")->result();
+        return $db;
     }
     function getAllDonasi()
     {

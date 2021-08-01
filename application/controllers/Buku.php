@@ -16,7 +16,7 @@ class buku extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('templates/sidebar');
-        $this->load->view('templates/starter');
+        $this->load->view('templates/dashboard');
         $this->load->view('templates/footer');
     }
 

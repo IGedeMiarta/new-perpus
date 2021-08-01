@@ -5,13 +5,11 @@
     <div class="topbar-left">
         <a href="#" class="logo">
             <span>
-                <!-- <img src="<?= base_url() ?>/assets/images/logo-sm.png" alt="logo-small" class="logo-sm"> -->
+
+                <h3 class="text-light mt-3"> <img src="<?= base_url() ?>/assets/images/logo.png" alt="logo-small" class="logo-sm"> Perpustakaan</h3>
+                <img src="<?= base_url() ?>/assets/images/logo.png" alt="logo-large" class="logo-lg logo-dark">
             </span>
-            <span>
-                <!-- <img src="<?= base_url() ?>/assets/images/logo.png" alt="logo-large" class="logo-lg"> -->
-                <h3 class="text-white mt-4">Perpustakaan</h3>
-                <!-- <img src="<?= base_url() ?>/assets/images/logo-dark.png" alt="logo-large" class="logo-lg logo-dark"> -->
-            </span>
+
         </a>
     </div>
     <!--end logo-->

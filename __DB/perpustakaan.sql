@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 03, 2021 at 04:50 PM
--- Server version: 5.7.31
+-- Generation Time: Aug 01, 2021 at 03:29 PM
+-- Server version: 8.0.21
 -- PHP Version: 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -29,13 +29,13 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `anggota`;
 CREATE TABLE IF NOT EXISTS `anggota` (
-  `id_anggota` int(11) NOT NULL AUTO_INCREMENT,
+  `id_anggota` int NOT NULL AUTO_INCREMENT,
   `nis` varchar(11) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `jenis_kel` enum('L','P') NOT NULL,
   `alamat` varchar(255) NOT NULL,
   `no_hp` varchar(11) NOT NULL,
-  `status` int(11) NOT NULL,
+  `status` int NOT NULL,
   PRIMARY KEY (`id_anggota`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
@@ -55,14 +55,14 @@ INSERT INTO `anggota` (`id_anggota`, `nis`, `nama`, `jenis_kel`, `alamat`, `no_h
 
 DROP TABLE IF EXISTS `buku`;
 CREATE TABLE IF NOT EXISTS `buku` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `kd_buku` varchar(11) NOT NULL,
   `judul` varchar(255) NOT NULL,
   `pengarang` varchar(11) NOT NULL,
   `penerbit` varchar(11) NOT NULL,
-  `th_terbit` year(4) NOT NULL,
+  `th_terbit` year NOT NULL,
   `kategori` varchar(11) NOT NULL,
-  `status` int(1) NOT NULL,
+  `status` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
@@ -90,12 +90,12 @@ INSERT INTO `buku` (`id`, `kd_buku`, `judul`, `pengarang`, `penerbit`, `th_terbi
 
 DROP TABLE IF EXISTS `detail_buku`;
 CREATE TABLE IF NOT EXISTS `detail_buku` (
-  `id_detail` int(11) NOT NULL AUTO_INCREMENT,
+  `id_detail` int NOT NULL AUTO_INCREMENT,
   `kd_detail` varchar(11) NOT NULL,
   `kd_buku` varchar(11) NOT NULL,
   `tgl_masuk` date NOT NULL,
-  `rak` int(11) NOT NULL,
-  `status` int(11) NOT NULL,
+  `rak` int NOT NULL,
+  `status` int NOT NULL,
   PRIMARY KEY (`id_detail`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `detail_buku` (
 --
 
 INSERT INTO `detail_buku` (`id_detail`, `kd_detail`, `kd_buku`, `tgl_masuk`, `rak`, `status`) VALUES
-(1, 'BK0001DTL1', 'BK0001', '2021-06-01', 4, 1),
+(1, 'BK0001DTL1', 'BK0001', '2021-06-01', 4, 0),
 (2, 'BK0001DTL2', 'BK0001', '2021-06-01', 4, 1),
 (3, 'BK0001DTL3', 'BK0001', '2021-06-01', 4, 1),
 (4, 'BK0007DTL1', 'BK0007', '2021-06-03', 2, 1),
@@ -119,11 +119,19 @@ INSERT INTO `detail_buku` (`id_detail`, `kd_detail`, `kd_buku`, `tgl_masuk`, `ra
 
 DROP TABLE IF EXISTS `detail_donasi`;
 CREATE TABLE IF NOT EXISTS `detail_donasi` (
-  `id_detail_donasi` int(11) NOT NULL AUTO_INCREMENT,
+  `id_detail_donasi` int NOT NULL AUTO_INCREMENT,
   `keterangan` varchar(255) NOT NULL,
   `status` varchar(11) NOT NULL,
   PRIMARY KEY (`id_detail_donasi`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `detail_donasi`
+--
+
+INSERT INTO `detail_donasi` (`id_detail_donasi`, `keterangan`, `status`) VALUES
+(1, 'Sumbangan Sukarela', 'sumbangan'),
+(2, 'sumabangan', 'sumbangan');
 
 -- --------------------------------------------------------
 
@@ -133,9 +141,21 @@ CREATE TABLE IF NOT EXISTS `detail_donasi` (
 
 DROP TABLE IF EXISTS `detail_peminjaman`;
 CREATE TABLE IF NOT EXISTS `detail_peminjaman` (
-  `id_detail_peminjaman` int(11) NOT NULL,
-  `status_pinjam` enum('Selesai','Terlambat','Perpanjang') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id_detail_peminjaman` int NOT NULL AUTO_INCREMENT,
+  `status_pinjam` enum('Terpinjam','Selesai','Terlambat','Perpanjang','Hilang') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  PRIMARY KEY (`id_detail_peminjaman`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `detail_peminjaman`
+--
+
+INSERT INTO `detail_peminjaman` (`id_detail_peminjaman`, `status_pinjam`) VALUES
+(1, 'Terpinjam'),
+(2, 'Selesai'),
+(3, 'Terlambat'),
+(4, 'Perpanjang'),
+(5, 'Hilang');
 
 -- --------------------------------------------------------
 
@@ -145,10 +165,21 @@ CREATE TABLE IF NOT EXISTS `detail_peminjaman` (
 
 DROP TABLE IF EXISTS `detail_pengembalian`;
 CREATE TABLE IF NOT EXISTS `detail_pengembalian` (
-  `id_detail_pengembalian` int(11) NOT NULL AUTO_INCREMENT,
-  `status_kembali` enum('Selesai','Terlambat','Hilang','') NOT NULL,
+  `id_detail_pengembalian` int NOT NULL AUTO_INCREMENT,
+  `status_kembali` enum('Terpinjam','Selesai','Terlambat','Perpanjang','Hilang') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id_detail_pengembalian`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `detail_pengembalian`
+--
+
+INSERT INTO `detail_pengembalian` (`id_detail_pengembalian`, `status_kembali`) VALUES
+(1, 'Terpinjam'),
+(2, 'Selesai'),
+(3, 'Terlambat'),
+(4, 'Perpanjang'),
+(5, 'Hilang');
 
 -- --------------------------------------------------------
 
@@ -158,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `detail_pengembalian` (
 
 DROP TABLE IF EXISTS `detail_perpanjangan`;
 CREATE TABLE IF NOT EXISTS `detail_perpanjangan` (
-  `id_detail_perpanjangan` int(11) NOT NULL AUTO_INCREMENT,
+  `id_detail_perpanjangan` int NOT NULL AUTO_INCREMENT,
   `status_perpanjangan` enum('Selesai','Terlambat','Hilang') NOT NULL,
   PRIMARY KEY (`id_detail_perpanjangan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -171,13 +202,21 @@ CREATE TABLE IF NOT EXISTS `detail_perpanjangan` (
 
 DROP TABLE IF EXISTS `donasi`;
 CREATE TABLE IF NOT EXISTS `donasi` (
-  `id_donasi` int(11) NOT NULL AUTO_INCREMENT,
+  `id_donasi` int NOT NULL AUTO_INCREMENT,
   `tgl_donasi` date NOT NULL,
-  `donatur` int(11) NOT NULL,
-  `jml_donasi` int(11) NOT NULL,
-  `detail` int(11) NOT NULL,
+  `donatur` int NOT NULL,
+  `jml_donasi` int NOT NULL,
+  `detail` int NOT NULL,
   PRIMARY KEY (`id_donasi`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `donasi`
+--
+
+INSERT INTO `donasi` (`id_donasi`, `tgl_donasi`, `donatur`, `jml_donasi`, `detail`) VALUES
+(1, '2021-08-01', 2, 5000, 1),
+(2, '2021-08-02', 2, 2500, 2);
 
 -- --------------------------------------------------------
 
@@ -187,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `donasi` (
 
 DROP TABLE IF EXISTS `donatur`;
 CREATE TABLE IF NOT EXISTS `donatur` (
-  `id_donatur` int(11) NOT NULL AUTO_INCREMENT,
+  `id_donatur` int NOT NULL AUTO_INCREMENT,
   `nama_donatur` varchar(255) NOT NULL,
   `jenkel` enum('L','P') NOT NULL,
   `no_hp` varchar(11) NOT NULL,
@@ -210,7 +249,7 @@ INSERT INTO `donatur` (`id_donatur`, `nama_donatur`, `jenkel`, `no_hp`, `alamat`
 
 DROP TABLE IF EXISTS `kategori`;
 CREATE TABLE IF NOT EXISTS `kategori` (
-  `id_kategori` int(11) NOT NULL AUTO_INCREMENT,
+  `id_kategori` int NOT NULL AUTO_INCREMENT,
   `kd_kategori` varchar(50) NOT NULL,
   `nama_kategori` varchar(255) NOT NULL,
   PRIMARY KEY (`id_kategori`)
@@ -235,14 +274,25 @@ INSERT INTO `kategori` (`id_kategori`, `kd_kategori`, `nama_kategori`) VALUES
 
 DROP TABLE IF EXISTS `peminjaman`;
 CREATE TABLE IF NOT EXISTS `peminjaman` (
-  `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT,
+  `id_peminjaman` int NOT NULL AUTO_INCREMENT,
   `tgl_pinjam` date NOT NULL,
-  `id_anggota` int(11) NOT NULL,
+  `id_anggota` int NOT NULL,
   `id_buku` varchar(11) NOT NULL,
   `batas_pinjam` date NOT NULL,
-  `detail` int(11) NOT NULL,
+  `tgl_perpanjang` date DEFAULT NULL,
+  `detail` int NOT NULL,
   PRIMARY KEY (`id_peminjaman`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `peminjaman`
+--
+
+INSERT INTO `peminjaman` (`id_peminjaman`, `tgl_pinjam`, `id_anggota`, `id_buku`, `batas_pinjam`, `tgl_perpanjang`, `detail`) VALUES
+(1, '2021-07-01', 3, '1', '2021-07-08', NULL, 2),
+(2, '2021-07-18', 1, '4', '2021-07-25', NULL, 2),
+(3, '2021-07-01', 1, '1', '2021-07-08', NULL, 2),
+(4, '2021-08-01', 1, '1', '2021-08-09', '2021-08-02', 4);
 
 -- --------------------------------------------------------
 
@@ -252,7 +302,7 @@ CREATE TABLE IF NOT EXISTS `peminjaman` (
 
 DROP TABLE IF EXISTS `penerbit`;
 CREATE TABLE IF NOT EXISTS `penerbit` (
-  `id_penerbit` int(11) NOT NULL AUTO_INCREMENT,
+  `id_penerbit` int NOT NULL AUTO_INCREMENT,
   `kd_penerbit` varchar(11) NOT NULL,
   `nama_penerbit` varchar(255) NOT NULL,
   PRIMARY KEY (`id_penerbit`)
@@ -275,7 +325,7 @@ INSERT INTO `penerbit` (`id_penerbit`, `kd_penerbit`, `nama_penerbit`) VALUES
 
 DROP TABLE IF EXISTS `pengarang`;
 CREATE TABLE IF NOT EXISTS `pengarang` (
-  `id_pengarang` int(11) NOT NULL AUTO_INCREMENT,
+  `id_pengarang` int NOT NULL AUTO_INCREMENT,
   `kd_pengarang` varchar(11) NOT NULL,
   `nama_pengarang` varchar(255) NOT NULL,
   PRIMARY KEY (`id_pengarang`)
@@ -299,12 +349,21 @@ INSERT INTO `pengarang` (`id_pengarang`, `kd_pengarang`, `nama_pengarang`) VALUE
 
 DROP TABLE IF EXISTS `pengembalian`;
 CREATE TABLE IF NOT EXISTS `pengembalian` (
-  `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT,
-  `id_pinjam` int(11) NOT NULL,
+  `id_pengembalian` int NOT NULL AUTO_INCREMENT,
+  `id_pinjam` int NOT NULL,
   `tgl_kembali` date NOT NULL,
-  `detail` int(11) NOT NULL,
+  `detail` int NOT NULL,
   PRIMARY KEY (`id_pengembalian`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pengembalian`
+--
+
+INSERT INTO `pengembalian` (`id_pengembalian`, `id_pinjam`, `tgl_kembali`, `detail`) VALUES
+(3, 2, '2021-07-01', 2),
+(4, 1, '2021-07-18', 2),
+(5, 3, '2021-07-18', 2);
 
 -- --------------------------------------------------------
 
@@ -314,11 +373,11 @@ CREATE TABLE IF NOT EXISTS `pengembalian` (
 
 DROP TABLE IF EXISTS `perpanjangan`;
 CREATE TABLE IF NOT EXISTS `perpanjangan` (
-  `id_perpanjangan` int(11) NOT NULL AUTO_INCREMENT,
+  `id_perpanjangan` int NOT NULL AUTO_INCREMENT,
   `tgl_perpanjangan` date NOT NULL,
-  `id_peminjaman` int(11) NOT NULL,
+  `id_peminjaman` int NOT NULL,
   `batas_kembali` date NOT NULL,
-  `detail` int(11) NOT NULL,
+  `detail` int NOT NULL,
   PRIMARY KEY (`id_perpanjangan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -330,7 +389,7 @@ CREATE TABLE IF NOT EXISTS `perpanjangan` (
 
 DROP TABLE IF EXISTS `petugas`;
 CREATE TABLE IF NOT EXISTS `petugas` (
-  `id_petugas` int(11) NOT NULL AUTO_INCREMENT,
+  `id_petugas` int NOT NULL AUTO_INCREMENT,
   `nip` varchar(255) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `jenkel` enum('L','P') NOT NULL,
@@ -355,7 +414,7 @@ INSERT INTO `petugas` (`id_petugas`, `nip`, `nama`, `jenkel`, `no_hp`, `alamat`)
 
 DROP TABLE IF EXISTS `rak`;
 CREATE TABLE IF NOT EXISTS `rak` (
-  `id_rak` int(11) NOT NULL AUTO_INCREMENT,
+  `id_rak` int NOT NULL AUTO_INCREMENT,
   `nama_rak` varchar(255) NOT NULL,
   `detail` varchar(255) NOT NULL,
   PRIMARY KEY (`id_rak`)
@@ -382,8 +441,8 @@ INSERT INTO `rak` (`id_rak`, `nama_rak`, `detail`) VALUES
 
 DROP TABLE IF EXISTS `status_anggota`;
 CREATE TABLE IF NOT EXISTS `status_anggota` (
-  `id_status_anggota` int(11) NOT NULL AUTO_INCREMENT,
-  `status` enum('Non Aktif','Aktif','Alumni','') NOT NULL,
+  `id_status_anggota` int NOT NULL AUTO_INCREMENT,
+  `status` enum('Siswa','Guru','Karyawan','') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id_status_anggota`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
@@ -392,9 +451,9 @@ CREATE TABLE IF NOT EXISTS `status_anggota` (
 --
 
 INSERT INTO `status_anggota` (`id_status_anggota`, `status`) VALUES
-(1, 'Non Aktif'),
-(2, 'Aktif'),
-(3, 'Alumni');
+(1, 'Siswa'),
+(2, 'Guru'),
+(3, 'Karyawan');
 
 -- --------------------------------------------------------
 
@@ -404,10 +463,10 @@ INSERT INTO `status_anggota` (`id_status_anggota`, `status`) VALUES
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
-  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `password` varchar(225) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` int NOT NULL,
   `role` enum('Admin','Petugas','Anggota') NOT NULL,
   PRIMARY KEY (`id_user`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;

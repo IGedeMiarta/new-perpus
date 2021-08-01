@@ -8,12 +8,12 @@
                 <div class="page-title-box">
                     <div class="float-right">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Metrica</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Pages</a></li>
-                            <li class="breadcrumb-item active">Starter</li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Admin</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Anggota</a></li>
+                            <li class="breadcrumb-item active">Cetak Kartu</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Petugas</h4>
+                    <h4 class="page-title">Cetak Kartu</h4>
                 </div>
                 <!--end page-title-box-->
             </div>
@@ -30,7 +30,7 @@
 
         <div class="card">
             <div class="card-header bg-primary text-center">
-                <h4 class="text-light">Tabel Petugas</h4>
+                <h4 class="text-light">Tabel Anggota</h4>
             </div>
             <div class="card-body bg-white">
                 <a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add</a>

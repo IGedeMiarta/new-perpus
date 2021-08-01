@@ -18,6 +18,7 @@ class Transaksi extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data['judul'] = 'Peminajaman';
             $data['peminjaman'] = $this->transaksi->getAllPeminjaman();
+
             $data['buku'] = $this->transaksi->gelAllAvailableBook();
             $data['bukuedt'] = $this->transaksi->gelAllBook();
             $data['anggota'] = $this->transaksi->read('anggota');
@@ -52,7 +53,6 @@ class Transaksi extends CI_Controller
     }
     public function updatePeminjaman()
     {
-        var_dump($_POST);
 
         $id = $this->input->post('id');
         $tgl_pinjam = $this->input->post('tanggal');
@@ -79,5 +79,81 @@ class Transaksi extends CI_Controller
         }
         $this->session->set_flashdata('update', 'Peminjaman ' . $anggota['nama']);
         redirect('transaksi/peminjaman');
+    }
+    public function pengembalian()
+    {
+        $this->form_validation->set_rules('tanggal', 'tanggal', 'trim|required');
+
+        if ($this->form_validation->run() == false) {
+            $data['judul'] = 'Pengembalian';
+            $data['peminjaman'] = $this->transaksi->getPeminjamanActive();
+            $data['pengembalian'] = $this->transaksi->getAllPengembalian();
+            $data['buku'] = $this->transaksi->gelAllAvailableBook();
+            $data['bukuedt'] = $this->transaksi->gelAllBook();
+            $data['anggota'] = $this->transaksi->read('anggota');
+            $data['detail'] = $this->transaksi->read('detail_peminjaman');
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('transaksi/pengembalian');
+            $this->load->view('templates/footer');
+        } else {
+            // insert data peminjaman
+            $tgl_kembali = $this->input->post('tanggal');
+            $peminjaman = $this->input->post('peminjaman');
+            $status = $this->input->post('status');
+            $data = [
+                'tgl_kembali' => $tgl_kembali,
+                'id_pinjam' => $peminjaman,
+                'detail' => $status
+            ];
+            $this->transaksi->insert($data, 'pengembalian');
+            // update status peminjaman 
+            $this->transaksi->update(['id_peminjaman' => $peminjaman], ['detail' => $status], 'peminjaman');
+
+
+            $peminjaman_db =  $this->transaksi->get(['id_peminjaman' => $peminjaman], 'peminjaman');
+
+            $detail_buku = $peminjaman_db['id_buku'];
+            if ($status != 3) {
+                echo 'status true';
+                $this->transaksi->update(['id_detail' => $detail_buku], ['status' => 1], 'detail_buku');
+            }
+
+            $this->session->set_flashdata('messege', 'Pengembalian ');
+            redirect('transaksi/pengembalian');
+        }
+    }
+    public function perpanjangan()
+    {
+        $this->form_validation->set_rules('tanggal', 'tanggal', 'trim|required');
+
+        if ($this->form_validation->run() == false) {
+            $data['judul'] = 'Perpanjangan';
+            $data['perpanjangan'] = $this->transaksi->getAllPerpanjangan();
+            $data['peminjaman'] = $this->transaksi->getPeminjamanActive();
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('transaksi/perpanjangan');
+            $this->load->view('templates/footer');
+        } else {
+            // insert data peminjaman
+            $tgl_perpanjang = $this->input->post('tanggal');
+            $peminjaman = $this->input->post('peminjaman');
+            $batas_pinjam = date("Y-m-d", strtotime("$tgl_perpanjang + 7 days"));
+            $status = 4;
+            $data = [
+                'batas_pinjam' => $batas_pinjam,
+                'tgl_perpanjang' => $tgl_perpanjang,
+                'detail' => $status
+            ];
+            // update status peminjaman 
+            $this->transaksi->update(['id_peminjaman' => $peminjaman], $data, 'peminjaman');
+
+            $this->session->set_flashdata('messege', 'Perpanjangan');
+            redirect('transaksi/perpanjangan');
+        }
     }
 }

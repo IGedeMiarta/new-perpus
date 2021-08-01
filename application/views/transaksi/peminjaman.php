@@ -8,9 +8,9 @@
                 <div class="page-title-box">
                     <div class="float-right">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Metrica</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Pages</a></li>
-                            <li class="breadcrumb-item active">Starter</li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Admin</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Transaksi</a></li>
+                            <li class="breadcrumb-item active">Peminjaman</li>
                         </ol>
                     </div>
                     <h4 class="page-title">Peminjaman</h4>
@@ -52,10 +52,10 @@
 
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td><?= $b->tgl_pinjam ?></td>
+                                <td><?= $b->tgl_perpanjang ? date('d M Y', strtotime($b->tgl_perpanjang)) : date('d M Y', strtotime($b->tgl_pinjam)) ?></td>
                                 <td><?= $b->nama ?></td>
                                 <td><?= $b->judul ?></td>
-                                <td><?= $b->batas_pinjam ?></td>
+                                <td><?= date('d M Y', strtotime($b->batas_pinjam)) ?></td>
                                 <td><?= $b->status_pinjam ?></td>
                                 <td>
                                     <a href="" class="btn btn-warning edit-peminjaman" data-toggle="modal" data-id="<?= $b->id_peminjaman ?>" data-target="#modelEdit"> <i class="fas fa-edit"></i></a>
@@ -164,7 +164,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Status</label>
                             <div class="col-sm-10">
                                 <select name="status" id="e_status" class="form-control">
@@ -174,7 +174,7 @@
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
 
 
                 </div>

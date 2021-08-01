@@ -8,12 +8,12 @@
                 <div class="page-title-box">
                     <div class="float-right">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Metrica</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Pages</a></li>
-                            <li class="breadcrumb-item active">Starter</li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Admin</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Anggota</a></li>
+                            <li class="breadcrumb-item active">Data Anggota</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Petugas</h4>
+                    <h4 class="page-title">Data Anggota</h4>
                 </div>
                 <!--end page-title-box-->
             </div>
@@ -30,7 +30,7 @@
 
         <div class="card">
             <div class="card-header bg-primary text-center">
-                <h4 class="text-light">Tabel Petugas</h4>
+                <h4 class="text-light">Tabel Anggota</h4>
             </div>
             <div class="card-body bg-white">
                 <a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add</a>
@@ -50,7 +50,6 @@
 
                     <tbody>
                         <?php $no = 1;
-
                         foreach ($anggota as $b) { ?>
                             <tr>
                                 <td><?= $no++ ?></td>
@@ -65,15 +64,7 @@
                                     ?></td>
                                 <td><?= $b->no_hp ?></td>
                                 <td><?= $b->alamat ?></td>
-                                <td><?php
-                                    if ($b->sts == 1) {
-                                        echo '<span class="badge badge-warning">' . $b->status_anggota . '</span>';
-                                    } elseif ($b->sts == 2) {
-                                        echo '<span class="badge badge-success">' . $b->status_anggota . '</span>';
-                                    } elseif ($b->sts == 3) {
-                                        echo '<span class="badge badge-info">' . $b->status_anggota . '</span>';
-                                    }
-                                    ?></td>
+                                <td><?= $b->status ?></td>
                                 <td>
                                     <a href="" class="btn btn-warning edit-anggota" data-toggle="modal" data-id="<?= $b->id_anggota ?>" data-target="#modelEdit"> <i class="fas fa-edit"></i></a>
                                     <a href="<?= base_url('users/deleteAnggota/') . $b->id_anggota ?>" class="btn btn-danger"> <i class="fas fa-trash"></i></a>
@@ -93,7 +84,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Penerbit</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Anggota</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -101,7 +92,7 @@
                 <div class="modal-body">
                     <form id="form_kategori" method="POST" action="">
                         <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">NIS</label>
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Nomer Induk</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="nis" name="nis">
                             </div>
@@ -193,9 +184,9 @@
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Status</label>
                             <div class="col-sm-10">
                                 <select name="status" id="status" class="form-control">
-                                    <option value="1">Non Aktif</option>
-                                    <option value="2">Aktif</option>
-                                    <option value="3">Alumni</option>
+                                    <option value="1">Siswa</option>
+                                    <option value="2">Guru</option>
+                                    <option value="3">Karyawan</option>
                                 </select>
                             </div>
                         </div>
