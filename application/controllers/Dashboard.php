@@ -15,6 +15,7 @@ class Dashboard extends CI_Controller
         $data['buku'] = $this->dashboard->countAllBuku();
         $data['peminjaman'] = $this->dashboard->countPeminjamanActive();
         $data['donasi'] = $this->dashboard->sumAllDonasi();
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('templates/sidebar');

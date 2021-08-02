@@ -10,15 +10,15 @@ class buku extends CI_Controller
         $this->load->model('MakeCode');
         $this->load->library('form_validation');
     }
-    public function index()
-    {
-        $data['judul'] = 'Home';
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('templates/dashboard');
-        $this->load->view('templates/footer');
-    }
+    // public function index()
+    // {
+    //     $data['judul'] = 'Home';
+    //     $this->load->view('templates/header', $data);
+    //     $this->load->view('templates/navbar');
+    //     $this->load->view('templates/sidebar');
+    //     $this->load->view('templates/dashboard');
+    //     $this->load->view('templates/footer');
+    // }
 
     public function book()
     {
