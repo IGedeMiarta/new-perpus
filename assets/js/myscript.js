@@ -9,13 +9,13 @@ if (flashData) {
 };
 
 const flashDalete = $('.flash-delete').data('delete');
-if (flashDalete) {
-    Swal.fire({
-        title: 'Data ' + flashDalete,
-        text: 'berhasil dihapus',
-        icon: 'success',
-        confirmButtonText: 'Ok'
-    });
+const flash_Dalete = $('.flash-delete').data('flashdelete');
+if (flashDalete || flash_Dalete) {
+    Swal.fire(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+    )
 };
 
 const flashUpdate = $('.flash-update').data('update');
@@ -89,7 +89,7 @@ $('.edit-anggota').click(function () {
                 $('#e_jenkel').val(data.jenis_kel);
                 $('#e_hp').val(data.no_hp);
                 $('#e_alamat').val(data.alamat);
-                $('#status').val(data.status);
+                $('#e_status').val(data.status);
             })
         }
     });
@@ -141,7 +141,24 @@ $('.edit-peminjaman').on('click', function () {
     })
 });
 
-
+$('.delete').on('click', function (e) {
+    e.preventDefault();
+    var getLink = $(this).attr('href');
+    console.log('click');
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = getLink;
+        }
+    })
+})
 // contoh insert dengan ajax
 //  $('#edit_petugas').on('submit',function(){
 

@@ -75,7 +75,7 @@
                                             </td>
                                             <td>
                                                 <a href="" class="badge badge-warning"><i class="ti ti-marker-alt"></i></a>
-                                                <a href="" class="badge badge-danger"><i class="ti ti-trash"></i></a>
+                                                <a href="" class="badge badge-danger delete"><i class="ti ti-trash"></i></a>
                                             </td>
                                         </tr>
                                     <?php } ?>

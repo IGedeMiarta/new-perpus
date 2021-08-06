@@ -65,9 +65,9 @@
                                 <td><?= $b->no_hp ?></td>
                                 <td><?= $b->alamat ?></td>
                                 <td><?= $b->status ?></td>
-                                <td>
+                                <td width="12%">
                                     <a href="" class="btn btn-warning edit-anggota" data-toggle="modal" data-id="<?= $b->id_anggota ?>" data-target="#modelEdit"> <i class="fas fa-edit"></i></a>
-                                    <a href="<?= base_url('users/deleteAnggota/') . $b->id_anggota ?>" class="btn btn-danger"> <i class="fas fa-trash"></i></a>
+                                    <a href="<?= base_url('users/deleteAnggota/') . $b->id_anggota ?>" class="btn btn-danger delete"> <i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                             </tr>
@@ -122,6 +122,17 @@
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Alamat</label>
                             <div class="col-sm-10">
                                 <textarea name="alamat" id="alamat" class="form-control" cols="30" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Status Anggota</label>
+                            <div class="col-sm-10">
+                                <select name="status" id="status" class="form-control">
+                                    <option value="L">--Pilih</option>
+                                    <?php foreach ($status as $s) : ?>
+                                        <option value="<?= $s->id_status_anggota ?>"><?= $s->status ?></option>
+                                    <?php endforeach ?>
+                                </select>
                             </div>
                         </div>
                 </div>
@@ -183,10 +194,11 @@
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Status</label>
                             <div class="col-sm-10">
-                                <select name="status" id="status" class="form-control">
-                                    <option value="1">Siswa</option>
-                                    <option value="2">Guru</option>
-                                    <option value="3">Karyawan</option>
+                                <select name="status" id="e_status" class="form-control">
+                                    <option value="L">--Pilih</option>
+                                    <?php foreach ($status as $s) : ?>
+                                        <option value="<?= $s->id_status_anggota ?>"><?= $s->status ?></option>
+                                    <?php endforeach ?>
                                 </select>
                             </div>
                         </div>

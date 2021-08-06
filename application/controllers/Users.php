@@ -60,10 +60,10 @@ class Users extends CI_Controller
     public function anggota()
     {
         $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
-
         if ($this->form_validation->run() == false) {
             $data['judul'] = 'Anggota';
             $data['anggota'] = $this->user->gelAllAnggota();
+            $data['status'] = $this->user->read('status_anggota');
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
@@ -76,7 +76,7 @@ class Users extends CI_Controller
                 'jenis_kel' => $this->input->post('jenkel'),
                 'no_hp' => $this->input->post('hp'),
                 'alamat' => $this->input->post('alamat'),
-                'status' => 1
+                'status' => $this->input->post('status')
             ];
             $this->user->insert($data, 'anggota');
             $this->session->set_flashdata('messege', $this->input->post('nama'));
@@ -119,5 +119,33 @@ class Users extends CI_Controller
     {
         $data['anggota'] = $this->user->edit(['id_anggota' => $id], 'anggota');
         $this->load->view('users/cardprint', $data);
+    }
+    public function status_anggota()
+    {
+        $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
+
+        if ($this->form_validation->run() == false) {
+            $data['judul'] = 'Status Anggota';
+            $data['status'] = $this->user->read('status_anggota');
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('users/status_anggota', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'status' => $this->input->post('nama')
+            ];
+            $this->user->insert($data, 'status_anggota');
+            $this->session->set_flashdata('messege', $this->input->post('nama'));
+            redirect('users/status_anggota');
+        }
+    }
+    public function status_delete($id)
+    {
+        $this->user->delete(['id_status_anggota' => $id], 'status_anggota');
+        $this->session->set_flashdata('delete', 'Status Anggota');
+        redirect('users/status_anggota');
     }
 }
