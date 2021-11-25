@@ -7,7 +7,7 @@ application/logs/*
 !application/logs/index.html
 
 !application/*/.htaccess
-
+_DB
 composer.lock
 
 user_guide_src/build/*

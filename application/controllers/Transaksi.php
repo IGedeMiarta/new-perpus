@@ -18,7 +18,6 @@ class Transaksi extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data['judul'] = 'Peminajaman';
             $data['peminjaman'] = $this->transaksi->getAllPeminjaman();
-
             $data['buku'] = $this->transaksi->gelAllAvailableBook();
             $data['bukuedt'] = $this->transaksi->gelAllBook();
             $data['anggota'] = $this->transaksi->read('anggota');
