@@ -25,6 +25,7 @@
         <div class="flash-data" data-flashdata="<?= $this->session->flashdata('messege') ?>"></div>
         <div class="flash-update" data-update="<?= $this->session->flashdata('update') ?>"></div>
         <div class="flash-delete" data-delete="<?= $this->session->flashdata('delete') ?>"></div>
+        <div class="flash-gagal" data-gagal="<?= $this->session->flashdata('gagal') ?>"></div>
         <!-- end sweet alert -->
 
 
