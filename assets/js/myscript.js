@@ -18,6 +18,15 @@ if (flashDalete || flash_Dalete) {
     )
 };
 
+const flash_Gagal = $('.flash-gagal').data('gagal');
+if (flash_Gagal) {
+    Swal.fire(
+        'Gagal!',
+        'Tidak bisa meminjam buku lebih dari 3 kali.',
+        'warning'
+    )
+};
+
 const flashUpdate = $('.flash-update').data('update');
 if (flashUpdate) {
     Swal.fire({
