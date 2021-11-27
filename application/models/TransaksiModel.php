@@ -207,4 +207,19 @@ class TransaksiModel extends CI_Model
         )->result();
         return $qry;
     }
+    function countPeminjaman($id_anggota){
+        return $this->db->query(
+            "SELECT  
+                *,
+                count(*) AS total_pinjam 
+            FROM 
+                peminjaman 
+            WHERE 
+                id_anggota= $id_anggota 
+            AND 
+                detail = 1 #status dipinjam
+            AND 
+                detail = 4 #status diperpanjang
+        ")->row_array();
+    }
 }

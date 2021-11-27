@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Aug 01, 2021 at 03:29 PM
+-- Generation Time: Nov 23, 2021 at 11:22 AM
 -- Server version: 8.0.21
--- PHP Version: 7.3.21
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `anggota` (
   `no_hp` varchar(11) NOT NULL,
   `status` int NOT NULL,
   PRIMARY KEY (`id_anggota`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `anggota`
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `detail_buku` (
 
 INSERT INTO `detail_buku` (`id_detail`, `kd_detail`, `kd_buku`, `tgl_masuk`, `rak`, `status`) VALUES
 (1, 'BK0001DTL1', 'BK0001', '2021-06-01', 4, 0),
-(2, 'BK0001DTL2', 'BK0001', '2021-06-01', 4, 1),
+(2, 'BK0001DTL2', 'BK0001', '2021-06-01', 4, 0),
 (3, 'BK0001DTL3', 'BK0001', '2021-06-01', 4, 1),
 (4, 'BK0007DTL1', 'BK0007', '2021-06-03', 2, 1),
 (5, 'BK0007DTL2', 'BK0007', '2021-06-03', 2, 1),
@@ -282,7 +282,7 @@ CREATE TABLE IF NOT EXISTS `peminjaman` (
   `tgl_perpanjang` date DEFAULT NULL,
   `detail` int NOT NULL,
   PRIMARY KEY (`id_peminjaman`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `peminjaman`
@@ -292,7 +292,8 @@ INSERT INTO `peminjaman` (`id_peminjaman`, `tgl_pinjam`, `id_anggota`, `id_buku`
 (1, '2021-07-01', 3, '1', '2021-07-08', NULL, 2),
 (2, '2021-07-18', 1, '4', '2021-07-25', NULL, 2),
 (3, '2021-07-01', 1, '1', '2021-07-08', NULL, 2),
-(4, '2021-08-01', 1, '1', '2021-08-09', '2021-08-02', 4);
+(4, '2021-08-01', 1, '1', '2021-08-09', '2021-08-02', 4),
+(5, '2021-10-11', 1, '2', '2021-10-18', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -337,7 +338,6 @@ CREATE TABLE IF NOT EXISTS `pengarang` (
 
 INSERT INTO `pengarang` (`id_pengarang`, `kd_pengarang`, `nama_pengarang`) VALUES
 (1, 'PG0001', 'Pidi Baiq'),
-(3, 'PG0002', 'Kal Sidi'),
 (4, 'PG0003', 'Andi Offset'),
 (6, 'PG0004', 'Sutarman');
 
@@ -418,7 +418,7 @@ CREATE TABLE IF NOT EXISTS `rak` (
   `nama_rak` varchar(255) NOT NULL,
   `detail` varchar(255) NOT NULL,
   PRIMARY KEY (`id_rak`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `rak`
@@ -442,9 +442,9 @@ INSERT INTO `rak` (`id_rak`, `nama_rak`, `detail`) VALUES
 DROP TABLE IF EXISTS `status_anggota`;
 CREATE TABLE IF NOT EXISTS `status_anggota` (
   `id_status_anggota` int NOT NULL AUTO_INCREMENT,
-  `status` enum('Siswa','Guru','Karyawan','') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `status` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id_status_anggota`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `status_anggota`
@@ -453,7 +453,8 @@ CREATE TABLE IF NOT EXISTS `status_anggota` (
 INSERT INTO `status_anggota` (`id_status_anggota`, `status`) VALUES
 (1, 'Siswa'),
 (2, 'Guru'),
-(3, 'Karyawan');
+(3, 'Karyawan'),
+(4, 'Alumni');
 
 -- --------------------------------------------------------
 
@@ -465,18 +466,20 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id_user` int NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `password` varchar(225) NOT NULL,
   `user_id` int NOT NULL,
   `role` enum('Admin','Petugas','Anggota') NOT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `username`, `password`, `user_id`, `role`) VALUES
-(1, 'admin@sekolah.com', '$2y$10$ihsCWSPGw39nGNUpRAa/IOfjoMt4FRTIpkKBJrHg3o6...', 0, 'Admin');
+INSERT INTO `user` (`id_user`, `username`, `email`, `password`, `user_id`, `role`) VALUES
+(1, 'admin', 'admin@sekolah.com', '$2y$10$FmO8fDbUZcPH7X9NP1NGoetVZ5YCo86uzQ2iBcOmH9UFBaNc1L86a', 0, 'Admin'),
+(2, 'user', 'user@gmail.com', '$2y$10$FmO8fDbUZcPH7X9NP1NGoetVZ5YCo86uzQ2iBcOmH9UFBaNc1L86a', 0, 'Petugas');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

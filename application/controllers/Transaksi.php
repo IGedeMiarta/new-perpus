@@ -18,7 +18,6 @@ class Transaksi extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data['judul'] = 'Peminajaman';
             $data['peminjaman'] = $this->transaksi->getAllPeminjaman();
-
             $data['buku'] = $this->transaksi->gelAllAvailableBook();
             $data['bukuedt'] = $this->transaksi->gelAllBook();
             $data['anggota'] = $this->transaksi->read('anggota');
@@ -30,24 +29,35 @@ class Transaksi extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             // insert data peminjaman
+            
             $tgl_pinjam = $this->input->post('tanggal');
             $anggota = $this->input->post('anggota');
             $buku = $this->input->post('buku');
             $batas_pinjam = date("Y-m-d", strtotime("$tgl_pinjam + 7 days"));
-            $detail = 1;
-            $data = [
-                'tgl_pinjam' => $tgl_pinjam,
-                'id_anggota' => $anggota,
-                'id_buku' => $buku,
-                'batas_pinjam' => $batas_pinjam,
-                'detail' => $detail
-            ];
-            $this->transaksi->insert($data, 'peminjaman');
-            //update detail buku status=0
-            $this->transaksi->update(['id_detail' => $buku], ['status' => 0], 'detail_buku');
-            //cari nama peminjam
-            $anggota = $this->transaksi->get(['id_anggota' => $anggota], 'anggota');
-            $this->session->set_flashdata('messege', 'Peminjaman ' . $anggota['nama']);
+            $detail = 1; #status dipinjam
+
+            $cek_peminjaman = $this->transaksi->countPeminjaman($anggota);
+            if($cek_peminjaman['total_pinjam'] >= 3 ){
+                var_dump('peminjaman lebih dari samadengan 3 = '.$cek_peminjaman['total_pinjam']);
+                die;
+            }else{
+                var_dump('peminjaman kurang dari 3 = '.$cek_peminjaman['total_pinjam']);
+                die;
+                $data = [
+                    'tgl_pinjam' => $tgl_pinjam,
+                    'id_anggota' => $anggota,
+                    'id_buku' => $buku,
+                    'batas_pinjam' => $batas_pinjam,
+                    'detail' => $detail
+                ];
+                $this->transaksi->insert($data, 'peminjaman');
+                //update detail buku status=0
+                $this->transaksi->update(['id_detail' => $buku], ['status' => 0], 'detail_buku');
+                //cari nama peminjam
+                $anggota = $this->transaksi->get(['id_anggota' => $anggota], 'anggota');
+                $this->session->set_flashdata('messege', 'Peminjaman ' . $anggota['nama']);
+            }
+            
             redirect('transaksi/peminjaman');
         }
     }
