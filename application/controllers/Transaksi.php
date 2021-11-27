@@ -38,11 +38,11 @@ class Transaksi extends CI_Controller
 
             $cek_peminjaman = $this->transaksi->countPeminjaman($anggota);
             if($cek_peminjaman['total_pinjam'] >= 3 ){
-                var_dump('peminjaman lebih dari samadengan 3 = '.$cek_peminjaman['total_pinjam']);
-                die;
+                $this->session->set_flashdata('gagal', 'Peminjaman');
+                redirect('transaksi/peminjaman');
             }else{
                 var_dump('peminjaman kurang dari 3 = '.$cek_peminjaman['total_pinjam']);
-                die;
+                
                 $data = [
                     'tgl_pinjam' => $tgl_pinjam,
                     'id_anggota' => $anggota,
@@ -56,9 +56,9 @@ class Transaksi extends CI_Controller
                 //cari nama peminjam
                 $anggota = $this->transaksi->get(['id_anggota' => $anggota], 'anggota');
                 $this->session->set_flashdata('messege', 'Peminjaman ' . $anggota['nama']);
+                redirect('transaksi/peminjaman');
             }
             
-            redirect('transaksi/peminjaman');
         }
     }
     public function updatePeminjaman()
