@@ -3,7 +3,7 @@
     <div class="left-sidenav">
         <ul class="metismenu left-sidenav-menu">
             <li>
-                <a href="<?= base_url('dashboard') ?>"><i class="ti-dashboard"></i><span>Dashboard</span></a>
+                <a href="<?= base_url('admin') ?>"><i class="ti-dashboard"></i><span>Dashboard</span></a>
             </li>
             <li>
                 <a href="<?= base_url('users/petugas') ?>"><i class="ti-user"></i><span>Management User</span></a>

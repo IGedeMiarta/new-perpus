@@ -25,7 +25,7 @@
                     <a class="dropdown-item" href="#"><i class="ti-user text-muted mr-2"></i> Profile</a>
                     <a class="dropdown-item" href="#"><i class="ti-wallet text-muted mr-2"></i> Reset Password</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#"><i class="ti-power-off text-muted mr-2"></i> Logout</a>
+                    <a class="dropdown-item" href="<?= base_url() ?>"><i class="ti-power-off text-muted mr-2"></i> Logout</a>
                 </div>
             </li>
         </ul>
