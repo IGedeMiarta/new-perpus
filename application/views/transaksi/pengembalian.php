@@ -44,7 +44,7 @@
                             <th>Kode Buku </th>
                             <th>Judul Buku</th>
                             <th>Status</th>
-                            <th>Opsi</th>
+                            <!-- <th>Opsi</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -59,10 +59,10 @@
                                 <td><?= $b->kd_detail ?></td>
                                 <td><?= $b->judul ?></td>
                                 <td><?= $b->status_kembali ?></td>
-                                <td>
+                                <!-- <td>
                                     <a href="" class="btn btn-warning edit-pengembalian" data-toggle="modal" data-id="<?= $b->id_pengembalian ?>" data-target="#modelEdit"> <i class="fas fa-edit"></i></a>
-                                    <!-- <a href="<?= base_url('peminjaman/deletePeminjaman/') . $b->id_peminjaman ?>" class="btn btn-danger"> <i class="fas fa-trash"></i></a> -->
-                                </td>
+                                    <a href="<?= base_url('peminjaman/deletePeminjaman/') . $b->id_peminjaman ?>" class="btn btn-danger"> <i class="fas fa-trash"></i></a>
+                                </td> -->
                             </tr>
                             </tr>
                         <?php } ?>

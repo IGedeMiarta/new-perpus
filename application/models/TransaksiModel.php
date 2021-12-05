@@ -92,6 +92,8 @@ class TransaksiModel extends CI_Model
                     ON detail_buku.kd_buku=buku.kd_buku
             WHERE 
                 peminjaman.detail=1
+            OR
+                peminjaman.detail=4
             ORDER BY 
                 peminjaman.id_peminjaman
             DESC

@@ -44,7 +44,7 @@
                             <th>Judul Buku</th>
                             <th>Batas Pinjam</th>
                             <th>Status</th>
-                            <th>Opsi</th>
+                            <!-- <th>Opsi</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -58,10 +58,10 @@
                                 <td><?= $b->judul ?></td>
                                 <td><?= date('d M Y', strtotime($b->batas_pinjam)) ?></td>
                                 <td><?= $b->status_pinjam ?></td>
-                                <td>
+                                <!-- <td>
                                     <a href="" class="btn btn-warning edit-peminjaman" data-toggle="modal" data-id="<?= $b->id_peminjaman ?>" data-target="#modelEdit"> <i class="fas fa-edit"></i></a>
-                                    <!-- <a href="<?= base_url('peminjaman/deletePeminjaman/') . $b->id_peminjaman ?>" class="btn btn-danger"> <i class="fas fa-trash"></i></a> -->
-                                </td>
+                                    <a href="<?= base_url('peminjaman/deletePeminjaman/') . $b->id_peminjaman ?>" class="btn btn-danger"> <i class="fas fa-trash"></i></a>
+                                </td> -->
                             </tr>
                             </tr>
                         <?php } ?>
@@ -73,8 +73,8 @@
         </div>
 
         <!-- table pemijaman selesai -->
-        <div class="card">
-            <div class="card-header bg-primary text-center">
+        <div class="card mt-5">
+            <div class="card-header bg-success text-center">
                 <h4 class="text-light">Tabel Peminjaman Selesai</h4>
             </div>
             <div class="card-body bg-white">
@@ -88,7 +88,7 @@
                             <th>Judul Buku</th>
                             <th>Batas Pinjam</th>
                             <th>Status</th>
-                            <th>Opsi</th>
+                            <!-- <th>Opsi</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -102,7 +102,7 @@
                                 <td><?= $b->judul ?></td>
                                 <td><?= date('d M Y', strtotime($b->batas_pinjam)) ?></td>
                                 <td><?= $b->status_pinjam ?></td>
-                                <td><center>-</center></td>
+                                <!-- <td><center>-</center></td> -->
                             </tr>
                             </tr>
                         <?php } ?>

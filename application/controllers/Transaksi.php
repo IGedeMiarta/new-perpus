@@ -119,6 +119,7 @@ class Transaksi extends CI_Controller
 
             //insert data ke table pengembalian
             $this->transaksi->insert($data, 'pengembalian');
+           
             // update status peminjaman 
             $this->transaksi->update(['id_peminjaman' => $peminjaman], ['detail' => $status], 'peminjaman');
 
