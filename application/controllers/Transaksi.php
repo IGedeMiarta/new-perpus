@@ -117,19 +117,10 @@ class Transaksi extends CI_Controller
                 'detail' => $status
             ];
 
-            $data_peminjaman_selesai = [
-                'id_anggota' => $peminjaman,
-                'tgl_kembali' => $tgl_kembali,
-                'detail' => $status
-            ];
-
-            //insert data di table peminjaman_selesai
-            $this->transaksi->insert($data_peminjaman_selesai, 'peminjaman_selesai');
-
             //insert data ke table pengembalian
             $this->transaksi->insert($data, 'pengembalian');
             // update status peminjaman 
-            // $this->transaksi->update(['id_peminjaman' => $peminjaman], ['detail' => $status], 'peminjaman');
+            $this->transaksi->update(['id_peminjaman' => $peminjaman], ['detail' => $status], 'peminjaman');
 
 
             $peminjaman_db =  $this->transaksi->get(['id_peminjaman' => $peminjaman], 'peminjaman');

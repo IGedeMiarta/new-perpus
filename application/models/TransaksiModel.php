@@ -33,6 +33,7 @@ class TransaksiModel extends CI_Model
             "SELECT 
                     peminjaman.id_peminjaman,
                     peminjaman.tgl_pinjam,
+                    peminjaman.detail,
                     anggota.nis,
                     anggota.nama,
                     buku.kd_buku,

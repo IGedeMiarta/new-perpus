@@ -31,7 +31,7 @@
 
         <div class="card">
             <div class="card-header bg-primary text-center">
-                <h4 class="text-light">Tabel Peminjaman</h4>
+                <h4 class="text-light">Tabel Peminjaman Aktif</h4>
             </div>
             <div class="card-body bg-white">
                 <a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add</a>
@@ -50,7 +50,7 @@
                     <tbody>
                         <?php $no = 1;
                         foreach ($peminjaman as $b) { ?>
-
+                            <?php if($b->detail != 2){ ?>
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $b->tgl_perpanjang ? date('d M Y', strtotime($b->tgl_perpanjang)) : date('d M Y', strtotime($b->tgl_pinjam)) ?></td>
@@ -64,6 +64,48 @@
                                 </td>
                             </tr>
                             </tr>
+                        <?php } ?>
+                        <?php } ?>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <!-- table pemijaman selesai -->
+        <div class="card">
+            <div class="card-header bg-primary text-center">
+                <h4 class="text-light">Tabel Peminjaman Selesai</h4>
+            </div>
+            <div class="card-body bg-white">
+                <!-- <a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add</a> -->
+                <table id="datatable" class="table table-bordered table-striped table-hover table-datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>No</th>
+                            <th>Tanggal Pinjam </th>
+                            <th>Nama Peminjam </th>
+                            <th>Judul Buku</th>
+                            <th>Batas Pinjam</th>
+                            <th>Status</th>
+                            <th>Opsi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $no = 1;
+                        foreach ($peminjaman as $b) { ?>
+                            <?php if($b->detail == 2){ ?>
+                            <tr>
+                                <td><?= $no++ ?></td>
+                                <td><?= $b->tgl_perpanjang ? date('d M Y', strtotime($b->tgl_perpanjang)) : date('d M Y', strtotime($b->tgl_pinjam)) ?></td>
+                                <td><?= $b->nama ?></td>
+                                <td><?= $b->judul ?></td>
+                                <td><?= date('d M Y', strtotime($b->batas_pinjam)) ?></td>
+                                <td><?= $b->status_pinjam ?></td>
+                                <td><center>-</center></td>
+                            </tr>
+                            </tr>
+                        <?php } ?>
                         <?php } ?>
                     </tbody>
                 </table>
