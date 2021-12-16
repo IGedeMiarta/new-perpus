@@ -52,7 +52,7 @@ class TransaksiModel extends CI_Model
                     ON peminjaman.detail=detail_peminjaman.id_detail_peminjaman
             LEFT JOIN
                 detail_buku 
-                    ON peminjaman.id_buku=detail_buku.id_detail 
+                    ON peminjaman.isbn=detail_buku.id_detail 
             LEFT JOIN
                 buku 
                     ON detail_buku.kd_buku=buku.kd_buku
@@ -86,7 +86,7 @@ class TransaksiModel extends CI_Model
                     ON peminjaman.detail=detail_peminjaman.id_detail_peminjaman
             LEFT JOIN
                 detail_buku 
-                    ON peminjaman.id_buku=detail_buku.id_detail 
+                    ON peminjaman.isbn=detail_buku.id_detail 
             LEFT JOIN
                 buku 
                     ON detail_buku.kd_buku=buku.kd_buku
@@ -164,7 +164,7 @@ class TransaksiModel extends CI_Model
                     ON peminjaman.detail=detail_peminjaman.id_detail_peminjaman
             LEFT JOIN
                 detail_buku 
-                    ON peminjaman.id_buku=detail_buku.id_detail 
+                    ON peminjaman.isbn=detail_buku.id_detail 
             LEFT JOIN
                 buku 
                     ON detail_buku.kd_buku=buku.kd_buku
@@ -197,7 +197,7 @@ class TransaksiModel extends CI_Model
                     ON peminjaman.detail=detail_peminjaman.id_detail_peminjaman
             LEFT JOIN
                 detail_buku 
-                    ON peminjaman.id_buku=detail_buku.id_detail 
+                    ON peminjaman.isbn=detail_buku.id_detail 
             LEFT JOIN
                 buku 
                     ON detail_buku.kd_buku=buku.kd_buku
@@ -219,6 +219,7 @@ class TransaksiModel extends CI_Model
                 peminjaman 
             WHERE 
                 id_anggota= $id_anggota 
+            AND peminjaman.detail = 1 OR peminjaman.detail = 4
         ")->row_array();
     }
 }

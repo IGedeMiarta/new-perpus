@@ -65,11 +65,11 @@
                                             <td>
 
                                                 <?php if ($b->status == 1) { ?>
-                                                    <a class="badge badge-success" href="<?= base_url('buku/bookdetail/') . $b->id ?>"><i class="far fa-fw fa-eye"></i></a>
-                                                    <a class="badge badge-primary detail-buku" href="#" data-toggle="modal" data-target="#exampleModal" data-id="<?= $b->id ?>"><i class="fas fa-fw fa-plus"></i></a>
+                                                    <a class="badge badge-success" href="<?= base_url('buku/bookdetail/') . $b->isbn ?>"><i class="far fa-fw fa-eye"></i></a>
+                                                    <a class="badge badge-primary detail-buku" href="#" data-toggle="modal" data-target="#exampleModal" data-id="<?= $b->isbn?>"><i class="fas fa-fw fa-plus"></i></a>
                                                 <?php } else {
                                                 ?>
-                                                    <a class="badge badge-primary detail-buku" href="#" data-toggle="modal" data-target="#exampleModal" data-id="<?= $b->id ?>"><i class="fas fa-fw fa-plus"></i></a>
+                                                    <a class="badge badge-primary detail-buku" href="#" data-toggle="modal" data-target="#exampleModal" data-id="<?= $b->isbn?>"><i class="fas fa-fw fa-plus"></i></a>
                                                 <?php } ?>
 
                                             </td>

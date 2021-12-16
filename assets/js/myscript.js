@@ -1,12 +1,12 @@
 const flashData = $('.flash-data').data('flashdata');
-if (flashData) {
-    Swal.fire({
-        title: 'Data ' + flashData,
-        text: 'berhasil ditambahkan',
-        icon: 'success',
-        confirmButtonText: 'Ok'
-    });
-};
+// if (flashData) {
+//     Swal.fire({
+//         title: 'Data ' + flashData,
+//         text: 'berhasil ditambahkan',
+//         icon: 'success',
+//         confirmButtonText: 'Ok'
+//     });
+// };
 
 const flashDalete = $('.flash-delete').data('delete');
 const flash_Dalete = $('.flash-delete').data('flashdelete');

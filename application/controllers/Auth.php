@@ -4,7 +4,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Auth extends CI_Controller
 {
     public function index(){
-        $this->load->view('auth/header');
+        $data['title'] = 'Login';
+        $this->load->view('auth/header',$data);
         $this->load->view('auth/login');
         $this->load->view('auth/footer');
     }
@@ -29,4 +30,5 @@ class Auth extends CI_Controller
         echo json_encode($out);
        
     }
+  
 }

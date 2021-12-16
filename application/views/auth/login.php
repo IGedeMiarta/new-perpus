@@ -12,10 +12,11 @@
                                 </a>
                             </div>
                             <h2 class="text-center mt-3 mb-2">Login Form</h4>
+                              <?php echo $this->session->flashdata('messege'); ?>
                            <form id="auth" class="mt-3">
                             <div class="form-group ">
                                 <label for="exampleInputEmail1">Email address</label>
-                                <input type="text" class="form-control outline-warning inp-error" id="inp-user" aria-describedby="emailHelp" name="user" >
+                                <input type="email" class="form-control outline-warning inp-error" id="inp-user" aria-describedby="emailHelp" name="user" >
                                 <small id="user" class="form-text text-warning"> </small>
                             </div>
                             <div class="form-group mb-4">
@@ -29,6 +30,7 @@
                             </form>
                         </div>
                         <!--end /div-->
+<p class="mt-3 text-center">Belum Punya Akun? <a href="<?= base_url('register') ?>">Daftar</a></p>
                     </div>
                     <!--end card-body-->
                 </div>

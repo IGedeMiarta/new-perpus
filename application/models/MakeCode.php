@@ -4,11 +4,10 @@ class MakeCode extends CI_Model
 {
     function kd_buku()
     {
-        $query = $this->db->query("SELECT MAX(kd_buku) as id_buku from buku"); //
-        $data = $query->row();
-        $id_buku = $data->id_buku;
+        $query = $this->db->query("SELECT MAX(isbn) as id_buku from buku")->row_array();
+        $id_buku = $query['id_buku'];
         $nourut = substr($id_buku, 2, 4);
-        $buku = $nourut + 1;
+        $buku = $id_buku + 1;
         return $buku;
     }
     function kd_pengarang()
@@ -43,7 +42,7 @@ class MakeCode extends CI_Model
     }
     function kd_detail($id)
     {
-        $detail_buku = $this->db->query("SELECT buku.id, buku.kd_buku, MAX(detail_buku.kd_detail) AS detail_buku FROM buku, detail_buku WHERE buku.kd_buku=detail_buku.kd_buku AND buku.id=$id")->row_array();
+        $detail_buku = $this->db->query("SELECT buku.isbn, buku.kd_buku, MAX(detail_buku.kd_detail) AS detail_buku FROM buku, detail_buku WHERE buku.kd_buku=detail_buku.kd_buku AND buku.isbn=$id")->row_array();
         $dariDB = $detail_buku['detail_buku'];
         $nourut = substr($dariDB, 9, 1);
         $id_detail = substr($dariDB, 0, 9);

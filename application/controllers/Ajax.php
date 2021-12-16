@@ -30,7 +30,7 @@ class Ajax extends CI_Controller
     public function bookDetail()
     {
         $id = $this->input->post('id');
-        $buku = $this->ajax->getWhere(['id' => $id], 'buku');
+        $buku = $this->ajax->getWhere(['isbn' => $id], 'buku');
         $detail = $this->MakeCode->kd_detail($id);
 
         $data = [

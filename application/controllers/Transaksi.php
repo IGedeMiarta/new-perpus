@@ -45,7 +45,7 @@ class Transaksi extends CI_Controller
                 $data = [
                     'tgl_pinjam' => $tgl_pinjam,
                     'id_anggota' => $anggota,
-                    'id_buku' => $buku,
+                    'isbn' => $buku,
                     'batas_pinjam' => $batas_pinjam,
                     'detail' => $detail
                 ];
@@ -73,7 +73,7 @@ class Transaksi extends CI_Controller
         $data = [
             'tgl_pinjam' => $tgl_pinjam,
             'id_anggota' => $anggota,
-            'id_buku' => $buku,
+            'isbn' => $buku,
             'batas_pinjam' => $batas_pinjam,
             'detail' => $detail
         ];
@@ -126,7 +126,7 @@ class Transaksi extends CI_Controller
 
             $peminjaman_db =  $this->transaksi->get(['id_peminjaman' => $peminjaman], 'peminjaman');
 
-            $detail_buku = $peminjaman_db['id_buku'];
+            $detail_buku = $peminjaman_db['isbn'];
             if ($status != 3) {
                 echo 'status true';
                 $this->transaksi->update(['id_detail' => $detail_buku], ['status' => 1], 'detail_buku');

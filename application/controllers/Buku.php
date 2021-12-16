@@ -130,7 +130,7 @@ class buku extends CI_Controller
             $data['buku'] = $this->BookModels->getBukuId($id);
             $buku = $this->BookModels->getBukuId($id);
             $kode = $buku['kd_buku'];
-            $data['id'] = $buku['id'];
+            $data['id'] = $buku['isbn'];
             $data['detail'] = $this->BookModels->getAllDetailBuku($kode);
             $data['rak'] = $this->BookModels->getAllRak();
             $this->load->view('templates/header', $data);

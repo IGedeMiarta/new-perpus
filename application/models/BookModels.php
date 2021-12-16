@@ -7,7 +7,7 @@ class BookModels extends CI_Model
     {
         return $this->db->query(
             "SELECT 
-                buku.id,
+                buku.isbn,
                 buku.kd_buku,
                 buku.judul,
                 pengarang.nama_pengarang,
@@ -23,7 +23,7 @@ class BookModels extends CI_Model
     }
     function getBukuId($id)
     {
-        return $this->db->query("SELECT * FROM buku,pengarang,penerbit,kategori WHERE buku.pengarang=pengarang.kd_pengarang AND buku.penerbit=penerbit.kd_penerbit AND buku.kategori=kategori.kd_kategori AND buku.id=$id")->row_array();
+        return $this->db->query("SELECT * FROM buku,pengarang,penerbit,kategori WHERE buku.pengarang=pengarang.kd_pengarang AND buku.penerbit=penerbit.kd_penerbit AND buku.kategori=kategori.kd_kategori AND buku.isbn=$id")->row_array();
     }
     function getAllDetailBuku($kd)
     {

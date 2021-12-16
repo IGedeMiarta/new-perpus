@@ -4,7 +4,7 @@ class DashboardModel extends CI_Model
 {
     function countAllBuku()
     {
-        return $this->db->query("SELECT COUNT(id) as all_buku FROM buku")->row_array();
+        return $this->db->query("SELECT COUNT(isbn) as all_buku FROM buku")->row_array();
     }
     function countAllAnggota()
     {
