@@ -34,7 +34,10 @@
                             <h4 class="text-light mb-2">Tabel Buku</h4>
                         </div>
                         <div class="card-body bg-white">
-                            <a href="<?= base_url('buku/BookAdd') ?>" class="btn btn-success float-right"><i class="ti ti-plus"></i> Add</a>
+                            <?php if($this->session->userdata('role') == 'Petugas'){ ?>
+                                <a href="<?= base_url('buku/BookAdd') ?>" class="btn btn-success float-right"><i class="ti ti-plus"></i> Add</a>
+                            <?php }?>
+                            
                             <table id="datatable2" class="table table-bordered table-striped table-hover table-datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead class="thead-dark">
                                     <tr>
@@ -66,17 +69,25 @@
 
                                                 <?php if ($b->status == 1) { ?>
                                                     <a class="badge badge-success" href="<?= base_url('buku/bookdetail/') . $b->isbn ?>"><i class="far fa-fw fa-eye"></i></a>
+                                                    <?php if($this->session->userdata('role') == 'Petugas'){ ?>
                                                     <a class="badge badge-primary detail-buku" href="#" data-toggle="modal" data-target="#exampleModal" data-id="<?= $b->isbn?>"><i class="fas fa-fw fa-plus"></i></a>
-                                                <?php } else {
+                                                
+                                                <?php }} elseif($this->session->userdata('role') == 'Petugas') {
                                                 ?>
                                                     <a class="badge badge-primary detail-buku" href="#" data-toggle="modal" data-target="#exampleModal" data-id="<?= $b->isbn?>"><i class="fas fa-fw fa-plus"></i></a>
                                                 <?php } ?>
 
                                             </td>
+                                            <?php if($this->session->userdata('role') == 'Petugas'){ ?>
                                             <td>
                                                 <a href="" class="badge badge-warning"><i class="ti ti-marker-alt"></i></a>
                                                 <a href="" class="badge badge-danger delete"><i class="ti ti-trash"></i></a>
                                             </td>
+                                            <?php }else{ ?>
+                                                <td>
+                                                    <p class="text-center">-</p>
+                                                </td>
+                                                <?php }?>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

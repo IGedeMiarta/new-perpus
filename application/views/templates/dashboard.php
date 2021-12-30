@@ -23,9 +23,9 @@
         <div class="card jumbotron text-center">
             <div class="col-sm-8 mx-auto">
                 <h1>Selamat datang!</h1>
-                <p>Halaman Admin perpustakaan, Petugas dapat menambah petugas perpustakaan dengan menginputkan data petugas, dan mengontrol seluruh aktifitas sistem</b>.</p>
+                <p><?= $text ?></p>
                 <p>
-                    Anda telah login sebagai <b><?php echo "Administrator" ?></b>
+                    Anda telah login sebagai <b><?php echo $sebagai ?></b>
                 </p>
 
             </div>

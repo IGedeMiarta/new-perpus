@@ -19,8 +19,11 @@ class Auth extends CI_Controller
         }
         $user=$cek;
         if ($user) {
+            $this->session->set_userdata($user);
             if (password_verify($password, $user['password'])) {
-                $out = ['type'=>'success','data'=>$user];
+                $out = [
+                    'type'=>'success',
+                    'data'=>$user];
             } else {
                 $out = ['type'=>'pass'];
             }
@@ -29,6 +32,10 @@ class Auth extends CI_Controller
         }
         echo json_encode($out);
        
+    }
+    public function logout(){
+       $this->session->sess_destroy();
+        return redirect('/');
     }
   
 }

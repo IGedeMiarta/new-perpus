@@ -16,7 +16,9 @@ class Users extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $data['judul'] = 'Petugas';
-            $data['petugas'] = $this->user->read('petugas');
+            $data['petugas'] = $this->user->account();
+           
+            // var_dump($data);die;
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
@@ -147,5 +149,87 @@ class Users extends CI_Controller
         $this->user->delete(['id_status_anggota' => $id], 'status_anggota');
         $this->session->set_flashdata('delete', 'Status Anggota');
         redirect('users/status_anggota');
+    }
+
+    public function tambah($id){ //tambah user petugas
+        
+        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.username]');
+
+        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
+            'matches' => 'Password doesnt match!',
+            'min_length' => 'Password to short!'
+        ]);
+        $this->form_validation->set_rules('password2', 'Password', 'required|trim|min_length[3]|matches[password1]');
+
+        if ($this->form_validation->run() == false) {
+            $data['judul'] = 'Add User Petugas';
+            $data['status'] = $this->user->read('status_anggota');
+            $data['id'] = $id;
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('users/user_petugas', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'username' => htmlspecialchars($this->input->post('email', true)),
+                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+                'user_id' => $id,
+                'role'=>'petugas'
+            ];
+
+            $this->db->insert('user', $data);
+            $this->session->set_flashdata('messege', "Users Perugas sukses dibuat");
+            redirect('users/petugas');
+        }
+    }
+    public function kepala()
+    {
+        $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
+
+        if ($this->form_validation->run() == false) {
+            $data['judul'] = 'Kepala Perpus';
+            $data['petugas'] = $this->user->account();
+           
+            // var_dump($data);die;
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('users/kepala', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'nip' => $this->input->post('nip'),
+                'nama' => $this->input->post('nama'),
+                'jenkel' => $this->input->post('jenkel'),
+                'no_hp' => $this->input->post('hp'),
+                'alamat' => $this->input->post('alamat')
+            ];
+            $this->user->insert($data, 'petugas');
+            $this->session->set_flashdata('messege', $this->input->post('nama'));
+            redirect('users/petugas');
+        }
+    }
+    public function updateKepala()
+    {
+        $id = $_POST['id'];
+        $data = [
+            'nis' => $_POST['nis'],
+            'nama' => $_POST['nama'],
+            'jenis_kel' => $_POST['jenkel'],
+            'no_hp' => $_POST['hp'],
+            'alamat' => $_POST['alamat'],
+            'status' => $_POST['status']
+        ];
+
+        $this->user->update(['id_anggota' => $id], $data, 'anggota');
+        $this->session->set_flashdata('update', $this->input->post('nama'));
+        redirect('users/kepala');
+    }
+    public function deleteKepala($id)
+    {
+        $this->user->delete(['id_anggota' => $id], 'anggota');
+        $this->session->set_flashdata('delete', 'Anggota');
+        redirect('users/kepala');
     }
 }

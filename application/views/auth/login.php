@@ -12,7 +12,7 @@
                                 </a>
                             </div>
                             <h2 class="text-center mt-3 mb-2">Login Form</h4>
-                              <?php echo $this->session->flashdata('messege'); ?>
+                              <!-- <?php echo $this->session->flashdata('messege'); ?> -->
                            <form id="auth" class="mt-3">
                             <div class="form-group ">
                                 <label for="exampleInputEmail1">Email address</label>
@@ -30,7 +30,9 @@
                             </form>
                         </div>
                         <!--end /div-->
-<p class="mt-3 text-center">Belum Punya Akun? <a href="<?= base_url('register') ?>">Daftar</a></p>
+                            <p class="mt-3 text-center">Belum Punya Akun? <a href="<?= base_url('register') ?>">Daftar</a></p>
+                           <p class="mt-n3 text-center">- Atau -</p>
+                            <p class="mt-n3 text-center"><a href="<?= base_url('/anggota') ?>">Masuk Sebagai Anggota</a></p>
                     </div>
                     <!--end card-body-->
                 </div>

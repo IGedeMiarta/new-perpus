@@ -29,6 +29,8 @@
                                     <?= form_error('password2', '<small class="text-danger pl-3">', '</small>');  ?>
                                 </div>
                             <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                            <p class="mt-3 text-center">Sudah Punya Akun? <a href="<?= base_url('/') ?>">Login</a></p>
+
                             </form>
                         </div>
                         <!--end /div-->

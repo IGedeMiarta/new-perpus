@@ -5,18 +5,38 @@
             <li>
                 <a href="<?= base_url('admin') ?>"><i class="ti-dashboard"></i><span>Dashboard</span></a>
             </li>
-            <li>
-                <a href="<?= base_url('users/petugas') ?>"><i class="ti-user"></i><span>Management User</span></a>
+            <?php if($this->session->userdata('role') == 'Admin'){ ?>
+           
+           
+             <li>
+                <a href="javascript: void(0);"><i class="ti-user"></i><span>Management User</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li class="nav-item"><a href="<?= base_url('users/petugas') ?>"><i class="ti-control-record"></i>Petugas</a></li>
+                    <li class="nav-item"><a href="<?= base_url('anggota/all') ?>"><i class="ti-control-record"></i>Anggota</a></li>
+                   
+                </ul>
             </li>
             <li>
-                <a href="javascript: void(0);"><i class="ti-book"></i><span>Management Data</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <a href="javascript: void(0);"><i class="dripicons-user-group"></i><span>Laporan</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li class="nav-item"><a href="#"><i class="ti-control-record"></i>Laporan Buku</a></li>
+                    <li class="nav-item"><a href="#"><i class="ti-control-record"></i>Laporan Anggota</a></li>
+                    <li class="nav-item"><a href="#"><i class="ti-control-record"></i>Laporan Peminjaman</a></li>
+                    <li class="nav-item"><a href="#"><i class="ti-control-record"></i>Laporan Pengembalian</a></li>
+                    <li class="nav-item"><a href="#"><i class="ti-control-record"></i>Laporan Donasi</a></li>
+                </ul>
+            </li>
+            
+            <?php }
+            if($this->session->userdata('role') == 'Petugas'){ ?>
+            <li>
+                <a href="javascript: void(0);"><i class="ti-book"></i><span>Management Buku</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                 <ul class="nav-second-level" aria-expanded="false">
                     <li class="nav-item"><a href="<?= base_url('buku/book') ?>"><i class="ti-control-record"></i>Buku</a></li>
                     <li class="nav-item"><a href="<?= base_url('buku/kategori') ?>"><i class="ti-control-record"></i>Kategori</a></li>
                     <li class="nav-item"><a href="<?= base_url('buku/pengarang') ?>"><i class="ti-control-record"></i>Pengarang</a></li>
                     <li class="nav-item"><a href="<?= base_url('buku/penerbit') ?>"><i class="ti-control-record"></i>Penerbit</a></li>
                     <li class="nav-item"><a href="<?= base_url('buku/rak') ?>"><i class="ti-control-record"></i>Rak</a></li>
-                    <li class="nav-item"><a href="<?= base_url('users/status_anggota') ?>"><i class="ti-control-record"></i>Status Anggota</a></li>
                 </ul>
             </li>
             <li>
@@ -25,7 +45,7 @@
                     <li class="nav-item"><a href="<?= base_url('users/anggota') ?>"><i class="ti-control-record"></i>Pendaftaran</a></li>
                     <li class="nav-item"><a href="<?= base_url('donasi/donatur') ?>"><i class="ti-control-record"></i>Donatur</a></li>
                     <li class="nav-item"><a href="<?= base_url('users/kartuAnggota') ?>"><i class="ti-control-record"></i>Cetak Kartu Anggota</a></li>
-
+                    <li class="nav-item"><a href="<?= base_url('users/status_anggota') ?>"><i class="ti-control-record"></i>Status Anggota</a></li>
                 </ul>
             </li>
 
@@ -45,9 +65,19 @@
                 </ul>
             </li>
 
-
-
-
+        <?php }else{ ?>
+            <li>
+                <a href="javascript: void(0);"><i class="ti-book"></i><span>Data Buku</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li class="nav-item"><a href="<?= base_url('buku/book') ?>"><i class="ti-control-record"></i>Buku</a></li>
+                    <li class="nav-item"><a href="<?= base_url('buku/kategori') ?>"><i class="ti-control-record"></i>Kategori</a></li>
+                    <li class="nav-item"><a href="<?= base_url('buku/pengarang') ?>"><i class="ti-control-record"></i>Pengarang</a></li>
+                    <li class="nav-item"><a href="<?= base_url('buku/penerbit') ?>"><i class="ti-control-record"></i>Penerbit</a></li>
+                    <li class="nav-item"><a href="<?= base_url('buku/rak') ?>"><i class="ti-control-record"></i>Rak</a></li>
+                </ul>
+            </li>
+           
+<?php } ?>
         </ul>
     </div>
     <!-- end left-sidenav-->

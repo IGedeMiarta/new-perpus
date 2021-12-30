@@ -83,8 +83,10 @@
                         </div>
                     </div>
                 </div>
-                <a href="#" class="btn btn-sm btn-success detail-buku" href="#" data-toggle="modal" data-target="#exampleModal" data-id="<?= $id ?>"><i class="fa fa-plus"></i> Detail Buku</a>
+                <?php if($this->session->userdata('role') == 'Petugas'){ ?>
 
+                <a href="#" class="btn btn-sm btn-success detail-buku" href="#" data-toggle="modal" data-target="#exampleModal" data-id="<?= $id ?>"><i class="fa fa-plus"></i> Detail Buku</a>
+<?php }?>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -120,6 +122,8 @@
                                         }
                                         ?>
                                     </td>
+                                    
+                                    <?php if($this->session->userdata('role') == 'Petugas'){ ?>
 
                                     <td>
                                         <div class="btn-group">
@@ -132,6 +136,11 @@
                                             </div>
                                         </div>
                                     </td>
+                                    <?php }else{ ?>
+                                        <td>
+                                            <p class="text-center">-</p>
+                                        </td>
+                                    <?php } ?>
                                 </tr>
                             <?php
                                 // }

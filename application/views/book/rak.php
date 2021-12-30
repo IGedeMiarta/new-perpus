@@ -51,10 +51,17 @@
                                 <td><?= $no++ ?></td>
                                 <td><?= $b->nama_rak ?></td>
                                 <td><?= $b->detail ?></td>
+                            <?php if($this->session->userdata('role') == 'Petugas'){ ?>
+
                                 <td>
                                     <a href="" class="btn btn-warning"> <i class="fas fa-edit"></i></a>
                                     <a href="<?= base_url('buku/deleteRak/') . $b->id_rak ?>" class="btn btn-danger"> <i class="fas fa-trash"></i></a>
                                 </td>
+                                  <?php }else{?>
+                                    <td>
+                                        <p class="text-center">-</p>
+                                    </td>
+                                    <?php }?>
                             </tr>
                         <?php } ?>
                     </tbody>

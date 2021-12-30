@@ -9,10 +9,11 @@
                     <div class="float-right">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:void(0);">Admin</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Petugas</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Anggota</a></li>
+                            <li class="breadcrumb-item active">Data Anggota</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Petugas</h4>
+                    <h4 class="page-title">Data Anggota</h4>
                 </div>
                 <!--end page-title-box-->
             </div>
@@ -29,7 +30,7 @@
 
         <div class="card">
             <div class="card-header bg-primary text-center">
-                <h4 class="text-light">Tabel Petugas</h4>
+                <h4 class="text-light">Tabel Anggota</h4>
             </div>
             <div class="card-body bg-white">
                 <a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add</a>
@@ -42,22 +43,20 @@
                             <th>Jenis Kelamin</th>
                             <th>No Hp</th>
                             <th>Alamat</th>
-                            <th  width="100px">Akun</th>
-                            <th>Role</th>
-                            <th width="50px">Opsi</th>
+                            <th>Status</th>
+                            <th>Opsi</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         <?php $no = 1;
-
-                        foreach ($petugas as $b) { ?>
+                        foreach ($anggota as $b) { ?>
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td><?= $b->nip ?></td>
+                                <td><?= $b->nis ?></td>
                                 <td><?= $b->nama ?></td>
                                 <td><?php
-                                    if ($b->jenkel == 'L') {
+                                    if ($b->jenis_kel == 'L') {
                                         echo 'Laki - Laki';
                                     } else {
                                         echo 'Perempuan';
@@ -65,23 +64,10 @@
                                     ?></td>
                                 <td><?= $b->no_hp ?></td>
                                 <td><?= $b->alamat ?></td>
-                                <td class="text-center" width="10px">
-                                         <?php if ($b->user == 'null') { ?>
-                                             <a href="<?= base_url('users/tambah/' . $b->id_petugas) ?>" target="_blank" class="btn btn-success btn-sm"><i class="dripicons-document-edit"></i> Buat</a>
-                                         <?php } else {
-                                                echo $b->username;
-                                            } ?>
-                                </td>
-                                <td class="text-center" width="10px">
-                                         <?php if ($b->user == 'null') { ?>
-                                             -
-                                         <?php } else {
-                                                echo $b->role;
-                                            } ?>
-                                     </td>
-                                <td>
-                                    <a href="" class="btn btn-warning edit-petugas btn-sm" data-toggle="modal" data-id="<?= $b->id_petugas ?>" data-target="#modelEdit"> <i class="fas fa-edit"></i></a>
-                                    <a href="<?= base_url('users/deletePetugas/') . $b->id_petugas ?>" class="btn btn-danger btn-sm"> <i class="fas fa-trash"></i></a>
+                                <td><?= $b->status ?></td>
+                                <td width="12%">
+                                    <a href="" class="btn btn-warning edit-anggota" data-toggle="modal" data-id="<?= $b->id_anggota ?>" data-target="#modelEdit"> <i class="fas fa-edit"></i></a>
+                                    <a href="<?= base_url('users/deleteAnggota/') . $b->id_anggota ?>" class="btn btn-danger delete"> <i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                             </tr>
@@ -95,10 +81,10 @@
     </div><!-- container -->
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Penerbit</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Anggota</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -106,9 +92,9 @@
                 <div class="modal-body">
                     <form id="form_kategori" method="POST" action="">
                         <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">NIP</label>
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Nomer Induk</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="nip" name="nip">
+                                <input type="text" class="form-control" id="nis" name="nis">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -138,6 +124,17 @@
                                 <textarea name="alamat" id="alamat" class="form-control" cols="30" rows="5"></textarea>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Status Anggota</label>
+                            <div class="col-sm-10">
+                                <select name="status" id="status" class="form-control">
+                                    <option value="L">--Pilih</option>
+                                    <?php foreach ($status as $s) : ?>
+                                        <option value="<?= $s->id_status_anggota ?>"><?= $s->status ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -149,22 +146,22 @@
     </div>
 
     <div class="modal fade" id="modelEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Penerbit</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Anggota</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="edit_petugas" method="POST" action="<?= base_url('users/updatePetugas') ?>">
+                    <form id="edit_petugas" method="POST" action="<?= base_url('users/updateAnggota') ?>">
                         <input type="text" class="form-control" id="e_id" name="id" hidden>
 
                         <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">NIP</label>
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">NIS</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="e_nip" name="nip">
+                                <input type="text" class="form-control" id="e_nip" name="nis">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -192,6 +189,17 @@
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Alamat</label>
                             <div class="col-sm-10">
                                 <textarea name="alamat" id="e_alamat" class="form-control" cols="30" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Status</label>
+                            <div class="col-sm-10">
+                                <select name="status" id="e_status" class="form-control">
+                                    <option value="L">--Pilih</option>
+                                    <?php foreach ($status as $s) : ?>
+                                        <option value="<?= $s->id_status_anggota ?>"><?= $s->status ?></option>
+                                    <?php endforeach ?>
+                                </select>
                             </div>
                         </div>
                 </div>

@@ -49,10 +49,17 @@
                                 <td><?= $no++ ?></td>
                                 <td><?= $b->kd_kategori ?></td>
                                 <td><?= $b->nama_kategori ?></td>
+                            <?php if($this->session->userdata('role') == 'Petugas'){ ?>
+
                                 <td>
                                     <a href="" class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                     <a href="<?= base_url('buku/deleteKategori/') . $b->id_kategori ?>" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                                 </td>
+                                <?php }else{?>
+                                    <td>
+                                        <p class="text-center">-</p>
+                                    </td>
+                                    <?php }?>
                             </tr>
                         <?php } ?>
                     </tbody>
