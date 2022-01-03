@@ -65,7 +65,7 @@
                 </ul>
             </li>
 
-        <?php }else{ ?>
+        <?php }elseif(!$this->session->userdata('role')) { ?>
             <li>
                 <a href="javascript: void(0);"><i class="ti-book"></i><span>Data Buku</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                 <ul class="nav-second-level" aria-expanded="false">
