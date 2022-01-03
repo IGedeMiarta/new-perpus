@@ -143,7 +143,7 @@ class Transaksi extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data['judul'] = 'Perpanjangan';
             $data['perpanjangan'] = $this->transaksi->getAllPerpanjangan();
-            $data['peminjaman'] = $this->transaksi->getPeminjamanActive();
+            $data['peminjaman'] = $this->transaksi->getPeminjamanTerpinjam();
 
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');

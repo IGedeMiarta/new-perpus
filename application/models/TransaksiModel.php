@@ -101,6 +101,44 @@ class TransaksiModel extends CI_Model
         )->result();
         return $qry;
     }
+    // function getPeminjamanTerpinjam()
+    function getPeminjamanTerpinjam()
+    {
+        $qry = $this->db->query(
+            "SELECT 
+                    peminjaman.id_peminjaman,
+                    peminjaman.tgl_pinjam,
+                    anggota.nis,
+                    anggota.nama,
+                    buku.kd_buku,
+                    buku.judul,
+                    detail_buku.kd_detail,
+                    peminjaman.batas_pinjam,
+                    detail_peminjaman.status_pinjam
+            FROM 
+                peminjaman 
+            LEFT JOIN 
+                anggota 
+                    ON peminjaman.id_anggota=anggota.id_anggota
+            LEFT JOIN
+                detail_peminjaman 
+                    ON peminjaman.detail=detail_peminjaman.id_detail_peminjaman
+            LEFT JOIN
+                detail_buku 
+                    ON peminjaman.isbn=detail_buku.id_detail 
+            LEFT JOIN
+                buku 
+                    ON detail_buku.kd_buku=buku.kd_buku
+            WHERE 
+                peminjaman.detail=1
+            
+            ORDER BY 
+                peminjaman.id_peminjaman
+            DESC
+            "
+        )->result();
+        return $qry;
+    }
     function gelAllAvailableBook()
     {
         return $this->db->query(

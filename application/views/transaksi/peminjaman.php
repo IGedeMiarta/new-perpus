@@ -40,6 +40,7 @@
                         <tr>
                             <th>No</th>
                             <th>Tanggal Pinjam </th>
+                            <th>Nomer peminjaman</th>
                             <th>Nama Peminjam </th>
                             <th>Judul Buku</th>
                             <th>Batas Pinjam</th>
@@ -54,6 +55,7 @@
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $b->tgl_perpanjang ? date('d M Y', strtotime($b->tgl_perpanjang)) : date('d M Y', strtotime($b->tgl_pinjam)) ?></td>
+                                <td><?= $b->id_peminjaman ?></td>
                                 <td><?= $b->nama ?></td>
                                 <td><?= $b->judul ?></td>
                                 <td><?= date('d M Y', strtotime($b->batas_pinjam)) ?></td>
@@ -135,7 +137,7 @@
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Peminjam</label>
                             <div class="col-sm-10">
-                                <select name="anggota" id="anggota" class="form-control">
+                                <select name="anggota" id="anggota" class="form-control select2">
                                     <option>-Select Anggota</option>
                                     <?php foreach ($anggota as $d) : ?>
                                         <option value="<?= $d->id_anggota ?>"><strong><?= $d->nis != '' ? $d->nis . ' - ' : '';  ?></strong><?= $d->nama ?></option>
@@ -146,7 +148,7 @@
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Buku</label>
                             <div class="col-sm-10">
-                                <select name="buku" id="buku" class="form-control">
+                                <select name="buku" id="buku" class="form-control select2">
                                     <option>-Select Buku</option>
                                     <?php foreach ($buku as $d) : ?>
                                         <option value="<?= $d->id_detail ?>"><?= '[' . $d->kd_buku . '] ' . $d->judul ?></option>
@@ -188,7 +190,7 @@
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Peminjam</label>
                             <div class="col-sm-10">
-                                <select name="anggota" id="e_anggota" class="form-control">
+                                <select name="anggota" id="e_anggota" class="form-control select2">
                                     <option>-Select Anggota</option>
                                     <?php foreach ($anggota as $d) : ?>
                                         <option value="<?= $d->id_anggota ?>"><strong><?= $d->nis != '' ? $d->nis . ' - ' : '';  ?></strong><?= $d->nama ?></option>
@@ -199,7 +201,7 @@
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Buku</label>
                             <div class="col-sm-10">
-                                <select name="buku" id="e_buku" class="form-control">
+                                <select name="buku" id="e_buku" class="form-control select2">
                                     <option>-Select Buku</option>
                                     <?php foreach ($bukuedt as $d) : ?>
                                         <option value="<?= $d->id_detail ?>"><?= '[' . $d->kd_buku . '] ' . $d->judul ?></option>

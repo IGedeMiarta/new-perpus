@@ -11,7 +11,10 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="<?= base_url('') ?>/assets/images/logo.ico">
 
-    <!-- datatables -->
+    <!-- select 2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="<?= base_url() ?>/asset/css/select2.css">
+    <link rel="stylesheet" href="<?= base_url() ?>/asset/css/select2-bootstrap.css">
     <!-- DataTables -->
     <link href="<?= base_url() ?>/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url() ?>/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />

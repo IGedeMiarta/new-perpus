@@ -13,6 +13,18 @@
 
 <!-- jQuery  -->
 <script src="<?= base_url() ?>/assets/js/jquery.min.js"></script>
+<!-- select 2 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            // theme: "bootstrap"
+            width:"100%"
+        });
+    });
+</script>
+
 <script src="<?= base_url() ?>/assets/js/bootstrap.bundle.min.js"></script>
 <script src="<?= base_url() ?>/assets/js/metisMenu.min.js"></script>
 <script src="<?= base_url() ?>/assets/js/waves.min.js"></script>
@@ -21,7 +33,7 @@
 <!-- Required datatable js -->
 <script src="<?= base_url() ?>/assets/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?= base_url() ?>/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
-<!-- Buttons examples -->
+Buttons examples
 <script src="<?= base_url() ?>/assets/plugins/datatables/dataTables.buttons.min.js"></script>
 <script src="<?= base_url() ?>/assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
 <script src="<?= base_url() ?>/assets/plugins/datatables/jszip.min.js"></script>
@@ -47,7 +59,6 @@
 <script src="<?= base_url('assets/js/myscript.js') ?>"></script>
 <!-- App js -->
 <script src="<?= base_url() ?>/assets/js/app.js"></script>
-
 
 </body>
 

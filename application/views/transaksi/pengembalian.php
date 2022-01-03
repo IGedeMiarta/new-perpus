@@ -94,10 +94,10 @@
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Peminjam</label>
                             <div class="col-sm-10">
-                                <select name="peminjaman" id="peminjaman" class="form-control">
+                                <select name="peminjaman" id="peminjaman" class="form-control select2">
                                     <option>-Select Pengembalian</option>
                                     <?php foreach ($peminjaman as $d) : ?>
-                                        <option value="<?= $d->id_peminjaman ?>"><strong><?= $d->nis != '' ? $d->nis . ' - ' : '';  ?></strong><?= $d->nama . ' - [ ' . $d->kd_buku . ' ] ' . $d->judul ?></option>
+                                        <option value="<?= $d->id_peminjaman ?>"><?= $d->id_peminjaman .' - ' .  $d->nama . ' - '.$d->judul.' - '.$d->status_pinjam ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -105,7 +105,7 @@
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Status</label>
                             <div class="col-sm-10">
-                                <select name="status" id="e_status" class="form-control">
+                                <select name="status" id="e_status" class="form-control select2">
                                     <option>-Select Status</option>
                                     <option class="form-control" value="2">Selesai</option>
                                     <option class="form-control" value="3">Terlambat</option>
@@ -148,7 +148,7 @@
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Peminjam</label>
                             <div class="col-sm-10">
-                                <select name="anggota" id="e_anggota" class="form-control">
+                                <select name="anggota" id="e_anggota" class="form-control select2">
                                     <option>-Select Anggota</option>
                                     <?php foreach ($anggota as $d) : ?>
                                         <option value="<?= $d->id_anggota ?>"><strong><?= $d->nis != '' ? $d->nis . ' - ' : '';  ?></strong><?= $d->nama ?></option>
