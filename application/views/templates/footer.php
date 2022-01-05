@@ -18,7 +18,25 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
 <script>
     $(document).ready(function() {
+        $('.select1').select2({
+            // theme: "bootstrap"
+            width:"100%"
+        });
+    });
+    $(document).ready(function() {
         $('.select2').select2({
+            // theme: "bootstrap"
+            width:"100%"
+        });
+    });
+    $(document).ready(function() {
+        $('.select3').select2({
+            // theme: "bootstrap"
+            width:"100%"
+        });
+    });
+    $(document).ready(function() {
+        $('.select4').select2({
             // theme: "bootstrap"
             width:"100%"
         });

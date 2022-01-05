@@ -57,7 +57,7 @@ class UserModel extends CI_Model
     }
     function getAllDonasi()
     {
-        return $this->db->query("SELECT * FROM donasi, donatur, detail_donasi WHERE donasi.donatur=donatur.id_donatur AND donasi.detail=detail_donasi.id_detail_donasi ORDER BY id_donasi DESC")->result();
+        return $this->db->query("SELECT donasi.*,donatur.nama_donatur,donatur.no_hp,detail_donasi.keterangan,detail_donasi.status AS status_donasi,buku.judul FROM donasi JOIN donatur ON donasi.donatur=donatur.id_donatur JOIN detail_donasi ON donasi.detail=detail_donasi.id_detail_donasi LEFT JOIN buku ON buku.kd_buku=donasi.buku ORDER BY id_donasi DESC")->result();
     }
 
      function account()

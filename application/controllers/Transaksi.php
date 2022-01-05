@@ -18,7 +18,8 @@ class Transaksi extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data['judul'] = 'Peminjaman';
             $data['peminjaman'] = $this->transaksi->getAllPeminjaman();
-            $data['buku'] = $this->transaksi->gelAllAvailableBook();
+            $data['buku1'] = $this->transaksi->gelAllAvailableBook();
+            $data['buku2'] = $this->transaksi->gelAllAvailableBook();
             $data['bukuedt'] = $this->transaksi->gelAllBook();
             $data['anggota'] = $this->transaksi->read('anggota');
             $data['detail'] = $this->transaksi->read('detail_peminjaman');
@@ -32,7 +33,9 @@ class Transaksi extends CI_Controller
             
             $tgl_pinjam = $this->input->post('tanggal');
             $anggota = $this->input->post('anggota');
-            $buku = $this->input->post('buku');
+            $buku1 = $this->input->post('buku1');
+            $buku2 = $this->input->post('buku2');
+            $buku3 = $this->input->post('buku3');
             $batas_pinjam = date("Y-m-d", strtotime("$tgl_pinjam + 7 days"));
             $detail = 1; #status dipinjam
 
@@ -42,17 +45,49 @@ class Transaksi extends CI_Controller
                 redirect('transaksi/peminjaman');
             }else{
                 
-                $data = [
+                if (isset($buku1)) {
+                     $data1 = [
                     'tgl_pinjam' => $tgl_pinjam,
                     'id_anggota' => $anggota,
-                    'isbn' => $buku,
+                    'isbn' => $buku1,
                     'batas_pinjam' => $batas_pinjam,
                     'detail' => $detail
-                ];
-                $this->transaksi->insert($data, 'peminjaman');
-                //update detail buku status=0
-                $this->transaksi->update(['id_detail' => $buku], ['status' => 0], 'detail_buku');
-                //cari nama peminjam
+                    ];
+                    
+                    $this->transaksi->insert($data1, 'peminjaman');
+                    //update detail buku status=0
+                    $this->transaksi->update(['id_detail' => $buku1], ['status' => 0], 'detail_buku');
+                    
+                }
+                if (isset($buku2)) {
+                   $data2 = [
+                        'tgl_pinjam' => $tgl_pinjam,
+                        'id_anggota' => $anggota,
+                        'isbn' => $buku2,
+                        'batas_pinjam' => $batas_pinjam,
+                        'detail' => $detail
+                    ];
+                    
+                    $this->transaksi->insert($data2, 'peminjaman');
+                    //update detail buku status=0
+                    $this->transaksi->update(['id_detail' => $buku2], ['status' => 0], 'detail_buku');
+                    
+                }
+                if (isset($buku3)) {
+                    $data3 = [
+                        'tgl_pinjam' => $tgl_pinjam,
+                        'id_anggota' => $anggota,
+                        'isbn' => $buku3,
+                        'batas_pinjam' => $batas_pinjam,
+                        'detail' => $detail
+                    ];
+                    
+                    $this->transaksi->insert($data3, 'peminjaman');
+                    //update detail buku status=0
+                    $this->transaksi->update(['id_detail' => $buku3], ['status' => 0], 'detail_buku');
+                    
+                }
+               //cari nama peminjam
                 $anggota = $this->transaksi->get(['id_anggota' => $anggota], 'anggota');
                 $this->session->set_flashdata('messege', 'Peminjaman ' . $anggota['nama']);
                 redirect('transaksi/peminjaman');
@@ -156,28 +191,38 @@ class Transaksi extends CI_Controller
             $peminjaman = $this->input->post('peminjaman');
             $batas_pinjam = date("Y-m-d", strtotime("$tgl_perpanjang + 7 days"));
             $status = 4;
-            $data_pemijam = [
-                'batas_pinjam' => $batas_pinjam,
-                'tgl_perpanjang' => $tgl_perpanjang,
-                'detail' => $status
-            ];
+            $cek = $this->transaksi->get(['id_peminjaman'=>$peminjaman],'peminjaman');
+            $id= $cek['id_anggota'];
+            $anggota = $this->transaksi->getAllPerpanjanganAnggota($id);
 
-            $data_perpanjang = [
-                'tgl_perpanjangan' => $tgl_perpanjang,
-                'id_peminjaman' => $peminjaman,
-                'batas_kembali' => $batas_pinjam,
-                'detail' => $status
+            if(!isset($anggota)){
+                $data_pemijam = [
+                    'batas_pinjam' => $batas_pinjam,
+                    'tgl_perpanjang' => $tgl_perpanjang,
+                    'detail' => $status
+                ];
 
-                
-            ];
+                $data_perpanjang = [
+                    'tgl_perpanjangan' => $tgl_perpanjang,
+                    'id_peminjaman' => $peminjaman,
+                    'batas_kembali' => $batas_pinjam,
+                    'detail' => $status
 
-             //insert data di table peminjaman_selesai
-             $this->transaksi->insert($data_perpanjang, 'perpanjangan');
-            // update status peminjaman 
-            $this->transaksi->update(['id_peminjaman' => $peminjaman], $data_pemijam, 'peminjaman');
+                    
+                ];
 
-            $this->session->set_flashdata('messege', 'Perpanjangan');
-            redirect('transaksi/perpanjangan');
+                //insert data di table peminjaman_selesai
+                $this->transaksi->insert($data_perpanjang, 'perpanjangan');
+                // update status peminjaman 
+                $this->transaksi->update(['id_peminjaman' => $peminjaman], $data_pemijam, 'peminjaman');
+
+                $this->session->set_flashdata('messege', 'Perpanjangan');
+                redirect('transaksi/perpanjangan');
+            }else{
+                $this->session->set_flashdata('perpanjang', 'Perpanjangan');
+                redirect('transaksi/perpanjangan');
+            }
+            
         }
     }
 }

@@ -41,7 +41,7 @@
                             <th>Tanggal </th>
                             <th>Donatur</th>
                             <th>No Hp</th>
-                            <th>Jumlah</th>
+                            <th>Donasi</th>
                             <th>Detail</th>
                             <th>Status</th>
                             <th>Opsi</th>
@@ -58,9 +58,9 @@
                                 <td><?= date('d M Y', strtotime($b->tgl_donasi)) ?></td>
                                 <td><?= $b->nama_donatur ?></td>
                                 <td><?= $b->no_hp ?></td>
-                                <td><?= "Rp " . number_format($b->jml_donasi) ?></td>
+                                <td><?= isset($b->jml_donasi)?"Rp " . number_format($b->jml_donasi):'BUKU - ['.$b->buku.'] '.$b->judul ?></td>
                                 <td><?= $b->keterangan ?></td>
-                                <td><?= $b->status ?></td>
+                                <td><?= $b->status_donasi ?></td>
                                 <td>
                                     <a href="" class="btn btn-warning edit-donasi" data-toggle="modal" data-id="<?= $b->id_donasi ?>" data-target="#modelEdit"> <i class="fas fa-edit"></i></a>
                                     <a href="<?= base_url('donasi/deleteDonasi/') . $b->id_donasi ?>" class="btn btn-danger"> <i class="fas fa-trash"></i></a>
@@ -96,7 +96,7 @@
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Donatur</label>
                             <div class="col-sm-10">
-                                <select name="donatur" id="donatur" class="form-control">
+                                <select name="donatur" id="donatur" class="form-control select2">
                                     <option>-Select Donatur</option>
                                     <?php foreach ($donatur as $d) : ?>
                                         <option value="<?= $d->id_donatur ?>"><?= $d->nama_donatur ?></option>
@@ -104,18 +104,100 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
+                         <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Jenis Donasi</label>
+                            <div class="col-sm-10">
+                                <select name="jenis" id="jenis" class="form control select2" onchange="donasi()">
+                                    <option >-Pilih</option>
+                                    <option value="uang">Uang</option>
+                                    <option value="buku">Buku</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row d-none" id="jumlah-donasi">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Jumlah Donasi</label>
                             <div class="col-sm-10">
                                 <input type="number" class="form-control" id="jml" name="jml">
                             </div>
                         </div>
-                        <div class="form-group row">
+                       
+
+                        <div class="form-group row d-none" id="kode-donasi">
+                            <label for="horizontalInput1" class="col-sm-2 col-form-label">Kode Buku</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="kd_buku" class="form-control" value="BK<?php echo sprintf("%04s", $kd_buku) ?>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row d-none" id="judul-donasi">
+                            <label class="col-sm-2 col-form-label">Judul</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="judul" placeholder="Judul Buku">
+                            </div>
+                        </div>
+                        <div class="form-group row d-none" id="tahun-donasi">
+                            <label class="col-sm-2 col-form-label">Tahun</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="tahun">
+                                    <option value="">- Pilih tahun</option>
+                                    <?php for ($tahun = date('Y'); $tahun >= 2010; $tahun--) { ?>
+                                        <option value="<?php echo $tahun; ?>"><?php echo $tahun; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="form-group row d-none" id="pengarang-donasi">
+                            <label class="col-sm-2 col-form-label">Pengarang</label>
+                            <div class="col-sm-10">
+                                <select name="pengarang" id="" class="form-control">
+                                    <option value="">--Pilih</option>
+                                    <?php foreach ($pengarang as $k) : ?>
+                                        <option value="<?= $k->kd_pengarang ?>"><?= $k->nama_pengarang ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row d-none" id="penerbit-donasi">
+                            <label class="col-sm-2 col-form-label">Penerbit</label>
+                            <div class="col-sm-10">
+                                <select name="penerbit" id="" class="form-control">
+                                    <option value="">--Pilih</option>
+                                    <?php foreach ($penerbit as $k) : ?>
+                                        <option value="<?= $k->kd_penerbit ?>"><?= $k->nama_penerbit ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row d-none" id="kategori-donasi">
+                            <label class="col-sm-2 col-form-label">Kategori</label>
+                            <div class="col-sm-10">
+                                <select name="kategori" id="" class="form-control">
+                                    <option value="">--Pilih</option>
+                                    <?php foreach ($kategori as $k) : ?>
+                                        <option value="<?= $k->kd_kategori ?>"><?= $k->nama_kategori ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                         <div class="form-group row d-none" id="rak-donasi">
+                            <label class="col-sm-2 col-form-label">Rak</label>
+                            <div class="col-sm-10">
+                               <select name="rak" class="form-control" id="">
+                                    <option value="">--pilih</option>
+                                    <?php foreach ($rak as $r) : ?>
+                                        <option value="<?= $r->id_rak ?>"><?= $r->nama_rak . ' - ' . $r->detail ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row " id="keterangan-donasi">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Keterengan</label>
                             <div class="col-sm-10">
                                 <textarea name="ket" id="ket" class="form-control" cols="30" rows="5"></textarea>
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Status</label>
                             <div class="col-sm-10">

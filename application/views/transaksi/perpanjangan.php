@@ -23,6 +23,7 @@
 
         <!-- sweet alert -->
         <div class="flash-data" data-flashdata="<?= $this->session->flashdata('messege') ?>"></div>
+        <div class="flash-perpanjang" data-perpanjang="<?= $this->session->flashdata('perpanjang') ?>"></div>
         <div class="flash-update" data-update="<?= $this->session->flashdata('update') ?>"></div>
         <div class="flash-delete" data-delete="<?= $this->session->flashdata('delete') ?>"></div>
         <!-- end sweet alert -->

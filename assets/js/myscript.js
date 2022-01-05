@@ -1,12 +1,12 @@
 const flashData = $('.flash-data').data('flashdata');
-// if (flashData) {
-//     Swal.fire({
-//         title: 'Data ' + flashData,
-//         text: 'berhasil ditambahkan',
-//         icon: 'success',
-//         confirmButtonText: 'Ok'
-//     });
-// };
+if (flashData) {
+    Swal.fire({
+        title: 'Data ' + flashData,
+        text: 'berhasil ditambahkan',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+    });
+};
 
 const flashDalete = $('.flash-delete').data('delete');
 const flash_Dalete = $('.flash-delete').data('flashdelete');
@@ -23,6 +23,14 @@ if (flash_Gagal) {
     Swal.fire(
         'Gagal!',
         'Tidak bisa meminjam buku lebih dari 3 kali.',
+        'warning'
+    )
+};
+const flash_perpanjang = $('.flash-perpanjang').data('perpanjang');
+if (flash_perpanjang) {
+    Swal.fire(
+        'Gagal!',
+        'Tidak bisa perpanjang buku lebih dari 1 kali.',
         'warning'
     )
 };
@@ -187,3 +195,28 @@ $('.delete').on('click', function(e) {
 //         }
 //      });
 //  });
+
+function donasi() {
+    var jenis = $('#jenis').val();
+    if(jenis=='uang'){
+        $('#jumlah-donasi').removeClass('d-none');
+        // $('#kode-donasi').addClass('d-none');
+        $('#judul-donasi').addClass('d-none');
+        $('#tahun-donasi').addClass('d-none');
+        $('#pengarang-donasi').addClass('d-none');
+        $('#penerbit-donasi').addClass('d-none');
+        $('#kategori-donasi').addClass('d-none');
+        $('#rak-donasi').addClass('d-none');
+
+    }
+    if(jenis=='buku'){
+        $('#jumlah-donasi').addClass('d-none');
+        // $('#kode-donasi').removeClass('d-none');
+        $('#judul-donasi').removeClass('d-none');
+        $('#tahun-donasi').removeClass('d-none');
+        $('#pengarang-donasi').removeClass('d-none');
+        $('#penerbit-donasi').removeClass('d-none');
+        $('#kategori-donasi').removeClass('d-none');
+        $('#rak-donasi').removeClass('d-none');
+    }
+}

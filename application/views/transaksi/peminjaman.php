@@ -146,17 +146,38 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Buku</label>
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Buku 1</label>
                             <div class="col-sm-10">
-                                <select name="buku" id="buku" class="form-control select2">
+                                <select name="buku1" id="buku1" class="form-control select2">
                                     <option>-Select Buku</option>
-                                    <?php foreach ($buku as $d) : ?>
+                                    <?php foreach ($buku1 as $d) : ?>
                                         <option value="<?= $d->id_detail ?>"><?= '[' . $d->kd_buku . '] ' . $d->judul ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
-
+                         <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Buku 2</label>
+                            <div class="col-sm-10">
+                                <select name="buku2" id="buku2" class="form-control select3">
+                                    <option>-Select Buku</option>
+                                    <?php foreach ($buku2 as $d) : ?>
+                                        <option value="<?= $d->id_detail ?>"><?= '[' . $d->kd_buku . '] ' . $d->judul ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Buku 3</label>
+                            <div class="col-sm-10">
+                                <select name="buku3" id="buku3" class="form-control select4">
+                                    <option>-Select Buku</option>
+                                    <?php foreach ($buku2 as $d) : ?>
+                                        <option value="<?= $d->id_detail ?>"><?= '[' . $d->kd_buku . '] ' . $d->judul ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
