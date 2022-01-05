@@ -2,11 +2,11 @@
     <!-- Left Sidenav -->
     <div class="left-sidenav">
         <ul class="metismenu left-sidenav-menu">
-            <li>
+            
+            <?php if($this->session->userdata('role') == 'Admin'){ ?>
+           <li>
                 <a href="<?= base_url('admin') ?>"><i class="ti-dashboard"></i><span>Dashboard</span></a>
             </li>
-            <?php if($this->session->userdata('role') == 'Admin'){ ?>
-           
            
              <li>
                 <a href="javascript: void(0);"><i class="ti-user"></i><span>Management User</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
@@ -29,6 +29,10 @@
             
             <?php }
             if($this->session->userdata('role') == 'Petugas'){ ?>
+            <li>
+                <a href="<?= base_url('petugas') ?>"><i class="ti-dashboard"></i><span>Dashboard</span></a>
+            </li>
+           
             <li>
                 <a href="javascript: void(0);"><i class="ti-book"></i><span>Management Buku</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                 <ul class="nav-second-level" aria-expanded="false">
@@ -66,6 +70,9 @@
             </li>
 
         <?php }elseif(!$this->session->userdata('role')) { ?>
+             <li>
+                <a href="<?= base_url('anggota') ?>"><i class="ti-dashboard"></i><span>Dashboard</span></a>
+            </li>
             <li>
                 <a href="javascript: void(0);"><i class="ti-book"></i><span>Data Buku</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                 <ul class="nav-second-level" aria-expanded="false">
