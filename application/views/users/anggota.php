@@ -33,7 +33,10 @@
                 <h4 class="text-light">Tabel Anggota</h4>
             </div>
             <div class="card-body bg-white">
-                <!-- <a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add</a> -->
+                <?php 
+                    if($this->session->userdata('role')){ ?>
+                <a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add</a>
+                <?php } ?>
                 <table id="datatable2" class="table table-bordered table-striped table-hover table-datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead class="thead-dark">
                         <tr>
@@ -44,7 +47,9 @@
                             <th>No Hp</th>
                             <th>Alamat</th>
                             <th>Status</th>
-                            <!-- <th>Akun</th> -->
+                            <?php if($this->session->userdata('role')){ ?>
+                            <th>Akun</th>
+                            <?php } ?>
                         </tr>
                     </thead>
 
@@ -65,10 +70,13 @@
                                 <td><?= $b->no_hp ?></td>
                                 <td><?= $b->alamat ?></td>
                                 <td><?= $b->status ?></td>
-                                <!-- <td width="12%">
-                                    <a href="" class="btn btn-warning edit-anggota" data-toggle="modal" data-id="<?= $b->id_anggota ?>" data-target="#modelEdit"> <i class="fas fa-edit"></i></a>
-                                    <a href="<?= base_url('users/deleteAnggota/') . $b->id_anggota ?>" class="btn btn-danger delete"> <i class="fas fa-trash"></i></a>
-                                </td> -->
+                                 <?php if($this->session->userdata('role')){ ?>
+                         
+                            <td width="12%">
+                                <a href="" class="btn btn-warning edit-anggota" data-toggle="modal" data-id="<?= $b->id_anggota ?>" data-target="#modelEdit"> <i class="fas fa-edit"></i></a>
+                                <a href="<?= base_url('users/deleteAnggota/') . $b->id_anggota ?>" class="btn btn-danger delete"> <i class="fas fa-trash"></i></a>
+                            </td>
+                            <?php } ?>
                             </tr>
                             </tr>
                         <?php } ?>

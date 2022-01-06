@@ -30,7 +30,9 @@
                 <h4 class="text-light">Tabel Kategori Buku</h4>
             </div>
             <div class="card-body bg-white">
-                <button class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add</button>
+                <?php if($this->session->userdata('role')){ ?>
+                    <button class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add</button>
+                <?php }?>
                 <table id="datatable2" class="table table-bordered table-striped table-hover table-datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead class="thead-dark">
                         <tr>
