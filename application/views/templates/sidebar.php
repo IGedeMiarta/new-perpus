@@ -19,11 +19,11 @@
             <li>
                 <a href="javascript: void(0);"><i class="dripicons-user-group"></i><span>Laporan</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                 <ul class="nav-second-level" aria-expanded="false">
-                    <li class="nav-item"><a href="#"><i class="ti-control-record"></i>Laporan Buku</a></li>
-                    <li class="nav-item"><a href="#"><i class="ti-control-record"></i>Laporan Anggota</a></li>
-                    <li class="nav-item"><a href="#"><i class="ti-control-record"></i>Laporan Peminjaman</a></li>
-                    <li class="nav-item"><a href="#"><i class="ti-control-record"></i>Laporan Pengembalian</a></li>
-                    <li class="nav-item"><a href="#"><i class="ti-control-record"></i>Laporan Donasi</a></li>
+                    <li class="nav-item"><a href="<?= base_url('laporan/buku') ?>"><i class="ti-control-record"></i>Laporan Buku</a></li>
+                    <li class="nav-item"><a href="<?= base_url('laporan/anggota') ?>"><i class="ti-control-record"></i>Laporan Anggota</a></li>
+                    <li class="nav-item"><a href="<?= base_url('laporan/peminjaman') ?>"><i class="ti-control-record"></i>Laporan Peminjaman</a></li>
+                    <li class="nav-item"><a href="<?= base_url('laporan/pengembalian') ?>"><i class="ti-control-record"></i>Laporan Pengembalian</a></li>
+                    <li class="nav-item"><a href="<?= base_url('laporan/donasi') ?>"><i class="ti-control-record"></i>Laporan Donasi</a></li>
                 </ul>
             </li>
             
