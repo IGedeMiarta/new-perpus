@@ -13,7 +13,7 @@ class Donasi extends CI_Controller
     }
     public function index()
     {
-        $this->form_validation->set_rules('tanggal', 'tanggal', 'trim|required');
+        $this->form_validation->set_rules('donatur', 'donatur', 'trim|required');
 
         if ($this->form_validation->run() == false) {
             $data['judul'] = 'Donasi';
@@ -34,7 +34,7 @@ class Donasi extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             // insert ke detail donasi
-            $tanggal = $this->input->post('tanggal');
+            $tanggal = date('Y-d-m');
             $donatur = $this->input->post('donatur');
             $jenis = $this->input->post('jenis');
             if($jenis == 'uang'){
@@ -104,11 +104,60 @@ class Donasi extends CI_Controller
             redirect('donasi');
         }
     }
+    public function updateDonasi(){
+        // var_dump($_POST); die;
+        $id_donasi = $_POST['id'];
+        $jenis = $_POST['jenis'];
+        $detail_donasi = $_POST['detail_donasi'];
+        $keterangan = $_POST['ket'];
+        $status= $_POST['status'];
+        $data_detail = [
+                'keterangan'=>$keterangan,
+                'status'=>$status
+            ];
+        if ($jenis == 'uang') {
+            $donatur = $_POST['donatur'];
+            $jml_donasi = $_POST['jml'];
+            $data =[
+                'donatur'=>$donatur,
+                'jml_donasi'=>$jml_donasi
+            ];
+           
+            $this->user->update(['id_donasi' => $id_donasi], $data, 'donasi');
+            $this->user->update(['id_detail_donasi' => $detail_donasi], $data_detail, 'detail_donasi');
+            $this->session->set_flashdata('update', 'Donasi');
+            redirect('donasi');
+        }else{
+            $isbn = $_POST['isbn'];
+            $judul = $_POST['judul'];
+            $pengarang = $_POST['pengarang'];
+            $penerbit = $_POST['penerbit'];
+            $tahun = $_POST['tahun'];
+            $kategori = $_POST['kategori'];
+            $data = [
+                'judul'=>$judul,
+                'pengarang'=>$pengarang,
+                'penerbit'=>$penerbit,
+                'th_terbit'=>$tahun,
+                'kategori'=>$kategori
+            ];
+            $this->user->update(['isbn' => $isbn], $data, 'buku');
+
+            $id_detail = $_POST['id_detail'];
+            $data2 =[
+                'rak'=> $_POST['rak']
+            ];
+            $this->user->update(['id_detail' => $id_detail], $data2, 'detail_buku');
+            $this->user->update(['id_detail_donasi' => $detail_donasi], $data_detail, 'detail_donasi');
+            $this->session->set_flashdata('update', 'Donasi');
+            redirect('donasi');
+            
+        }
+    }
     public function deleteDonasi($id_donasi)
     {
-        var_dump($id_donasi);
-        // $this->user->delete(['id_donasi' => $id_donasi], 'donasi');
-        $this->session->set_flashdata('delete', 'donasi');
+        $this->user->delete(['id_donasi' => $id_donasi], 'donasi');
+        $this->session->set_flashdata('update', 'Dihapus');
         redirect('donasi');
     }
     public function donatur()

@@ -85,12 +85,7 @@
                 </div>
                 <div class="modal-body">
                     <form id="form_kategori" method="POST" action="">
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Tanggal</label>
-                            <div class="col-sm-10">
-                                <input type="date" class="form-control" id="tanggal" name="tanggal">
-                            </div>
-                        </div>
+                        
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Peminjam</label>
                             <div class="col-sm-10">
@@ -138,13 +133,6 @@
                     <form id="updatePeminjaman" method="POST" action="<?= base_url('transaksi/updatePeminjaman') ?>">
                         <input type="text" class="form-control" id="e_id" name="id" hidden>
                         <input type="text" class="form-control" id="e_bk2" name="bk" hidden>
-
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Tanggal</label>
-                            <div class="col-sm-10">
-                                <input type="date" class="form-control" id="e_tgl" name="tanggal">
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Peminjam</label>
                             <div class="col-sm-10">

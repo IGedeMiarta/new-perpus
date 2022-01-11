@@ -18,7 +18,9 @@ class BookModels extends CI_Model
                 FROM buku,pengarang,penerbit,kategori 
                 WHERE buku.pengarang=pengarang.kd_pengarang
                 AND buku.penerbit=penerbit.kd_penerbit
-                AND buku.kategori=kategori.kd_kategori"
+                AND buku.kategori=kategori.kd_kategori
+                ORDER BY buku.isbn DESC"
+
         )->result();
     }
     function getBukuId($id)

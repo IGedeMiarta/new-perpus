@@ -84,12 +84,7 @@
                 </div>
                 <div class="modal-body">
                     <form id="form_kategori" method="POST" action="">
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Tanggal</label>
-                            <div class="col-sm-10">
-                                <input type="date" class="form-control" id="tanggal" name="tanggal">
-                            </div>
-                        </div>
+                       
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Peminjam</label>
                             <div class="col-sm-10">

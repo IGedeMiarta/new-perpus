@@ -13,9 +13,11 @@ class Transaksi extends CI_Controller
     }
     public function peminjaman()
     {
-        $this->form_validation->set_rules('tanggal', 'tanggal', 'trim|required');
+        $this->form_validation->set_rules('anggota', 'anggota', 'trim|required');
+        $this->form_validation->set_rules('buku1', 'buku1', 'trim|required');
 
         if ($this->form_validation->run() == false) {
+           
             $data['judul'] = 'Peminjaman';
             $data['peminjaman'] = $this->transaksi->getAllPeminjaman();
             $data['buku1'] = $this->transaksi->gelAllAvailableBook();
@@ -31,7 +33,7 @@ class Transaksi extends CI_Controller
         } else {
             // insert data peminjaman
             
-            $tgl_pinjam = $this->input->post('tanggal');
+            $tgl_pinjam = date('Y-m-d');
             $anggota = $this->input->post('anggota');
             $buku1 = $this->input->post('buku1');
             $buku2 = $this->input->post('buku2');
@@ -45,7 +47,7 @@ class Transaksi extends CI_Controller
                 redirect('transaksi/peminjaman');
             }else{
                 
-                if (isset($buku1)) {
+                if ($buku1 != 0) {
                      $data1 = [
                     'tgl_pinjam' => $tgl_pinjam,
                     'id_anggota' => $anggota,
@@ -59,7 +61,7 @@ class Transaksi extends CI_Controller
                     $this->transaksi->update(['id_detail' => $buku1], ['status' => 0], 'detail_buku');
                     
                 }
-                if (isset($buku2)) {
+                if ($buku2 != 0) {
                    $data2 = [
                         'tgl_pinjam' => $tgl_pinjam,
                         'id_anggota' => $anggota,
@@ -73,7 +75,7 @@ class Transaksi extends CI_Controller
                     $this->transaksi->update(['id_detail' => $buku2], ['status' => 0], 'detail_buku');
                     
                 }
-                if (isset($buku3)) {
+                if ($buku3 != 0) {
                     $data3 = [
                         'tgl_pinjam' => $tgl_pinjam,
                         'id_anggota' => $anggota,
@@ -126,7 +128,7 @@ class Transaksi extends CI_Controller
     }
     public function pengembalian()
     {
-        $this->form_validation->set_rules('tanggal', 'tanggal', 'trim|required');
+        $this->form_validation->set_rules('peminjaman', 'peminjaman', 'trim|required');
 
         if ($this->form_validation->run() == false) {
             $data['judul'] = 'Pengembalian';
@@ -143,7 +145,7 @@ class Transaksi extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             // insert data peminjaman
-            $tgl_kembali = $this->input->post('tanggal');
+            $tgl_kembali = date('Y-m-d');
             $peminjaman = $this->input->post('peminjaman');
             $status = $this->input->post('status');
             $data = [
@@ -173,7 +175,7 @@ class Transaksi extends CI_Controller
     }
     public function perpanjangan()
     {
-        $this->form_validation->set_rules('tanggal', 'tanggal', 'trim|required');
+        $this->form_validation->set_rules('peminjaman', 'peminjaman', 'trim|required');
 
         if ($this->form_validation->run() == false) {
             $data['judul'] = 'Perpanjangan';
@@ -187,7 +189,7 @@ class Transaksi extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             // insert data peminjaman
-            $tgl_perpanjang = $this->input->post('tanggal');
+            $tgl_perpanjang = date('Y-m-d');
             $peminjaman = $this->input->post('peminjaman');
             $batas_pinjam = date("Y-m-d", strtotime("$tgl_perpanjang + 7 days"));
             $status = 4;

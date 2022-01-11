@@ -22,10 +22,11 @@
             </div>
             <!-- end page title end breadcrumb -->
 
-            <!-- sweet alert -->
-            <div class="flash-data" data-flashdata="<?= $this->session->flashdata('messege') ?>"></div>
-            <div class="flash-delete" data-delete="<?= $this->session->flashdata('delete') ?>"></div>
-            <!-- end sweet alert -->
+             <!-- sweet alert -->
+        <div class="flash-data" data-flashdata="<?= $this->session->flashdata('messege') ?>"></div>
+        <div class="flash-update" data-update="<?= $this->session->flashdata('update') ?>"></div>
+        <div class="flash-delete" data-delete="<?= $this->session->flashdata('delete') ?>"></div>
+        <!-- end sweet alert -->
 
             <div class="row">
                 <div class="col-sm-12">
@@ -80,8 +81,8 @@
                                             </td>
                                             <?php if($this->session->userdata('role') == 'Petugas'){ ?>
                                             <td>
-                                                <a href="" class="badge badge-warning"><i class="ti ti-marker-alt"></i></a>
-                                                <a href="" class="badge badge-danger delete"><i class="ti ti-trash"></i></a>
+                                                <a href="<?= base_url('buku/bookedit/') . $b->isbn ?>" class="badge badge-warning"><i class="ti ti-marker-alt"></i></a>
+                                                <a href="<?= base_url('buku/bookdelete/') . $b->isbn ?>" class="badge badge-danger delete"><i class="ti ti-trash"></i></a>
                                             </td>
                                             <?php }else{ ?>
                                                 <td>

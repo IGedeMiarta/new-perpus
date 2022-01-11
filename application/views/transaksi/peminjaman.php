@@ -26,6 +26,7 @@
         <div class="flash-update" data-update="<?= $this->session->flashdata('update') ?>"></div>
         <div class="flash-delete" data-delete="<?= $this->session->flashdata('delete') ?>"></div>
         <div class="flash-gagal" data-gagal="<?= $this->session->flashdata('gagal') ?>"></div>
+        <div class="validate" data-validate="<?php echo validation_errors(); ?>"></div>
         <!-- end sweet alert -->
 
 
@@ -34,7 +35,8 @@
                 <h4 class="text-light">Tabel Peminjaman Aktif</h4>
             </div>
             <div class="card-body bg-white">
-                <a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add</a>
+                <a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#modalPeminjaman"><i class="fas fa-plus"></i> Add</a>
+                
                 <table id="datatable2" class="table table-bordered table-striped table-hover table-datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead class="thead-dark">
                         <tr>
@@ -80,7 +82,7 @@
                 <h4 class="text-light">Tabel Peminjaman Selesai</h4>
             </div>
             <div class="card-body bg-white">
-                <!-- <a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add</a> -->
+                <!-- <a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#modalPeminjaman"><i class="fas fa-plus"></i> Add</a> -->
                 <table id="datatable" class="table table-bordered table-striped table-hover table-datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead class="thead-dark">
                         <tr>
@@ -117,7 +119,7 @@
 
     </div><!-- container -->
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade modal-peminjaman" id="modalPeminjaman" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -128,17 +130,16 @@
                 </div>
                 <div class="modal-body">
                     <form id="form_kategori" method="POST" action="">
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Tanggal</label>
-                            <div class="col-sm-10">
-                                <input type="date" class="form-control" id="tanggal" name="tanggal">
+                        <?php if(validation_errors()){ ?>
+                            <div class="alert alert-warning" role="alert">
+                                <p class="text-white"><?php echo validation_errors() ?></p>
                             </div>
-                        </div>
+                            <?php } ?>
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Peminjam</label>
                             <div class="col-sm-10">
-                                <select name="anggota" id="anggota" class="form-control select2">
-                                    <option>-Select Anggota</option>
+                                <select name="anggota" id="anggota" class="form-control select2" aria-placeholder="select">
+                                    <option value="null" selected disabled>-Select Anggota</option>
                                     <?php foreach ($anggota as $d) : ?>
                                         <option value="<?= $d->id_anggota ?>"><strong><?= $d->nis != '' ? $d->nis . ' - ' : '';  ?></strong><?= $d->nama ?></option>
                                     <?php endforeach; ?>
@@ -149,7 +150,7 @@
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Buku 1</label>
                             <div class="col-sm-10">
                                 <select name="buku1" id="buku1" class="form-control select2">
-                                    <option>-Select Buku</option>
+                                    <option value="0" selected disabled>-Select Buku</option>
                                     <?php foreach ($buku1 as $d) : ?>
                                         <option value="<?= $d->id_detail ?>"><?= '[' . $d->kd_buku . '] ' . $d->judul ?></option>
                                     <?php endforeach; ?>
@@ -160,7 +161,7 @@
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Buku 2</label>
                             <div class="col-sm-10">
                                 <select name="buku2" id="buku2" class="form-control select3">
-                                    <option>-Select Buku</option>
+                                    <option value="0" selected disabled>-Select Buku</option>
                                     <?php foreach ($buku2 as $d) : ?>
                                         <option value="<?= $d->id_detail ?>"><?= '[' . $d->kd_buku . '] ' . $d->judul ?></option>
                                     <?php endforeach; ?>
@@ -171,7 +172,7 @@
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Buku 3</label>
                             <div class="col-sm-10">
                                 <select name="buku3" id="buku3" class="form-control select4">
-                                    <option>-Select Buku</option>
+                                    <option value="0" selected disabled>-Select Buku</option>
                                     <?php foreach ($buku2 as $d) : ?>
                                         <option value="<?= $d->id_detail ?>"><?= '[' . $d->kd_buku . '] ' . $d->judul ?></option>
                                     <?php endforeach; ?>

@@ -62,6 +62,12 @@ class Ajax extends CI_Controller
         $donatur = $this->ajax->getWhere(['id_donatur' => $id], 'donatur');
         echo json_encode($donatur);
     }
+    public function editDonasi()
+    {
+        $id = $_POST['id'];
+        $donatur = $this->user->getDonasiWhereId($id);
+        echo json_encode($donatur);
+    }
     public function editPeminjaman()
     {
         $id = $_POST['id'];

@@ -87,12 +87,7 @@
                 </div>
                 <div class="modal-body">
                     <form id="form_kategori" method="POST" action="">
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Tanggal</label>
-                            <div class="col-sm-10">
-                                <input type="date" class="form-control" id="tanggal" name="tanggal">
-                            </div>
-                        </div>
+                       
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Donatur</label>
                             <div class="col-sm-10">
@@ -228,37 +223,124 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="edit_petugas" method="POST" action="<?= base_url('donasi/updateDonatur') ?>">
-                        <input type="text" class="form-control" id="e_id" name="id" hidden>
-
+                    <form id="edit_petugas" method="POST" action="<?= base_url('donasi/updateDonasi') ?>">
+                        <input type="hidden" class="form-control" id="e_id" name="id" > <input type="hidden" name="detail_donasi" id="detail_donasi">
                         <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Donatur</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="e_nama" name="nama">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Jenis Kelamin</label>
-                            <div class="col-sm-10">
-                                <select name="jenkel" id="e_jenkel" class="form-control">
-                                    <option value="L">Laki-Laki</option>
-                                    <option value="P">Perempuan</option>
+                                <select name="donatur" id="e_donatur" class="form-control ">
+                                    <option>-Select Donatur</option>
+                                    <?php foreach ($donatur as $d) : ?>
+                                        <option value="<?= $d->id_donatur ?>"><?= $d->nama_donatur ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">No Hp</label>
+                         <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Jenis Donasi</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" id="e_hp" name="hp">
+                                <select name="jenis" id="e_jenis" class="form-control " onchange="donasi()">
+                                    <option >-Pilih</option>
+                                    <option value="uang">Uang</option>
+                                    <option value="buku">Buku</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Alamat</label>
+                        <div class="form-group row d-none" id="e_jumlah-donasi">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Jumlah Donasi</label>
                             <div class="col-sm-10">
-                                <textarea name="alamat" id="e_alamat" class="form-control" cols="30" rows="5"></textarea>
+                                <input type="number" class="form-control" id="e_jml" name="jml">
+                            </div>
+                        </div>
+                       
+                            <input type="hidden" name="isbn" id="isbn">
+                            <input type="hidden" name="id_detail" id="id_detail">
+                        <div class="form-group row d-none" id="e_kode-donasi">
+                            <label for="horizontalInput1" class="col-sm-2 col-form-label">Kode Buku</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="kd_buku" class="form-control" id="e_kode" value="">
                             </div>
                         </div>
 
+                        <div class="form-group row d-none" id="e_judul-donasi">
+                            <label class="col-sm-2 col-form-label">Judul</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="e_judul" class="form-control" name="judul" placeholder="Judul Buku">
+                            </div>
+                        </div>
+                        <div class="form-group row d-none" id="e_tahun-donasi">
+                            <label class="col-sm-2 col-form-label">Tahun</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="tahun" id="e_tahun">
+                                    <option value="">- Pilih tahun</option>
+                                    <?php for ($tahun = date('Y'); $tahun >= 2010; $tahun--) { ?>
+                                        <option value="<?php echo $tahun; ?>"><?php echo $tahun; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="form-group row d-none" id="e_pengarang-donasi">
+                            <label class="col-sm-2 col-form-label">Pengarang</label>
+                            <div class="col-sm-10">
+                                <select name="pengarang" id="e_pengarang" class="form-control">
+                                    <option value="">--Pilih</option>
+                                    <?php foreach ($pengarang as $k) : ?>
+                                        <option value="<?= $k->kd_pengarang ?>"><?= $k->nama_pengarang ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row d-none" id="e_penerbit-donasi">
+                            <label class="col-sm-2 col-form-label">Penerbit</label>
+                            <div class="col-sm-10">
+                                <select name="penerbit" id="e_penerbit" class="form-control">
+                                    <option value="">--Pilih</option>
+                                    <?php foreach ($penerbit as $k) : ?>
+                                        <option value="<?= $k->kd_penerbit ?>"><?= $k->nama_penerbit ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row d-none" id="e_kategori-donasi">
+                            <label class="col-sm-2 col-form-label">Kategori</label>
+                            <div class="col-sm-10">
+                                <select name="kategori" id="e_kategori" class="form-control">
+                                    <option value="">--Pilih</option>
+                                    <?php foreach ($kategori as $k) : ?>
+                                        <option value="<?= $k->kd_kategori ?>"><?= $k->nama_kategori ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                         <div class="form-group row d-none" id="e_rak-donasi">
+                            <label class="col-sm-2 col-form-label">Rak</label>
+                            <div class="col-sm-10">
+                               <select name="rak" class="form-control" id="e_rak">
+                                    <option value="">--pilih</option>
+                                    <?php foreach ($rak as $r) : ?>
+                                        <option value="<?= $r->id_rak ?>"><?= $r->nama_rak . ' - ' . $r->detail ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row " id="e_keterangan-donasi">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Keterengan</label>
+                            <div class="col-sm-10">
+                                <textarea name="ket" id="e_ket" class="form-control" cols="30" rows="5"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Status</label>
+                            <div class="col-sm-10">
+                                <select name="status" class="form-control" id="e_status">
+                                    <option value="">--Pilih</option>
+                                    <option value="sumbangan">Sumbangan</option>
+                                    <option value="denda">Denda</option>
+                                </select>
+                            </div>
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

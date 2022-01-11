@@ -7,13 +7,17 @@ if (flashData) {
         confirmButtonText: 'Ok'
     });
 };
+const validate = $('.validate').data('validate');
+if (validate) {
+    $('#modalPeminjaman').modal('show')
+};
 
 const flashDalete = $('.flash-delete').data('delete');
 const flash_Dalete = $('.flash-delete').data('flashdelete');
 if (flashDalete || flash_Dalete) {
     Swal.fire(
         'Deleted!',
-        'Your file has been deleted.',
+        'Your data has been deleted.',
         'success'
     )
 };
@@ -133,6 +137,63 @@ $('.edit-donatur').on('click', function() {
         }
     })
 });
+$('.edit-donasi').on('click', function() {
+    const id = $(this).data('id');
+    $.ajax({
+        type: 'POST',
+        data: {
+            id: id
+        },
+        dataType: 'JSON',
+        url: base_url + "ajax/editDonasi",
+        async: true,
+        success: function(data) {
+           console.log(data);
+           if(data.buku === null && data.jml_donasi !== null){
+               var jenis = 'uang';
+                $('#e_jumlah-donasi').removeClass('d-none');
+                $('#e_judul-donasi').addClass('d-none');
+                $('#e_tahun-donasi').addClass('d-none');
+                $('#e_pengarang-donasi').addClass('d-none');
+                $('#e_penerbit-donasi').addClass('d-none');
+                $('#e_kategori-donasi').addClass('d-none');
+                $('#e_rak-donasi').addClass('d-none');
+                $('#e_jml').val(data.jml_donasi);
+
+           }else{
+               var jenis = 'buku';
+                $('#e_jumlah-donasi').addClass('d-none');
+                $('#e_judul-donasi').removeClass('d-none');
+                $('#e_tahun-donasi').removeClass('d-none');
+                $('#e_pengarang-donasi').removeClass('d-none');
+                $('#e_penerbit-donasi').removeClass('d-none');
+                $('#e_kategori-donasi').removeClass('d-none');
+                $('#e_rak-donasi').removeClass('d-none');
+
+                $('#isbn').val(data.isbn);
+                $('#id_detail').val(data.id_detail);
+                $('#e_judul').val(data.judul);
+                $('#e_tahun').val(data.th_terbit);
+                $('#e_pengarang').val(data.pengarang);
+                $('#e_penerbit').val(data.penerbit);
+                $('#e_kategori').val(data.kategori);
+                $('#e_rak').val(data.rak);
+
+           }
+                $('#e_id').val(data.id_donasi);
+                $('#detail_donasi').val(data.detail);
+                $('#e_donatur').val(data.donatur);
+                $('#e_jenis').val(jenis);
+                $('#e_ket').val(data.keterangan);
+                $('#e_status').val(data.status_donasi);
+                // $('#e_nama').val(data.nama_donatur);
+                // $('#e_jenkel').val(data.jenkel);
+                // $('#e_hp').val(data.no_hp);
+                // $('#e_alamat').val(data.alamat);
+            
+        }
+    })
+});
 $('.edit-peminjaman').on('click', function() {
     const id = $(this).data('id');
     $.ajax({
@@ -200,7 +261,6 @@ function donasi() {
     var jenis = $('#jenis').val();
     if(jenis=='uang'){
         $('#jumlah-donasi').removeClass('d-none');
-        // $('#kode-donasi').addClass('d-none');
         $('#judul-donasi').addClass('d-none');
         $('#tahun-donasi').addClass('d-none');
         $('#pengarang-donasi').addClass('d-none');
@@ -211,7 +271,6 @@ function donasi() {
     }
     if(jenis=='buku'){
         $('#jumlah-donasi').addClass('d-none');
-        // $('#kode-donasi').removeClass('d-none');
         $('#judul-donasi').removeClass('d-none');
         $('#tahun-donasi').removeClass('d-none');
         $('#pengarang-donasi').removeClass('d-none');

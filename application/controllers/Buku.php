@@ -86,6 +86,43 @@ class buku extends CI_Controller
             redirect('buku/book');
         }
     }
+    public function BookEdit($isbn)
+    {
+        $this->form_validation->set_rules('judul', 'judul', 'trim|required');
+        $this->form_validation->set_rules('tahun', 'tahun', 'trim|required');
+        $this->form_validation->set_rules('pengarang', 'pengarang', 'trim|required');
+        $this->form_validation->set_rules('penerbit', 'penerbit', 'trim|required');
+        $this->form_validation->set_rules('kategori', 'kategori', 'trim|required');
+
+        if ($this->form_validation->run() == false) {
+            $data['edit'] = $this->BookModels->edit(['isbn'=>$isbn],'buku');
+            $data['kd_buku'] = $this->MakeCode->kd_buku();
+            $data['kd_pengarang'] =  $this->MakeCode->kd_pengarang();
+            $data['kd_penerbit'] =  $this->MakeCode->kd_penerbit();
+            $data['kd_kategori'] =  $this->MakeCode->kd_kategori();
+            $data['kategori'] = $this->BookModels->getAllFromTable('kategori');
+            $data['pengarang'] = $this->BookModels->getAllFromTable('pengarang');
+            $data['penerbit'] = $this->BookModels->getAllFromTable('penerbit');
+            $data['judul'] = 'Edit Buku';
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('book/bookedit', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'kd_buku' => $this->input->post('kd_buku'),
+                'judul' => $this->input->post('judul'),
+                'pengarang' => $this->input->post('pengarang'),
+                'penerbit' => $this->input->post('penerbit'),
+                'th_terbit' => $this->input->post('tahun'),
+                'kategori' => $this->input->post('kategori'),
+            ];
+            $this->BookModels->update(['isbn'=>$isbn],$data, 'buku');
+            $this->session->set_flashdata('update', 'Buku');
+            redirect('buku/book');
+        }
+    }
     public function AddPenerbit()
     {
         $nama = $this->input->post('nama_penerbit');
@@ -186,7 +223,14 @@ class buku extends CI_Controller
         }
     }
 
-
+    public function bookdelete($isbn){
+        $buku = $this->BookModels->edit(['isbn'=>$isbn],'buku');
+        $kode = $buku['kd_buku'];
+        $this->BookModels->delete(['isbn' => $isbn], 'buku');
+        $this->BookModels->delete(['kd_buku' => $kode], 'detail_buku');
+        $this->session->set_flashdata('delete', 'Buku');
+        redirect('buku/book');
+    }
 
 
     public function deleteKategori($id)
