@@ -32,6 +32,7 @@ class TransaksiModel extends CI_Model
         $qry = $this->db->query(
             "SELECT 
                     peminjaman.id_peminjaman,
+                    peminjaman.kd_peminjaman,
                     peminjaman.tgl_pinjam,
                     peminjaman.detail,
                     anggota.nis,
@@ -56,6 +57,46 @@ class TransaksiModel extends CI_Model
             LEFT JOIN
                 buku 
                     ON detail_buku.kd_buku=buku.kd_buku
+            ORDER BY 
+                peminjaman.id_peminjaman
+            DESC
+            "
+        )->result();
+        return $qry;
+    }
+    function getAllPeminjamanOnTanggal($mulai,$sampai)
+    {
+        $qry = $this->db->query(
+            "SELECT 
+                    peminjaman.id_peminjaman,
+                    peminjaman.tgl_pinjam,
+                    peminjaman.detail,
+                    anggota.nis,
+                    anggota.nama,
+                    buku.kd_buku,
+                    buku.judul,
+                    detail_buku.kd_detail,
+                    peminjaman.batas_pinjam,
+                    peminjaman.tgl_perpanjang,
+                    detail_peminjaman.status_pinjam
+            FROM 
+                peminjaman 
+            LEFT JOIN 
+                anggota 
+                    ON peminjaman.id_anggota=anggota.id_anggota
+            LEFT JOIN
+                detail_peminjaman 
+                    ON peminjaman.detail=detail_peminjaman.id_detail_peminjaman
+            LEFT JOIN
+                detail_buku 
+                    ON peminjaman.isbn=detail_buku.id_detail 
+            LEFT JOIN
+                buku 
+                    ON detail_buku.kd_buku=buku.kd_buku
+            WHERE
+                peminjaman.tgl_pinjam >= '$mulai'
+            AND 
+                peminjaman.tgl_pinjam <= '$sampai'
             ORDER BY 
                 peminjaman.id_peminjaman
             DESC
@@ -107,6 +148,7 @@ class TransaksiModel extends CI_Model
         $qry = $this->db->query(
             "SELECT 
                     peminjaman.id_peminjaman,
+                    peminjaman.kd_peminjaman,
                     peminjaman.tgl_pinjam,
                     anggota.nis,
                     anggota.nama,
@@ -211,11 +253,51 @@ class TransaksiModel extends CI_Model
             DESC"
         )->result();
     }
+    function getAllPengembalianOnTanggal($mulai,$sampai)
+    {
+        return $this->db->query(
+            "SELECT 
+            		pengembalian.id_pengembalian,
+            		pengembalian.tgl_kembali,
+                    anggota.nis,
+                    anggota.nama,
+                    buku.kd_buku,
+                    buku.judul,
+                    detail_buku.kd_detail,
+                    detail_pengembalian.status_kembali
+            FROM
+            	pengembalian
+            LEFT JOIN 
+            	detail_pengembalian ON pengembalian.detail=detail_pengembalian.id_detail_pengembalian
+            LEFT JOIN
+                peminjaman ON pengembalian.id_pinjam=peminjaman.id_peminjaman
+            LEFT JOIN 
+                anggota 
+                    ON peminjaman.id_anggota=anggota.id_anggota
+            LEFT JOIN
+                detail_peminjaman 
+                    ON peminjaman.detail=detail_peminjaman.id_detail_peminjaman
+            LEFT JOIN
+                detail_buku 
+                    ON peminjaman.isbn=detail_buku.id_detail 
+            LEFT JOIN
+                buku 
+                    ON detail_buku.kd_buku=buku.kd_buku
+            WHERE
+                pengembalian.tgl_kembali>= '$mulai'
+            AND 
+                pengembalian.tgl_kembali<= '$sampai'
+            ORDER BY 
+                peminjaman.id_peminjaman
+            DESC"
+        )->result();
+    }
     function getAllPerpanjangan()
     {
         $qry = $this->db->query(
             "SELECT 
                     peminjaman.id_peminjaman,
+                    peminjaman.kd_peminjaman,
                     peminjaman.tgl_pinjam,
                     anggota.nis,
                     anggota.nama,

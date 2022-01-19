@@ -89,9 +89,9 @@
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Peminjam</label>
                             <div class="col-sm-10">
                                 <select name="peminjaman" id="peminjaman" class="form-control select2">
-                                    <option>-Select Perpanjangan</option>
+                                    <option disabled selected>-Select Perpanjangan</option>
                                     <?php foreach ($peminjaman as $d) : ?>
-                                        <option value="<?= $d->id_peminjaman ?>"><strong><?= $d->id_peminjaman .' - ' .  $d->nama . ' - '.$d->judul ?></option>
+                                        <option value="<?= $d->id_peminjaman ?>"><strong><?= $d->kd_peminjaman .' - ' .  $d->nama . ' - '.$d->judul ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

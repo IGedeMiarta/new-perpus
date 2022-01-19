@@ -15,10 +15,13 @@ class Transaksi extends CI_Controller
     {
         $this->form_validation->set_rules('anggota', 'anggota', 'trim|required');
         $this->form_validation->set_rules('buku1', 'buku1', 'trim|required');
-
+        
         if ($this->form_validation->run() == false) {
-           
+            
+            $code = $this->MakeCode->kd_peminjaman();
             $data['judul'] = 'Peminjaman';
+            $data['code'] = $code;
+
             $data['peminjaman'] = $this->transaksi->getAllPeminjaman();
             $data['buku1'] = $this->transaksi->gelAllAvailableBook();
             $data['buku2'] = $this->transaksi->gelAllAvailableBook();
@@ -35,6 +38,7 @@ class Transaksi extends CI_Controller
             
             $tgl_pinjam = date('Y-m-d');
             $anggota = $this->input->post('anggota');
+            $kode = date('dmy').'/'.$anggota;
             $buku1 = $this->input->post('buku1');
             $buku2 = $this->input->post('buku2');
             $buku3 = $this->input->post('buku3');
@@ -49,6 +53,7 @@ class Transaksi extends CI_Controller
                 
                 if ($buku1 != 0) {
                      $data1 = [
+                    'kd_peminjaman'=>$kode,
                     'tgl_pinjam' => $tgl_pinjam,
                     'id_anggota' => $anggota,
                     'isbn' => $buku1,
@@ -63,6 +68,7 @@ class Transaksi extends CI_Controller
                 }
                 if ($buku2 != 0) {
                    $data2 = [
+                        'kd_peminjaman'=>$kode,
                         'tgl_pinjam' => $tgl_pinjam,
                         'id_anggota' => $anggota,
                         'isbn' => $buku2,
@@ -77,6 +83,7 @@ class Transaksi extends CI_Controller
                 }
                 if ($buku3 != 0) {
                     $data3 = [
+                        'kd_peminjaman'=>$kode,
                         'tgl_pinjam' => $tgl_pinjam,
                         'id_anggota' => $anggota,
                         'isbn' => $buku3,

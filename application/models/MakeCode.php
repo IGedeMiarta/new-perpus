@@ -10,6 +10,14 @@ class MakeCode extends CI_Model
         $buku = $id_buku + 1;
         return $buku;
     }
+    function kd_peminjaman(){
+        $query = $this->db->query("SELECT * from peminjaman GROUP BY id_anggota");
+        $row = $query->num_rows();
+        $nourut = substr($row, 2, 4);
+        $date = date('dmy');
+        $buku = $row + 1;
+        return $date.'/'.$buku;
+    }
     function kd_pengarang()
     {
         $qry = $this->db->query("SELECT MAX(kd_pengarang) as id from pengarang");

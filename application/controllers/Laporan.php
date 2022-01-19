@@ -50,8 +50,20 @@ class Laporan extends CI_Controller
         $this->load->view('laporancetak/footer');
     }
     public function peminjaman(){
-            $data['judul'] = 'Peminjaman';
+        if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
+            $mulai = $this->input->get('tanggal_mulai');
+            $sampai = $this->input->get('tanggal_sampai');
+          
+            // mengambil data peminjaman berdasarkan tanggal mulai sampai tanggal sampai
+
+            $data['peminjaman'] = $this->transaksi->getAllPeminjamanOnTanggal($mulai,$sampai);
+         
+        } else {
+            // mengambil data peminjaman buku dari database | dan mengurutkan data dari id peminjaman terbesar ke terkecil (desc)
             $data['peminjaman'] = $this->transaksi->getAllPeminjaman();
+
+        }
+            $data['judul'] = 'Peminjaman';
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
@@ -59,15 +71,34 @@ class Laporan extends CI_Controller
             $this->load->view('templates/footer');
     }
     public function cetakPeminjaman(){
+        if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
+            $mulai = $this->input->get('tanggal_mulai');
+            $sampai = $this->input->get('tanggal_sampai');
+            // mengambil data peminjaman berdasarkan tanggal mulai sampai tanggal sampai
+            $data['peminjaman'] = $this->transaksi->getAllPeminjamanOnTanggal($mulai,$sampai);
+
+        }
         $data['title']='LAPORAN PEMINJAMAN';
-        $data['peminjaman'] = $this->transaksi->getAllPeminjaman();
         $this->load->view('laporancetak/header',$data);
         $this->load->view('laporancetak/peminjaman',$data);
         $this->load->view('laporancetak/footer');
     }
     public function pengembalian(){
+        if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
+            $mulai = $this->input->get('tanggal_mulai');
+            $sampai = $this->input->get('tanggal_sampai');
+          
+            // mengambil data peminjaman berdasarkan tanggal mulai sampai tanggal sampai
+
+            $data['pengembalian'] = $this->transaksi->getAllPengembalianOnTanggal($mulai,$sampai);
+         
+        } else {
+            // mengambil data peminjaman buku dari database | dan mengurutkan data dari id peminjaman terbesar ke terkecil (desc)
+            $data['pengembalian'] = $this->transaksi->getAllPengembalian();
+
+
+        }
         $data['judul'] = 'Pengembalian';
-        $data['pengembalian'] = $this->transaksi->getAllPengembalian();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('templates/sidebar');
@@ -75,15 +106,34 @@ class Laporan extends CI_Controller
         $this->load->view('templates/footer');
     }
     public function cetakPegembalian(){
+         if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
+            $mulai = $this->input->get('tanggal_mulai');
+            $sampai = $this->input->get('tanggal_sampai');
+            // mengambil data peminjaman berdasarkan tanggal mulai sampai tanggal sampai
+            $data['pengembalian'] = $this->transaksi->getAllPengembalianOnTanggal($mulai,$sampai);
+
+        }
         $data['title']='LAPORAN PENGEMBALIAN';
-        $data['pengembalian'] = $this->transaksi->getAllPengembalian();
         $this->load->view('laporancetak/header',$data);
         $this->load->view('laporancetak/pengembalian');
         $this->load->view('laporancetak/footer');
     }
     public function donasi(){
+        if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
+            $mulai = $this->input->get('tanggal_mulai');
+            $sampai = $this->input->get('tanggal_sampai');
+          
+            // mengambil data peminjaman berdasarkan tanggal mulai sampai tanggal sampai
+
+            $data['donasi'] = $this->user->getAllDonasiOnTanggal($mulai,$sampai);
+         
+        } else {
+            // mengambil data peminjaman buku dari database | dan mengurutkan data dari id peminjaman terbesar ke terkecil (desc)
+            $data['donasi'] = $this->user->getAllDonasi();
+
+
+        }
         $data['judul'] = 'Donasi';
-        $data['donasi'] = $this->user->getAllDonasi();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('templates/sidebar');
@@ -91,8 +141,14 @@ class Laporan extends CI_Controller
         $this->load->view('templates/footer');
     }
     public function cetakDonasi(){
+          if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
+            $mulai = $this->input->get('tanggal_mulai');
+            $sampai = $this->input->get('tanggal_sampai');
+            // mengambil data peminjaman berdasarkan tanggal mulai sampai tanggal sampai
+            $data['donasi'] = $this->user->getAllDonasiOnTanggal($mulai,$sampai);
+
+        }
         $data['title']='LAPORAN DONASI';
-        $data['donasi'] = $this->user->getAllDonasi();
         $this->load->view('laporancetak/header',$data);
         $this->load->view('laporancetak/donasi');
         $this->load->view('laporancetak/footer');

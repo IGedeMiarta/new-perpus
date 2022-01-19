@@ -59,6 +59,31 @@ class UserModel extends CI_Model
     {
         return $this->db->query("SELECT donasi.*,donatur.nama_donatur,donatur.no_hp,detail_donasi.keterangan,detail_donasi.status AS status_donasi,buku.judul FROM donasi JOIN donatur ON donasi.donatur=donatur.id_donatur JOIN detail_donasi ON donasi.detail=detail_donasi.id_detail_donasi LEFT JOIN buku ON buku.kd_buku=donasi.buku ORDER BY id_donasi DESC")->result();
     }
+    function getAllDonasiOnTanggal($mulai,$sampai){
+        return $this->db->query(
+            "SELECT 
+                donasi.*,
+                donatur.nama_donatur,
+                donatur.no_hp,
+                detail_donasi.keterangan,
+                detail_donasi.status AS status_donasi,
+                buku.judul 
+            FROM 
+                donasi 
+            JOIN 
+                donatur ON donasi.donatur=donatur.id_donatur 
+            JOIN 
+                detail_donasi ON donasi.detail=detail_donasi.id_detail_donasi 
+            LEFT JOIN 
+                buku ON buku.kd_buku=donasi.buku 
+            WHERE
+                donasi.tgl_donasi>= '$mulai'
+            AND 
+                donasi.tgl_donasi<= '$sampai'
+            ORDER BY 
+            id_donasi DESC")->result();
+         
+    }
     function getDonasiWhereId($id)
     {
         return $this->db->query("SELECT donasi.*,donatur.nama_donatur,donatur.no_hp,detail_donasi.keterangan,detail_donasi.status AS status_donasi,buku.*,detail_buku.* FROM donasi JOIN donatur ON donasi.donatur=donatur.id_donatur JOIN detail_donasi ON donasi.detail=detail_donasi.id_detail_donasi LEFT JOIN buku ON buku.kd_buku=donasi.buku LEFT JOIN detail_buku ON buku.kd_buku=detail_buku.kd_buku WHERE donasi.id_donasi=$id")->row_array();

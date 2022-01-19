@@ -19,13 +19,50 @@
             <!--end col-->
         </div>
       
-
+       
         <div class="card">
             <div class="card-header bg-primary text-center">
                 <h4 class="text-light">Tabel Peminjaman</h4>
             </div>
+             <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header text-center">
+                                    <h6>Filter Berdasarkan Tanggal</h6>
+                                </div>
+                                <div class="card-body">
+
+                                    <form method="get" action="">
+                                        <div class="form-group">
+                                            <label class="font-weight-bold" for="tanggal_mulai">Tanggal Mulai Pinjam</label>
+                                            <input type="date" class="form-control" name="tanggal_mulai" placeholder="Masukkan tanggal mulai pinjam" value="<?= isset($_GET['tanggal_mulai'])?$_GET['tanggal_mulai']:'' ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-weight-bold" for="tanggal_sampai">Tanggal Pinjam Sampai</label>
+                                            <input type="date" class="form-control" name="tanggal_sampai" placeholder="Masukkan tanggal pinjam sampai" value="<?= isset($_GET['tanggal_sampai'])?$_GET['tanggal_sampai']:'' ?>">
+                                        </div>
+                                        <input type="submit" class="btn btn-primary" value="Filter">
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <br />
+                    <?php
+                    // membuat tombol cetak jika data sudah di filter
+                    if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
+                        $mulai = $_GET['tanggal_mulai'];
+                        $sampai = $_GET['tanggal_sampai'];
+                    ?>
+                        <a class='btn btn-danger' target="_blank" href='<?php echo base_url() . 'laporan/cetakPeminjaman?tanggal_mulai=' . $mulai . '&tanggal_sampai=' . $sampai ?>'><i class='fas fa-file-pdf'></i> Import PDF</a>
+                    <?php
+                    }
+                    ?>
             <div class="card-body bg-white">
-                <a href="<?= base_url('laporan/cetakPeminjaman') ?>" target="_blank" class="btn btn-danger float-left mr-2"><i class="fas fa-file-pdf"></i></i> Import PDF</a>
+
+                <!-- <a href="<?= base_url('laporan/cetakPeminjaman') ?>" target="_blank" class="btn btn-danger float-left mr-2"><i class=""></i></i> Import PDF</a> -->
                 <table id="datatable2" class="table table-bordered table-striped table-hover table-datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead class="thead-dark">
                         <tr>

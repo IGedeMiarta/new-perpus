@@ -53,11 +53,11 @@
                     <tbody>
                         <?php $no = 1;
                         foreach ($peminjaman as $b) { ?>
-                            <?php if($b->detail != 2){ ?>
+                            <?php if($b->detail == 1 || $b->detail == 4 ){ ?>
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $b->tgl_perpanjang ? date('d M Y', strtotime($b->tgl_perpanjang)) : date('d M Y', strtotime($b->tgl_pinjam)) ?></td>
-                                <td><?= $b->id_peminjaman ?></td>
+                                <td><?= $b->kd_peminjaman!=null?$b->kd_peminjaman:'-' ?></td>
                                 <td><?= $b->nama ?></td>
                                 <td><?= $b->judul ?></td>
                                 <td><?= date('d M Y', strtotime($b->batas_pinjam)) ?></td>
@@ -98,7 +98,7 @@
                     <tbody>
                         <?php $no = 1;
                         foreach ($peminjaman as $b) { ?>
-                            <?php if($b->detail == 2){ ?>
+                            <?php if($b->detail == 2 || $b->detail == 3 ||$b->detail == 5){ ?>
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $b->tgl_perpanjang ? date('d M Y', strtotime($b->tgl_perpanjang)) : date('d M Y', strtotime($b->tgl_pinjam)) ?></td>
@@ -130,6 +130,7 @@
                 </div>
                 <div class="modal-body">
                     <form id="form_kategori" method="POST" action="">
+                        <input type="hidden" name="code" id="code" value="<?= $code ?>">
                         <?php if(validation_errors()){ ?>
                             <div class="alert alert-warning" role="alert">
                                 <p class="text-white"><?php echo validation_errors() ?></p>
@@ -143,7 +144,7 @@
                                     <?php foreach ($anggota as $d) : ?>
                                         <option value="<?= $d->id_anggota ?>"><strong><?= $d->nis != '' ? $d->nis . ' - ' : '';  ?></strong><?= $d->nama ?></option>
                                     <?php endforeach; ?>
-                                </select>
+                                </select>  
                             </div>
                         </div>
                         <div class="form-group row">
