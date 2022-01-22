@@ -18,7 +18,7 @@
             <tr>
                 <td><?= $no++ ?></td>
                 <td><?= $b->tgl_perpanjang ? date('d M Y', strtotime($b->tgl_perpanjang)) : date('d M Y', strtotime($b->tgl_pinjam)) ?></td>
-                <td><?= $b->id_peminjaman ?></td>
+                <td><?= $b->kd_peminjaman ?></td>
                 <td><?= $b->nama ?></td>
                 <td><?= $b->judul ?></td>
                 <td><?= date('d M Y', strtotime($b->batas_pinjam)) ?></td>
