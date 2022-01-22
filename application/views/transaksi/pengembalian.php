@@ -92,7 +92,7 @@
                                 <select name="peminjaman" id="peminjaman" class="form-control select2">
                                     <option>-Select Pengembalian</option>
                                     <?php foreach ($peminjaman as $d) : ?>
-                                        <option value="<?= $d->id_peminjaman ?>"><?= $d->id_peminjaman .' - ' .  $d->nama . ' - '.$d->judul.' - '.$d->status_pinjam ?></option>
+                                        <option value="<?= $d->id_peminjaman ?>"><?= $d->kd_peminjaman .' - ' .  $d->nama . ' - '.$d->judul.' - '.$d->status_pinjam ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

@@ -18,11 +18,10 @@
             </div>
             <!--end col-->
         </div>
-      
-       
+        <!-- end page title end breadcrumb -->
         <div class="card">
             <div class="card-header bg-primary text-center">
-                <h4 class="text-light">Tabel Peminjaman</h4>
+                <h4 class="text-light">Tabel Pengembalian</h4>
             </div>
              <div class="card-body">
                     <div class="row">
@@ -44,62 +43,123 @@
                                         </div>
                                         <input type="submit" class="btn btn-primary" value="Filter">
                                     </form>
-
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                     <br />
                     <?php
                     // membuat tombol cetak jika data sudah di filter
                     if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
                         $mulai = $_GET['tanggal_mulai'];
                         $sampai = $_GET['tanggal_sampai'];
-                    ?>
+                        ?>
                         <a class='btn btn-danger' target="_blank" href='<?php echo base_url() . 'laporan/cetakPeminjaman?tanggal_mulai=' . $mulai . '&tanggal_sampai=' . $sampai ?>'><i class='fas fa-file-pdf'></i> Import PDF</a>
                     <?php
                     }
+                   ?>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header text-center">
+                                    <h6>Filter Berdasarkan Anggota</h6>
+                                </div>
+                                <div class="card-body">
+
+                                    <form method="get" action="">
+                                        <div class="form-group">
+                                            <label class="font-weight-bold" for="tanggal_mulai">Anggota</label>
+                                            <select name="anggota" id="" class="form-select select2">
+                                                <option selected disabled>-Pilih Anggota</option>
+
+                                                 <?php foreach ($anggota as $d) : ?>
+                                                    <option value="<?= $d->id_anggota ?>" <?= isset($_GET['anggota']) == $d->id_anggota?'selected':''  ?> ><?=  $d->nama ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <input type="submit" class="btn btn-primary" value="Filter">
+                                    </form>
+                                </div>
+                    <?php
+                    if (isset($_GET['anggota'])) {
+                        $anggota = $_GET['anggota'];
+                        ?>
+                        <a class='btn btn-danger' target="_blank" href='<?php echo base_url() . 'laporan/cetakPeminjaman?anggota=' . $anggota ?>'><i class='fas fa-file-pdf'></i> Import PDF</a>
+                    <?php
+                    }
                     ?>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header text-center">
+                                    <h6>Filter Berdasarkan Buku</h6>
+                                </div>
+                                <div class="card-body">
+
+                                    <form method="get" action="">
+                                        <div class="form-group">
+                                            <label class="font-weight-bold" for="tanggal_mulai">Buku</label>
+                                            <select name="buku" id="" class="form-select select2">
+                                                <option selected disabled>-Pilih Buku</option>
+                                                 <?php foreach ($book as $d) : ?>
+                                                    <option value="<?= $d->isbn ?>"  <?= isset($_GET['buku']) == $d->isbn?'selected':''  ?> ><?=  $d->judul ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <input type="submit" class="btn btn-primary" value="Filter">
+                                    </form>
+                                </div>
+                    <?php
+                    if (isset($_GET['buku'])) {
+                        $buku = $_GET['buku'];
+                        ?>
+                        <a class='btn btn-danger' target="_blank" href='<?php echo base_url() . 'laporan/cetakPeminjaman?buku=' . $buku ?>'><i class='fas fa-file-pdf'></i> Import PDF</a>
+                    <?php
+                    }
+                    ?>
+                            </div>
+                        </div>
+                    </div>
+                     <br />
+                   
+                   
+             </div>
+
             <div class="card-body bg-white">
-
-                <!-- <a href="<?= base_url('laporan/cetakPeminjaman') ?>" target="_blank" class="btn btn-danger float-left mr-2"><i class=""></i></i> Import PDF</a> -->
+                
                 <table id="datatable2" class="table table-bordered table-striped table-hover table-datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>No</th>
-                            <th>Tanggal Pinjam </th>
-                            <th>Nomer peminjaman</th>
-                            <th>Nama Peminjam </th>
-                            <th>Judul Buku</th>
-                            <th>Batas Pinjam</th>
-                            <th>Status</th>
-                            <!-- <th>Opsi</th> -->
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $no = 1;
-                        foreach ($peminjaman as $b) { ?>
-                          
+                        <thead class="thead-dark">
                             <tr>
-                                <td><?= $no++ ?></td>
-                                <td><?= $b->tgl_perpanjang ? date('d M Y', strtotime($b->tgl_perpanjang)) : date('d M Y', strtotime($b->tgl_pinjam)) ?></td>
-                                <td><?= $b->id_peminjaman ?></td>
-                                <td><?= $b->nama ?></td>
-                                <td><?= $b->judul ?></td>
-                                <td><?= date('d M Y', strtotime($b->batas_pinjam)) ?></td>
-                                <td><?= $b->status_pinjam ?></td>
-                                <!-- <td>
-                                    <a href="" class="btn btn-warning edit-peminjaman" data-toggle="modal" data-id="<?= $b->id_peminjaman ?>" data-target="#modelEdit"> <i class="fas fa-edit"></i></a>
-                                    <a href="<?= base_url('peminjaman/deletePeminjaman/') . $b->id_peminjaman ?>" class="btn btn-danger"> <i class="fas fa-trash"></i></a>
-                                </td> -->
+                                <th>No</th>
+                                <th>Tanggal Pinjam </th>
+                                <th>Nomer peminjaman</th>
+                                <th>Nama Peminjam </th>
+                                <th>Judul Buku</th>
+                                <th>Batas Pinjam</th>
+                                <th>Status</th>
+                                <!-- <th>Opsi</th> -->
                             </tr>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
+                        </thead>
+                        <tbody>
+                            <?php $no = 1;
+                            foreach ($peminjaman as $b) { ?>
+                            
+                                <tr>
+                                    <td><?= $no++ ?></td>
+                                    <td><?= $b->tgl_perpanjang ? date('d M Y', strtotime($b->tgl_perpanjang)) : date('d M Y', strtotime($b->tgl_pinjam)) ?></td>
+                                    <td><?= $b->kd_peminjaman ?></td>
+                                    <td><?= $b->nama ?></td>
+                                    <td><?= $b->judul ?></td>
+                                    <td><?= date('d M Y', strtotime($b->batas_pinjam)) ?></td>
+                                    <td><?= $b->status_pinjam ?></td>
+                                    <!-- <td>
+                                        <a href="" class="btn btn-warning edit-peminjaman" data-toggle="modal" data-id="<?= $b->id_peminjaman ?>" data-target="#modelEdit"> <i class="fas fa-edit"></i></a>
+                                        <a href="<?= base_url('peminjaman/deletePeminjaman/') . $b->id_peminjaman ?>" class="btn btn-danger"> <i class="fas fa-trash"></i></a>
+                                    </td> -->
+                                </tr>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
                 </table>
-
             </div>
         </div>
 
-    
     </div><!-- container -->

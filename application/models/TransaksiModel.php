@@ -69,6 +69,7 @@ class TransaksiModel extends CI_Model
         $qry = $this->db->query(
             "SELECT 
                     peminjaman.id_peminjaman,
+                    peminjaman.kd_peminjaman,
                     peminjaman.tgl_pinjam,
                     peminjaman.detail,
                     anggota.nis,
@@ -104,11 +105,133 @@ class TransaksiModel extends CI_Model
         )->result();
         return $qry;
     }
+    function getAllPeminjamanOnTanggalAnggota($mulai,$sampai,$anggota)
+    {
+        $qry = $this->db->query(
+            "SELECT 
+                    peminjaman.id_peminjaman,
+                    peminjaman.kd_peminjaman,
+                    peminjaman.tgl_pinjam,
+                    peminjaman.detail,
+                    anggota.nis,
+                    anggota.nama,
+                    buku.kd_buku,
+                    buku.judul,
+                    detail_buku.kd_detail,
+                    peminjaman.batas_pinjam,
+                    peminjaman.tgl_perpanjang,
+                    detail_peminjaman.status_pinjam
+            FROM 
+                peminjaman 
+            LEFT JOIN 
+                anggota 
+                    ON peminjaman.id_anggota=anggota.id_anggota
+            LEFT JOIN
+                detail_peminjaman 
+                    ON peminjaman.detail=detail_peminjaman.id_detail_peminjaman
+            LEFT JOIN
+                detail_buku 
+                    ON peminjaman.isbn=detail_buku.id_detail 
+            LEFT JOIN
+                buku 
+                    ON detail_buku.kd_buku=buku.kd_buku
+            WHERE
+                peminjaman.tgl_pinjam >= '$mulai'
+            AND 
+                peminjaman.tgl_pinjam <= '$sampai'
+            AND
+                anggota.id_anggota = $anggota
+            ORDER BY 
+                peminjaman.id_peminjaman
+            DESC
+            "
+        )->result();
+        return $qry;
+    }
+    function getAllPeminjamanOnAnggota($anggota)
+    {
+        $qry = $this->db->query(
+            "SELECT 
+                    peminjaman.id_peminjaman,
+                    peminjaman.kd_peminjaman,
+                    peminjaman.tgl_pinjam,
+                    peminjaman.detail,
+                    anggota.nis,
+                    anggota.nama,
+                    buku.kd_buku,
+                    buku.judul,
+                    detail_buku.kd_detail,
+                    peminjaman.batas_pinjam,
+                    peminjaman.tgl_perpanjang,
+                    detail_peminjaman.status_pinjam
+            FROM 
+                peminjaman 
+            LEFT JOIN 
+                anggota 
+                    ON peminjaman.id_anggota=anggota.id_anggota
+            LEFT JOIN
+                detail_peminjaman 
+                    ON peminjaman.detail=detail_peminjaman.id_detail_peminjaman
+            LEFT JOIN
+                detail_buku 
+                    ON peminjaman.isbn=detail_buku.id_detail 
+            LEFT JOIN
+                buku 
+                    ON detail_buku.kd_buku=buku.kd_buku
+            WHERE
+                 anggota.id_anggota = $anggota
+            ORDER BY 
+                peminjaman.id_peminjaman
+            DESC
+            "
+        )->result();
+        return $qry;
+    }
+    function getAllPeminjamanOnBuku($buku)
+    {
+        $qry = $this->db->query(
+            "SELECT 
+                    peminjaman.id_peminjaman,
+                    peminjaman.kd_peminjaman,
+                    peminjaman.tgl_pinjam,
+                    peminjaman.detail,
+                    anggota.nis,
+                    anggota.nama,
+                    buku.kd_buku,
+                    buku.judul,
+                    detail_buku.kd_detail,
+                    peminjaman.batas_pinjam,
+                    peminjaman.tgl_perpanjang,
+                    detail_peminjaman.status_pinjam
+            FROM 
+                peminjaman 
+            LEFT JOIN 
+                anggota 
+                    ON peminjaman.id_anggota=anggota.id_anggota
+            LEFT JOIN
+                detail_peminjaman 
+                    ON peminjaman.detail=detail_peminjaman.id_detail_peminjaman
+            LEFT JOIN
+                detail_buku 
+                    ON peminjaman.isbn=detail_buku.id_detail 
+            LEFT JOIN
+                buku 
+                    ON detail_buku.kd_buku=buku.kd_buku
+            WHERE
+                 buku.isbn = $buku
+            ORDER BY 
+                peminjaman.id_peminjaman
+            DESC
+            "
+        )->result();
+        return $qry;
+    }
     function getPeminjamanActive()
     {
         $qry = $this->db->query(
             "SELECT 
                     peminjaman.id_peminjaman,
+                    peminjaman.kd_peminjaman,
                     peminjaman.tgl_pinjam,
                     anggota.nis,
                     anggota.nama,
