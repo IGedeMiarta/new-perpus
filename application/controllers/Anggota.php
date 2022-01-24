@@ -9,6 +9,8 @@ class Anggota extends CI_Controller
         $this->load->model('DashboardModel', 'dashboard');
         $this->load->library('form_validation');
         $this->load->model('UserModel', 'user');
+        $this->load->model('TransaksiModel', 'transaksi');
+
     }
     public function index()
     {
@@ -26,8 +28,15 @@ class Anggota extends CI_Controller
         $this->load->view('templates/dashboard', $data);
         $this->load->view('templates/footer');
     }
-    public function buku(){
-
+    public function peminjaman(){
+            $id_anggota = $this->session->userdata('anggota_id');
+             $data['judul'] = 'Peminjaman Anggota';
+            $data['peminjaman'] = $this->transaksi->getAllPeminjamanOnAnggota($id_anggota);
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('users/detail_peminjaman');
+            $this->load->view('templates/footer');
     }
 
 
@@ -36,7 +45,7 @@ class Anggota extends CI_Controller
         $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
         if ($this->form_validation->run() == false) {
             $data['judul'] = 'Anggota';
-            $data['anggota'] = $this->user->gelAllAnggota();
+             $data['anggota'] = $this->user->accountAnggota();
             $data['status'] = $this->user->read('status_anggota');
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');

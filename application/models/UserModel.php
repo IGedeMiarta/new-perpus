@@ -89,12 +89,12 @@ class UserModel extends CI_Model
         return $this->db->query("SELECT donasi.*,donatur.nama_donatur,donatur.no_hp,detail_donasi.keterangan,detail_donasi.status AS status_donasi,buku.*,detail_buku.* FROM donasi JOIN donatur ON donasi.donatur=donatur.id_donatur JOIN detail_donasi ON donasi.detail=detail_donasi.id_detail_donasi LEFT JOIN buku ON buku.kd_buku=donasi.buku LEFT JOIN detail_buku ON buku.kd_buku=detail_buku.kd_buku WHERE donasi.id_donasi=$id")->row_array();
     }
 
-     function account()
+    function account()
     {
         return $this->db->query("SELECT *, COALESCE(username,'null') AS user, petugas.id_petugas FROM petugas LEFT JOIN user ON petugas.id_petugas = user.user_id ORDER BY petugas.id_petugas ASC")->result();
     }
     function accountAnggota()
     {
-        return $this->db->query("SELECT *, COALESCE(username,'null') AS user, petugas.id_petugas FROM petugas LEFT JOIN user ON petugas.id_petugas = user.user_id ORDER BY petugas.id_petugas ASC")->result();
+        return $this->db->query("SELECT *, COALESCE(username,'null') AS user, anggota.id_anggota FROM anggota LEFT JOIN user ON anggota.id_anggota = user.anggota_id LEFT JOIN status_anggota ON anggota.status=status_anggota.id_status_anggota ORDER BY anggota.id_anggota ASC")->result();
     }
 }

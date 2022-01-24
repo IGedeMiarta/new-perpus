@@ -32,7 +32,7 @@
                         <!--end /div-->
                             <!-- <p class="mt-3 text-center">Belum Punya Akun? <a href="<?= base_url('register') ?>">Daftar</a></p>
                            <p class="mt-n3 text-center">- Atau -</p> -->
-                            <p class="mt-3 text-center"><a href="<?= base_url('/anggota') ?>">Masuk Sebagai Anggota</a></p>
+                            <!-- <p class="mt-3 text-center"><a href="<?= base_url('/anggota') ?>">Masuk Sebagai Anggota</a></p> -->
                     </div>
                     <!--end card-body-->
                 </div>

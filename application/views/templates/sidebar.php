@@ -69,7 +69,7 @@
                 </ul>
             </li>
 
-        <?php }elseif(!$this->session->userdata('role')) { ?>
+        <?php }if($this->session->userdata('role') == 'Anggota') { ?>
              <li>
                 <a href="<?= base_url('anggota') ?>"><i class="ti-dashboard"></i><span>Dashboard</span></a>
             </li>
@@ -82,6 +82,9 @@
                     <li class="nav-item"><a href="<?= base_url('buku/penerbit') ?>"><i class="ti-control-record"></i>Penerbit</a></li>
                     <li class="nav-item"><a href="<?= base_url('buku/rak') ?>"><i class="ti-control-record"></i>Rak</a></li>
                 </ul>
+            </li>
+             <li>
+                <a href="<?= base_url('anggota/peminjaman/') ?>"><i class="ti-wallet"></i><span>Status Peminjaman</span></a>
             </li>
            
 <?php } ?>

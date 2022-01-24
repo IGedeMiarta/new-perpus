@@ -49,6 +49,7 @@
                             <th>Status</th>
                             <?php if($this->session->userdata('role')){ ?>
                             <th>Akun</th>
+                            <th>Action</th>
                             <?php } ?>
                         </tr>
                     </thead>
@@ -70,8 +71,14 @@
                                 <td><?= $b->no_hp ?></td>
                                 <td><?= $b->alamat ?></td>
                                 <td><?= $b->status ?></td>
-                                 <?php if($this->session->userdata('role')){ ?>
-                         
+                                <?php if($this->session->userdata('role')){ ?>
+                                <td class="text-center" width="100px">
+                                         <?php if ($b->user == 'null') { ?>
+                                             <a href="<?= base_url('users/createAccount/' . $b->id_anggota) ?>" class="btn btn-success btn-sm"><i class="fas fa-user"></i> Buat</a>
+                                         <?php } else {
+                                                echo $b->username;
+                                            } ?>
+                                </td>
                             <td width="12%">
                                 <a href="" class="btn btn-warning edit-anggota" data-toggle="modal" data-id="<?= $b->id_anggota ?>" data-target="#modelEdit"> <i class="fas fa-edit"></i></a>
                                 <a href="<?= base_url('users/deleteAnggota/') . $b->id_anggota ?>" class="btn btn-danger delete"> <i class="fas fa-trash"></i></a>

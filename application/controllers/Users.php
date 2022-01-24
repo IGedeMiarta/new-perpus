@@ -18,7 +18,6 @@ class Users extends CI_Controller
             $data['judul'] = 'Petugas';
             $data['petugas'] = $this->user->account();
            
-            // var_dump($data);die;
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
@@ -64,7 +63,8 @@ class Users extends CI_Controller
         $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
         if ($this->form_validation->run() == false) {
             $data['judul'] = 'Anggota';
-            $data['anggota'] = $this->user->gelAllAnggota();
+            $data['anggota'] = $this->user->accountAnggota();
+     
             $data['status'] = $this->user->read('status_anggota');
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
@@ -174,13 +174,13 @@ class Users extends CI_Controller
             $data = [
                 'username' => htmlspecialchars($this->input->post('email', true)),
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-                'user_id' => $id,
-                'role'=>'petugas'
+                'anggota_id' => $id,
+                'role'=>'anggota'
             ];
 
             $this->db->insert('user', $data);
-            $this->session->set_flashdata('messege', "Users Perugas sukses dibuat");
-            redirect('users/petugas');
+            $this->session->set_flashdata('messege', "Users Petugas sukses dibuat");
+            redirect($_SERVER['HTTP_REFERER']);
         }
     }
     public function kepala()
@@ -231,5 +231,37 @@ class Users extends CI_Controller
         $this->user->delete(['id_anggota' => $id], 'anggota');
         $this->session->set_flashdata('delete', 'Anggota');
         redirect('users/kepala');
+    }
+      public function createAccount($id){ //tambah user petugas
+        
+        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.username]');
+
+        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
+            'matches' => 'Password doesnt match!',
+            'min_length' => 'Password to short!'
+        ]);
+        $this->form_validation->set_rules('password2', 'Password', 'required|trim|min_length[3]|matches[password1]');
+
+        if ($this->form_validation->run() == false) {
+            $data['judul'] = 'Add User Petugas';
+            $data['status'] = $this->user->read('status_anggota');
+            $data['id'] = $id;
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('users/add_anggota', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'username' => htmlspecialchars($this->input->post('email', true)),
+                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+                'user_id' => $id,
+                'role'=>'petugas'
+            ];
+
+            $this->db->insert('user', $data);
+            $this->session->set_flashdata('messege', "Users Anggota sukses dibuat");
+            redirect('users/petugas');
+        }
     }
 }

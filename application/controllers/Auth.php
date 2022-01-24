@@ -23,7 +23,8 @@ class Auth extends CI_Controller
             if (password_verify($password, $user['password'])) {
                 $out = [
                     'type'=>'success',
-                    'data'=>$user];
+                    'data'=>$user
+                ];
             } else {
                 $out = ['type'=>'pass'];
             }
