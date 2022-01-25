@@ -50,6 +50,7 @@ class Laporan extends CI_Controller
         $this->load->view('laporancetak/footer');
     }
     public function peminjaman(){
+        // var_dump($_GET);
         if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
             $mulai = $this->input->get('tanggal_mulai');
             $sampai = $this->input->get('tanggal_sampai');

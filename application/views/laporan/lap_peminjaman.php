@@ -35,25 +35,30 @@
                                     <form method="get" action="">
                                         <div class="form-group">
                                             <label class="font-weight-bold" for="tanggal_mulai">Tanggal Mulai Pinjam</label>
-                                            <input type="date" class="form-control" name="tanggal_mulai" placeholder="Masukkan tanggal mulai pinjam" value="<?= isset($_GET['tanggal_mulai'])?$_GET['tanggal_mulai']:'' ?>">
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                <button class="btn btn-secondary" id="start_date"><i class="fas fa-calendar-alt"></i></button>
+                                                </div>
+                                                <!-- <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username"> -->
+                                                <input type="date" id="date_start" class="form-control" name="tanggal_mulai" placeholder="Masukkan tanggal mulai pinjam" value="<?= isset($_GET['tanggal_mulai'])?$_GET['tanggal_mulai']:'' ?>" disabled>
+                                            </div>
+                                        </div>
+                                         <div class="form-group">
+                                            <label class="font-weight-bold" for="tanggal_sampai">Tanggal Pinjam Sampai</label>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                <button class="btn btn-secondary" id="end_date"><i class="fas fa-calendar-alt"></i></button>
+                                                </div>
+                                                <!-- <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username"> -->
+                                                <input type="date" id="date_end" class="form-control" name="tanggal_sampai" placeholder="Masukkan tanggal pinjam sampai" value="<?= isset($_GET['tanggal_sampai'])?$_GET['tanggal_sampai']:'' ?>" disabled>
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="font-weight-bold" for="tanggal_sampai">Tanggal Pinjam Sampai</label>
-                                            <input type="date" class="form-control" name="tanggal_sampai" placeholder="Masukkan tanggal pinjam sampai" value="<?= isset($_GET['tanggal_sampai'])?$_GET['tanggal_sampai']:'' ?>">
                                         </div>
-                                        <input type="submit" class="btn btn-primary" value="Filter">
-                                    </form>
+                                        <!-- <input type="submit" class="btn btn-primary" value="Filter"> -->
+                                  
                                 </div>
-                    <?php
-                    // membuat tombol cetak jika data sudah di filter
-                    if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
-                        $mulai = $_GET['tanggal_mulai'];
-                        $sampai = $_GET['tanggal_sampai'];
-                        ?>
-                        <a class='btn btn-danger' target="_blank" href='<?php echo base_url() . 'laporan/cetakPeminjaman?tanggal_mulai=' . $mulai . '&tanggal_sampai=' . $sampai ?>'><i class='fas fa-file-pdf'></i> Import PDF</a>
-                    <?php
-                    }
-                   ?>
+                  
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -63,7 +68,7 @@
                                 </div>
                                 <div class="card-body">
 
-                                    <form method="get" action="">
+                                 
                                         <div class="form-group">
                                             <label class="font-weight-bold" for="tanggal_mulai">Anggota</label>
                                             <select name="anggota" id="" class="form-select select2">
@@ -74,17 +79,10 @@
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
-                                        <input type="submit" class="btn btn-primary" value="Filter">
-                                    </form>
+                                        <!-- <input type="submit" class="btn btn-primary" value="Filter"> -->
+                                    <!-- </form> -->
                                 </div>
-                    <?php
-                    if (isset($_GET['anggota'])) {
-                        $anggota = $_GET['anggota'];
-                        ?>
-                        <a class='btn btn-danger' target="_blank" href='<?php echo base_url() . 'laporan/cetakPeminjaman?anggota=' . $anggota ?>'><i class='fas fa-file-pdf'></i> Import PDF</a>
-                    <?php
-                    }
-                    ?>
+                   
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -94,7 +92,7 @@
                                 </div>
                                 <div class="card-body">
 
-                                    <form method="get" action="">
+                                  
                                         <div class="form-group">
                                             <label class="font-weight-bold" for="tanggal_mulai">Buku</label>
                                             <select name="buku" id="" class="form-select select2">
@@ -104,25 +102,44 @@
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
-                                        <input type="submit" class="btn btn-primary" value="Filter">
-                                    </form>
+                                    </div>
+                                    
                                 </div>
-                    <?php
-                    if (isset($_GET['buku'])) {
-                        $buku = $_GET['buku'];
-                        ?>
-                        <a class='btn btn-danger' target="_blank" href='<?php echo base_url() . 'laporan/cetakPeminjaman?buku=' . $buku ?>'><i class='fas fa-file-pdf'></i> Import PDF</a>
-                    <?php
-                    }
-                    ?>
                             </div>
                         </div>
-                    </div>
-                     <br />
+                        <br />
+                        <input type="submit" class="btn btn-primary" value="Filter">
+                       <button type="submit" class="btn btn-warning" onclick="this.form.reset();">Reset</button>
+                    </form>
                    
                    
+<?php
+// membuat tombol cetak jika data sudah di filter
+if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
+    $mulai = $_GET['tanggal_mulai'];
+    $sampai = $_GET['tanggal_sampai'];
+    ?>
+    <a class='btn btn-danger' target="_blank" href='<?php echo base_url() . 'laporan/cetakPeminjaman?tanggal_mulai=' . $mulai . '&tanggal_sampai=' . $sampai ?>'><i class='fas fa-file-pdf'></i> Import PDF</a>
+<?php
+}
+?>
+<?php
+if (isset($_GET['anggota'])) {
+    $anggota = $_GET['anggota'];
+    ?>
+    <a class='btn btn-danger' target="_blank" href='<?php echo base_url() . 'laporan/cetakPeminjaman?anggota=' . $anggota ?>'><i class='fas fa-file-pdf'></i> Import PDF</a>
+<?php
+}
+?>
+<?php
+if (isset($_GET['buku'])) {
+    $buku = $_GET['buku'];
+    ?>
+    <a class='btn btn-danger' target="_blank" href='<?php echo base_url() . 'laporan/cetakPeminjaman?buku=' . $buku ?>'><i class='fas fa-file-pdf'></i> Import PDF</a>
+<?php
+}
+?>
              </div>
-
             <div class="card-body bg-white">
                 
                 <table id="datatable2" class="table table-bordered table-striped table-hover table-datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -163,3 +180,5 @@
         </div>
 
     </div><!-- container -->
+
+    

@@ -30,6 +30,7 @@
 
             </div>
         </div>
+        <?php if($this->session->userdata('role') != 'Anggota') { ?>
         <div class="row justify-content-center">
             <div class="col-md-3">
                 <div class="card report-card">
@@ -93,7 +94,7 @@
             <!--end col-->
         </div>
         <!--end row-->
-
+        <?php } ?>
 
 
 
