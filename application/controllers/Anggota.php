@@ -28,19 +28,7 @@ class Anggota extends CI_Controller
         $this->load->view('templates/dashboard', $data);
         $this->load->view('templates/footer');
     }
-    public function peminjaman(){
-            $id_anggota = $this->session->userdata('anggota_id');
-             $data['judul'] = 'Peminjaman Anggota';
-            $data['peminjaman'] = $this->transaksi->getAllPeminjamanOnAnggota($id_anggota);
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/navbar');
-            $this->load->view('templates/sidebar');
-            $this->load->view('users/detail_peminjaman');
-            $this->load->view('templates/footer');
-    }
-
-
-    
+ 
     public function all(){
         $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
         if ($this->form_validation->run() == false) {
@@ -97,4 +85,25 @@ class Anggota extends CI_Controller
             redirect('users/petugas');
         }
     }
+    public function peminjamanactive(){
+        $id_anggota = $this->session->userdata('anggota_id');
+        $data['judul'] = 'Peminjaman Anggota';
+        $data['peminjaman'] = $this->transaksi->getAllPeminjamanOnAnggotaActive($id_anggota);
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('users/detail_peminjaman');
+        $this->load->view('templates/footer');
+    }
+    public function peminjaman(){
+        $id_anggota = $this->session->userdata('anggota_id');
+        $data['judul'] = 'History Peminjaman';
+        $data['peminjaman'] = $this->transaksi->getAllPeminjamanOnAnggotaHistoy($id_anggota);
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('users/history_peminjaman');
+        $this->load->view('templates/footer');
+}
+
 }

@@ -169,7 +169,7 @@ class Laporan extends CI_Controller
         $this->load->view('templates/footer');
     }
     public function cetakDonasi(){
-          if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
+        if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
             $mulai = $this->input->get('tanggal_mulai');
             $sampai = $this->input->get('tanggal_sampai');
             // mengambil data peminjaman berdasarkan tanggal mulai sampai tanggal sampai
@@ -179,6 +179,38 @@ class Laporan extends CI_Controller
         $data['title']='LAPORAN DONASI';
         $this->load->view('laporancetak/header',$data);
         $this->load->view('laporancetak/donasi');
+        $this->load->view('laporancetak/footer');
+    }
+    public function perpanjangan(){
+        if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
+            $mulai = $this->input->get('tanggal_mulai');
+            $sampai = $this->input->get('tanggal_sampai');
+            // mengambil data peminjaman berdasarkan tanggal mulai sampai tanggal sampai
+            $data['perpanjangan'] = $this->transaksi->getAllPerpanjanganOnTanggal($mulai,$sampai);
+
+        }else{
+
+            $data['perpanjangan'] = $this->transaksi->getAllPerpanjangan();
+        }
+            $data['judul'] = 'Laporan Perpanjangan';
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('laporan/lap_perpanjangan');
+            $this->load->view('templates/footer');
+    }
+    public function cetakPerpanjangan(){
+        if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
+            $mulai = $this->input->get('tanggal_mulai');
+            $sampai = $this->input->get('tanggal_sampai');
+            // mengambil data peminjaman berdasarkan tanggal mulai sampai tanggal sampai
+            $data['perpanjangan'] = $this->transaksi->getAllPerpanjanganOnTanggal($mulai,$sampai);
+
+        }
+        $data['title']='LAPORAN PERPANJANGAN';
+        $this->load->view('laporancetak/header',$data);
+        $this->load->view('laporancetak/perpanjangan');
         $this->load->view('laporancetak/footer');
     }
 }

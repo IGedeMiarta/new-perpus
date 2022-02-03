@@ -19,9 +19,10 @@
             <li>
                 <a href="javascript: void(0);"><i class="dripicons-user-group"></i><span>Laporan</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                 <ul class="nav-second-level" aria-expanded="false">
-                    <li class="nav-item"><a href="<?= base_url('laporan/buku') ?>"><i class="ti-control-record"></i>Laporan Buku</a></li>
-                    <li class="nav-item"><a href="<?= base_url('laporan/anggota') ?>"><i class="ti-control-record"></i>Laporan Anggota</a></li>
+                    <!-- <li class="nav-item"><a href="<?= base_url('laporan/buku') ?>"><i class="ti-control-record"></i>Laporan Buku</a></li> -->
+                    <!-- <li class="nav-item"><a href="<?= base_url('laporan/anggota') ?>"><i class="ti-control-record"></i>Laporan Anggota</a></li> -->
                     <li class="nav-item"><a href="<?= base_url('laporan/peminjaman') ?>"><i class="ti-control-record"></i>Laporan Peminjaman</a></li>
+                    <li class="nav-item"><a href="<?= base_url('laporan/perpanjangan') ?>"><i class="ti-control-record"></i>Laporan Perpanjangan</a></li>
                     <li class="nav-item"><a href="<?= base_url('laporan/pengembalian') ?>"><i class="ti-control-record"></i>Laporan Pengembalian</a></li>
                     <li class="nav-item"><a href="<?= base_url('laporan/donasi') ?>"><i class="ti-control-record"></i>Laporan Donasi</a></li>
                 </ul>
@@ -73,7 +74,7 @@
              <li>
                 <a href="<?= base_url('anggota') ?>"><i class="ti-dashboard"></i><span>Dashboard</span></a>
             </li>
-            <!-- <li>
+            <li>
                 <a href="javascript: void(0);"><i class="ti-book"></i><span>Data Buku</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                 <ul class="nav-second-level" aria-expanded="false">
                     <li class="nav-item"><a href="<?= base_url('buku/book') ?>"><i class="ti-control-record"></i>Buku</a></li>
@@ -82,10 +83,16 @@
                     <li class="nav-item"><a href="<?= base_url('buku/penerbit') ?>"><i class="ti-control-record"></i>Penerbit</a></li>
                     <li class="nav-item"><a href="<?= base_url('buku/rak') ?>"><i class="ti-control-record"></i>Rak</a></li>
                 </ul>
-            </li> -->
-             <li>
-                <a href="<?= base_url('anggota/peminjaman/') ?>"><i class="ti-wallet"></i><span>Status Peminjaman</span></a>
             </li>
+            <li>
+                <a href="javascript: void(0);"><i class="ti-book"></i><span>Peminjaman</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li class="nav-item"><a href="<?= base_url('anggota/peminjamanactive/') ?>"><i class="ti-control-record"></i>Status Peminjaman</a></li>
+                    <li class="nav-item"><a href="<?= base_url('anggota/peminjaman/') ?>"><i class="ti-control-record"></i>History Peminjaman</a></li>
+                 
+                </ul>
+            </li>
+             
            
 <?php } ?>
         </ul>

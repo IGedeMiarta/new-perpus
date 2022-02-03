@@ -52,8 +52,8 @@
                     <tbody>
                         <?php $no = 1;
                         foreach ($peminjaman as $b) { ?>
-                          <?php if($b->detail == 1 || $b->detail == 4) { ?>
-                              <tr>
+                          <?php if($b->detail == 2 || $b->detail == 3 || $b->detail == 5){ ?>
+                            <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $b->tgl_perpanjang ? date('d M Y', strtotime($b->tgl_perpanjang)) : date('d M Y', strtotime($b->tgl_pinjam)) ?></td>
                                 <td><?= $b->kd_peminjaman!=null?$b->kd_peminjaman:'-' ?></td>
@@ -61,10 +61,9 @@
                                 <td><?= $b->judul ?></td>
                                 <td><?= date('d M Y', strtotime($b->batas_pinjam)) ?></td>
                                 <td><?= $b->status_pinjam ?></td>
-                      
                             </tr>
-                        <?php } 
-                        }?>
+                            <?php } ?>
+                        <?php } ?>
                       
                     </tbody>
                 </table>

@@ -37,7 +37,7 @@
                                             <label class="font-weight-bold" for="tanggal_mulai">Tanggal Mulai Pinjam</label>
                                             <div class="input-group mb-2">
                                                 <div class="input-group-prepend">
-                                                <button class="btn btn-secondary" id="start_date"><i class="fas fa-calendar-alt"></i></button>
+                                                <button class="btn btn-secondary" id="start_date" ><i class="fas fa-calendar-alt"></i></button>
                                                 </div>
                                                 <!-- <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username"> -->
                                                 <input type="date" id="date_start" class="form-control" name="tanggal_mulai" placeholder="Masukkan tanggal mulai pinjam" value="<?= isset($_GET['tanggal_mulai'])?$_GET['tanggal_mulai']:'' ?>" disabled>
@@ -109,7 +109,8 @@
                         </div>
                         <br />
                         <input type="submit" class="btn btn-primary" value="Filter">
-                       <button type="submit" class="btn btn-warning" onclick="this.form.reset();">Reset</button>
+                       <!-- <button type="submit"  onclick="this.form.reset();"></button> -->
+                       <a href="<?= base_url('laporan/peminjaman') ?>" class="btn btn-warning"> Reset</a>
                     </form>
                    
                    

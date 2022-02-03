@@ -1,7 +1,9 @@
-$('#start_date').on('click',function(e){
+$(document).on('click','#start_date',function(e){
         e.preventDefault();
+      
         $('#date_start').removeAttr('disabled');
 })
+
  $('#end_date').on('click',function(e){
         e.preventDefault();
         $('#date_end').removeAttr('disabled');
