@@ -204,7 +204,7 @@ class Transaksi extends CI_Controller
             $id= $cek['id_anggota'];
             $anggota = $this->transaksi->getAllPerpanjanganAnggota($id);
 
-            if(!isset($anggota)){
+            if(isset($anggota)){
                 $data_pemijam = [
                     'batas_pinjam' => $batas_pinjam,
                     'tgl_perpanjang' => $tgl_perpanjang,

@@ -61,7 +61,7 @@ class Laporan extends CI_Controller
          
         } else if(isset($_GET['anggota'])){
             // mengambil data peminjaman buku dari database | dan mengurutkan data dari id peminjaman terbesar ke terkecil (desc)
-            $data['peminjaman'] = $this->transaksi->getAllPeminjamanOnAnggota($_GET['anggota']);
+            $data['peminjaman'] = $this->transaksi->getAllPeminjamanOnAnggotaActive($_GET['anggota']);
             
         }else if(isset($_GET['buku'])){
             $data['peminjaman'] = $this->transaksi->getAllPeminjamanOnBuku($_GET['buku']);
